@@ -1,0 +1,64 @@
+<mockup version="1.0" skin="sketch" measuredW="1333" measuredH="393" mockupW="826" mockupH="273">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="497" y="110" w="826" h="273" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1"/>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="512" y="145" w="-1" h="-1" measuredW="48" measuredH="25" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>master</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::RadioButton" x="575" y="146" w="-1" h="-1" measuredW="89" measuredH="22" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <state>selected</state>
+        <text>verzeichnis</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::RadioButton" x="575" y="186" w="89" h="22" measuredW="54" measuredH="22" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <state>disabled</state>
+        <text>album</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::ComboBox" x="686" y="185" w="622" h="-1" measuredW="92" measuredH="25" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <state>disabled</state>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::TextInput" x="686" y="142" w="622" h="-1" measuredW="174" measuredH="29" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%5CDesktop%5Cfoddos%5C+master</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="512" y="223" w="-1" h="-1" measuredW="35" measuredH="25" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>slave</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::TextInput" x="686" y="220" w="622" h="-1" measuredW="163" measuredH="29" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%5CDesktop%5Cfoddos%5C+slave</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="512" y="260" w="-1" h="-1" measuredW="27" measuredH="25" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>ziel</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::TextInput" x="686" y="257" w="622" h="-1" measuredW="155" measuredH="29" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%5CDesktop%5Cfoddos%5C+ziel</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::IconLabel" x="1257" y="300" w="-1" h="-1" measuredW="51" measuredH="57" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>ThumbsUpIcon%7Cmedium</icon>
+        <text>starten</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::IconLabel" x="1181" y="299" w="-1" h="-1" measuredW="61" measuredH="57" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>ThumbsDownIcon%7Cmedium</icon>
+        <text>schlie%DFen</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

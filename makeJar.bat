@@ -1,0 +1,1 @@
+jar -cfm lgs.jar Manifest.txt de LgsGui*.class Default.theme
