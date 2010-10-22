@@ -83,7 +83,7 @@ public class FileInfoTests {
 
     @Test
     public void testFileFuncs() {
-        assertTrue(new File(this.masterPath+File.pathSeparator+"a.a").getName().equals("a.a"));
+        assertTrue(new File(this.masterPath + File.pathSeparator + "a.a").getName().equals("a.a"));
     }
 
     @Test
@@ -106,7 +106,7 @@ public class FileInfoTests {
 
     @Test
     public void testGetFileInfoItems() {
-        String[] exts = {"a","b"};
+        String[] exts = {"a", "b"};
         Vector<FileInfo> fis = FileSyncer.GetFileInfoItems(this.masterPath, exts);
         assertTrue(fis.size() == 5);
         fis = FileSyncer.GetFileInfoItems(this.slavePath, exts);

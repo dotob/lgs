@@ -9,16 +9,24 @@ import java.util.Vector;
 public class FileSyncer {
     public static Vector<FileInfo> GetFileInfoItems(String absPath, String[] extensions) {
         Vector<FileInfo> ret = new Vector<FileInfo>();
+        for (FileInfo aFile : GetFileInfoItems(absPath)) {
+            boolean extMatch = false;
+            for (String ext : extensions) {
+                extMatch |= aFile.getFile().getName().toLowerCase().endsWith(ext.toLowerCase());
+            }
+            if (extMatch) {
+                ret.add(aFile);
+            }
+        }
+        return ret;
+    }
+
+    public static Vector<FileInfo> GetFileInfoItems(String absPath) {
+        Vector<FileInfo> ret = new Vector<FileInfo>();
         File f = new File(absPath);
         File[] files = f.listFiles();
         for (File aFile : files) {
-            boolean extMatch = false;
-            for (String ext : extensions) {
-                extMatch |= aFile.getName().toLowerCase().endsWith(ext.toLowerCase());
-            }
-            if (extMatch) {
-                ret.add(new FileInfo(aFile));
-            }
+            ret.add(new FileInfo(aFile));
         }
         return ret;
     }
@@ -29,7 +37,7 @@ public class FileSyncer {
     public static boolean SyncItemsFS(Vector<FileInfo> master, String slaveDir, String targetDir, JTextArea output) {
         File slaveDirFile = new File(slaveDir);
         File targetDirFile = new File(targetDir);
-        if(!doChecking(master, slaveDirFile, targetDirFile, output)){
+        if (!doChecking(master, slaveDirFile, targetDirFile, output)) {
             return false;
         }
         Vector<File> toCopy = new Vector<File>();
@@ -75,16 +83,18 @@ public class FileSyncer {
     }
 
     public static boolean SyncItemsDB(Vector<String> master, String slaveDir, String targetDir, JTextArea output) {
-                File slaveDirFile = new File(slaveDir);
+        File slaveDirFile = new File(slaveDir);
         File targetDirFile = new File(targetDir);
-        if(!doChecking(master, slaveDirFile, targetDirFile, output)){
+        if (!doChecking(master, slaveDirFile, targetDirFile, output)) {
             return false;
         }
         Vector<File> toCopy = new Vector<File>();
-        for (FileInfo fi : GetFileInfoItems(slaveDir, Lgs.ext)) {
-            for (File siblingInSlave : fi.GetSiblings(slaveDirFile)) {
-                //TODO master checking!!!!!!!!!!!!
-                toCopy.add(siblingInSlave);
+        // get all files, do not consider extensions
+        for (FileInfo fi : GetFileInfoItems(slaveDir)) {
+            for (String masterRequired : master) {
+                if (fi.getMatchName().equals(masterRequired)) {
+                    toCopy.add(fi.getFile());
+                }
             }
         }
         doCopying(toCopy, targetDirFile, output);

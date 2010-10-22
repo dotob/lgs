@@ -16,7 +16,7 @@ import java.util.Vector;
 
 public class Lgs extends TransferHandler implements ActionListener {
     //TODO: make this configurable
-    public static String[] ext = {"jpg", "xmp"};
+    String[] ext = {"jpg", "xmp"};
 
     public static void main(String[] args) {
         // Schedule a job for the event-dispatching thread:
@@ -116,6 +116,7 @@ public class Lgs extends TransferHandler implements ActionListener {
         gc.weightx = 1;
         gc.gridwidth = 6;
         this.targetDirectory = new JTextField();
+        this.targetDirectory.setName("ziel");
         this.targetDirectory.setTransferHandler(this);
         contentPane.add(this.targetDirectory, gc);
 
@@ -140,7 +141,8 @@ public class Lgs extends TransferHandler implements ActionListener {
         gc.weighty = 1;
         gc.gridwidth = 7;
         gc.gridheight = 8;
-        contentPane.add(this.outputArea, gc);
+        JScrollPane jsp = new JScrollPane(this.outputArea);
+        contentPane.add(jsp, gc);
 
         this.frame.pack();
         this.frame.setVisible(true);
@@ -310,17 +312,16 @@ public class Lgs extends TransferHandler implements ActionListener {
             String masterDir = this.masterDirectory.getText();
             String slaveDir = this.slaveDirectory.getText();
             String targetDir = this.targetDirectory.getText();
-            Vector<FileInfo> fis = FileSyncer.GetFileInfoItems(masterDir, this.ext);
-            for (FileInfo fileInfo : fis) {
-                System.out.println(fileInfo.GetString());
-            }
+            FileSyncer.SyncItemsFS(FileSyncer.GetFileInfoItems(masterDir, this.ext), slaveDir, targetDir, this.outputArea);
         } else {
             // use album from db
+            String slaveDir = this.slaveDirectory.getText();
+            String targetDir = this.targetDirectory.getText();
             String albumInfo = (String) this.masterAlbum.getSelectedItem();
             String[] parts = albumInfo.split(";");
             String albumId = parts[0].trim();
             Vector<String> foddos = this.getAlbumInfo(albumId);
-            
+            FileSyncer.SyncItemsDB(foddos, slaveDir, targetDir, this.outputArea);
         }
 
     }

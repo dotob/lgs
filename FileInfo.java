@@ -3,8 +3,16 @@ import java.util.Vector;
 
 public class FileInfo {
 
+    public File getFile() {
+        return file;
+    }
+
     private final File file;
     private final String matchName;
+
+    public String getMatchName() {
+        return matchName;
+    }
 
     public FileInfo(File aFile) {
         this.file = aFile;
@@ -13,6 +21,10 @@ public class FileInfo {
 
     public static String GetMatchName(File aFile) {
         String name = aFile.getName();
+        return GetMatchName(name);
+    }
+
+    public static String GetMatchName(String name) {
         int index = name.lastIndexOf('.');
         if (index > 0 && index <= name.length() - 2) {
             return name.substring(0, index);
