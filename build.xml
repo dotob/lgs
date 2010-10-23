@@ -1,65 +1,71 @@
 <?xml version="1.0"?>
-<project name="lgs" default="makeMacOSDMG" basedir=".">
+<project name="lgs" default="makeMacOSAppZip" basedir=".">
 
-	<!-- 
-	
-	//////////////////////////////////////////////////////////////////////////////////
-	//
-	//    need the following to be installed:
-	//      - nsis (c:\programme\nsis)
-	//      - common-net*.jar (\java\jre\lib\ext)
-	//      - jakarta-oro*.jar (\java\jre\lib\ext)
-	//
-	//////////////////////////////////////////////////////////////////////////////////
-	
-	-->
+    <!--
 
-	<taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler" />
-    
-	<property name="version" value="${build.number}" />
+     //////////////////////////////////////////////////////////////////////////////////
+     //
+     //    need the following to be installed:
+     //      - nsis (c:\programme\nsis)
+     //      - common-net*.jar (\java\jre\lib\ext)
+     //      - jakarta-oro*.jar (\java\jre\lib\ext)
+     //
+     //////////////////////////////////////////////////////////////////////////////////
 
-	<target name="init">
-	</target>
+     -->
 
-	<target name="addVersion">
-		<replace file="Lgs.java" token="buildnumber" value="${version}" encoding="UTF-8" /> <!-- ISO-8859-1 -->
-	</target>
+    <taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler"/>
 
-	<target name="compile" depends="addVersion">
-		<javac srcdir="." excludes="*Tests*.java" encoding="UTF-8" ><!-- ISO-8859-1 -->
-			<classpath>
-				<fileset dir=".">
-					<include name="*.jar" />
-				</fileset>
-			</classpath>
-		</javac>
-	</target>
+    <property name="version" value="${build.number}"/>
 
-	<target name="makejars" depends="init, compile">
-		<!-- make manifest files -->
-		<manifest file="build/MANIFEST.MF">
-			<attribute name="Main-Class" value="Lgs" />
-			<attribute name="Class-Path" value="commons-io-2.0.jar tinylaf.jar " />
-		</manifest>
-		<!-- pack files to jar -->
-		<jar destfile="build/lgs.jar" manifest="build/MANIFEST.MF">
-			<fileset dir="." casesensitive="no">
-				<include name="*.class" />
-				<include name="Default.theme" />
-			</fileset>
-		</jar>
-	</target>
+    <target name="init">
+    </target>
 
-	<target name="makeMacOSDMG" depends="makejars">
-		<jarbundler dir="build" name="lgs" mainclass="Lgs" build="${version}" version="${version}" stubfile="build/JavaApplicationStub" icon="build/lgs_icon.icns">
-			<jarfileset file="build/lgs.jar" />
-			<javafileset dir=".">
-				<include name="*.jar" />
-			</javafileset>
-			<extraclasspathfileset dir=".">
-				<include name="*.jar" />
-			</extraclasspathfileset>
-		</jarbundler>
-	</target>
+    <target name="addVersion">
+        <replace file="Lgs.java" token="buildnumber" value="${version}" encoding="UTF-8"/>
+        <!-- ISO-8859-1 -->
+    </target>
+
+    <target name="compile" depends="addVersion">
+        <javac srcdir="." excludes="*Tests*.java" encoding="UTF-8"><!-- ISO-8859-1 -->
+            <classpath>
+                <fileset dir=".">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="makejars" depends="init, compile">
+        <!-- make manifest files -->
+        <manifest file="build/MANIFEST.MF">
+            <attribute name="Main-Class" value="Lgs"/>
+            <attribute name="Class-Path" value="commons-io-2.0.jar tinylaf.jar "/>
+        </manifest>
+        <!-- pack files to jar -->
+        <jar destfile="build/lgs.jar" manifest="build/MANIFEST.MF">
+            <fileset dir="." casesensitive="no">
+                <include name="*.class"/>
+                <include name="Default.theme"/>
+            </fileset>
+        </jar>
+    </target>
+
+    <target name="makeMacOSApp" depends="makejars">
+        <jarbundler dir="build" name="lgs" mainclass="Lgs" build="${version}" version="${version}"
+                    stubfile="build/JavaApplicationStub" icon="build/lgs_icon.icns">
+            <jarfileset file="build/lgs.jar"/>
+            <javafileset dir=".">
+                <include name="*.jar"/>
+            </javafileset>
+            <extraclasspathfileset dir=".">
+                <include name="*.jar"/>
+            </extraclasspathfileset>
+        </jarbundler>
+    </target>
+
+    <target name="makeMacOSAppZip" depends="makeMacOSApp">
+        <zip destfile="build/lgs.zip" basedir="build/lgs.app" />
+    </target>
 </project>
 
