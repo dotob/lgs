@@ -52,7 +52,7 @@
     </target>
 
     <target name="makeMacOSApp" depends="makejars">
-        <jarbundler dir="build" name="lgs" mainclass="Lgs" build="${version}" version="${version}"
+        <jarbundler dir="build/macapp" name="lgs" mainclass="Lgs" build="${version}" version="${version}"
                     stubfile="build/JavaApplicationStub" icon="build/lgs_icon.icns">
             <jarfileset file="build/lgs.jar"/>
             <javafileset dir=".">
@@ -65,9 +65,14 @@
     </target>
 
     <target name="makeMacOSAppZip" depends="makeMacOSApp">
-        <zip destfile="build/lgs.zip">
+        <!--<zip destfile="build/lgs.zip">
             <zipfileset dir="build/lgs.app" prefix="lgs.app"/>
-        </zip>
+        </zip>-->
+        <exec executable="zip" dir="build/macapp">
+            <arg value="-qR"/>
+            <arg value="lgs-@{version}"/>
+            <arg value="*"/>
+        </exec>
     </target>
 </project>
 

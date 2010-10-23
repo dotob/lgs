@@ -34,7 +34,6 @@
         <string>$JAVAROOT/lgs.jar</string>
         <string>/Users/basti/Dropbox/syncme/java/commons-io-2.0.jar</string>
         <string>/Users/basti/Dropbox/syncme/java/jarbundler-2.1.0.jar</string>
-        <string>/Users/basti/Dropbox/syncme/java/lgs.jar</string>
         <string>/Users/basti/Dropbox/syncme/java/tinylaf.jar</string>
       </array>
       <key>Properties</key>
