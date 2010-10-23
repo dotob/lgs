@@ -42,7 +42,7 @@
 			<attribute name="Class-Path" value="commons-io-2.0.jar tinylaf.jar " />
 		</manifest>
 		<!-- pack files to jar -->
-		<jar destfile="lgs.jar" manifest="build/MANIFEST.MF">
+		<jar destfile="build/lgs.jar" manifest="build/MANIFEST.MF">
 			<fileset dir="." casesensitive="no">
 				<include name="*.class" />
 				<include name="Default.theme" />
@@ -52,7 +52,7 @@
 
 	<target name="makeMacOSDMG" depends="makejars">
 		<jarbundler dir="build" name="lgs" mainclass="Lgs" build="${version}" version="${version}" stubfile="build/JavaApplicationStub" icon="build/lgs_icon.icns">
-			<jarfileset file="lgs.jar" />
+			<jarfileset file="build/lgs.jar" />
 			<javafileset dir=".">
 				<include name="*.jar" />
 			</javafileset>
