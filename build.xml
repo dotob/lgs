@@ -19,7 +19,7 @@
     <property name="version" value="${build.number}"/>
 
     <target name="init">
-        <mkdir dir="buid/macapp" />
+        <mkdir dir="build/macapp" />
     </target>
 
     <target name="addVersion">
