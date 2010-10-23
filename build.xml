@@ -65,7 +65,9 @@
     </target>
 
     <target name="makeMacOSAppZip" depends="makeMacOSApp">
-        <zip destfile="build/lgs.zip" basedir="build/lgs.app" prefix="lgs.app"/>
+        <zip destfile="build/lgs.zip">
+            <zipfileset dir="build/lgs.app" prefix="lgs.app"/>
+        </zip>
     </target>
 </project>
 
