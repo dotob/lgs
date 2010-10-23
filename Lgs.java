@@ -15,7 +15,7 @@ import java.util.Vector;
 
 
 public class Lgs extends TransferHandler implements ActionListener {
-    private static final String versionString = "${build.number}";
+    private static final String versionString = "buildnumber";
 
     //TODO: make this configurable
     String[] ext = {"jpg", "xmp"};

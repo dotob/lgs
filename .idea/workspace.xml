@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="a84c7358-d7c7-428e-866a-8118c85b4d62" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Lgs.java" afterPath="$PROJECT_DIR$/Lgs.java" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="java.iws" />
@@ -63,10 +63,10 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Lgs.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Lgs.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Lgs.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="38" selection-start="1639" selection-end="1639" vertical-scroll-proportion="0.0">
+            <state line="17" column="60" selection-start="584" selection-end="584" vertical-scroll-proportion="0.42473918">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -74,10 +74,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="29" selection-start="2619" selection-end="2619" vertical-scroll-proportion="0.5310559">
+            <state line="25" column="51" selection-start="773" selection-end="784" vertical-scroll-proportion="-7.037037">
               <folding />
             </state>
           </provider>
@@ -126,11 +126,11 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/Lgs.java" />
         <option value="$PROJECT_DIR$/FileInfoTests.java" />
         <option value="$PROJECT_DIR$/FileInfo.java" />
         <option value="$PROJECT_DIR$/FileSyncer.java" />
         <option value="$PROJECT_DIR$/build.xml" />
+        <option value="$PROJECT_DIR$/Lgs.java" />
       </list>
     </option>
   </component>
@@ -464,15 +464,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Lgs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="38" selection-start="1639" selection-end="1639" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FileInfoTests.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="126" column="35" selection-start="4335" selection-end="4335" vertical-scroll-proportion="0.0">
@@ -498,8 +489,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="29" selection-start="2619" selection-end="2619" vertical-scroll-proportion="0.5310559">
+        <state line="25" column="51" selection-start="773" selection-end="784" vertical-scroll-proportion="-7.037037">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lgs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="60" selection-start="584" selection-end="584" vertical-scroll-proportion="0.42473918">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
