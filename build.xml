@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="lgs" default="makejars" basedir=".">
+<project name="lgs" default="makeMacOSDMG" basedir=".">
 
 	<!-- 
 	
@@ -14,215 +14,52 @@
 	
 	-->
 
-	<!-- <taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler" /> -->
-	<!-- -->
-	<property name="src" value="." />
-	<property name="finaljars" value="finaljars" />
-	<property name="install" value="install" />
-	<property name="version" value="2${build.number}" />
+	<taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler" />
+    
+	<property name="version" value="${build.number}" />
 
 	<target name="init">
-		<mkdir dir="${finaljars}" />
 	</target>
 
 	<target name="addVersion">
-		<replace file="Lgs.java" token="buildnumber" value="${version}" encoding="ISO-8859-1" />
+		<replace file="Lgs.java" token="buildnumber" value="${version}" encoding="UTF-8" /> <!-- ISO-8859-1 -->
 	</target>
 
 	<target name="compile" depends="addVersion">
-		<javac srcdir="${src}" encoding="ISO-8859-1">
+		<javac srcdir="." excludes="*Tests*.java" encoding="UTF-8" ><!-- ISO-8859-1 -->
 			<classpath>
-				<fileset dir="jars">
-					<include name="**/*.jar" />
+				<fileset dir=".">
+					<include name="*.jar" />
 				</fileset>
 			</classpath>
 		</javac>
 	</target>
 
-	<target name="makejars" depends="makejarsMFAssi, makejarsAdmin" />
-	
-	<target name="makejarsMFAssi" depends="init, compile">
+	<target name="makejars" depends="init, compile">
 		<!-- make manifest files -->
-		<manifest file="mfassistent/MANIFEST.MF">
-			<attribute name="Main-Class" value="mfassistent.OVTMafo" />
-			<attribute name="Class-Path" value="jars/mail.jar jars/activation.jar jars/animation-1.2.0.jar jars/commons-collections-3.2.jar jars/commons-dbcp-1.2.2.jar jars/commons-logging-1.1.jar jars/commons-net-1.4.1.jar jars/commons-pool-1.3.jar jars/forms-1.1.0.jar jars/jakarta-oro-2.0.8.jar jars/jcalendar-1.3.2.jar jars/jcommon-1.0.8.jar jars/junit-3.8.1.jar jars/log4j-1.2.14.jar jars/looks-2.1.4.jar jars/mysql-connector-java-5.0.7-bin.jar " />
+		<manifest file="build/MANIFEST.MF">
+			<attribute name="Main-Class" value="Lgs" />
+			<attribute name="Class-Path" value="commons-io-2.0.jar tinylaf.jar " />
 		</manifest>
 		<!-- pack files to jar -->
-		<jar destfile="finaljars/RMKMafo.jar" manifest="mfassistent/MANIFEST.MF">
+		<jar destfile="lgs.jar" manifest="build/MANIFEST.MF">
 			<fileset dir="." casesensitive="no">
-				<include name="mfassistent/*.class" />
-				<include name="ui/*.class" />
-				<include name="com/**" />
-				<include name="org/**" />
-				<include name="importer/**" />
-				<include name="tools/*.class" />
-				<include name="db/*.class" />
-				<include name="ovt.properties" />
-				<exclude name="**/.svn*" />
-				<exclude name="**/*.java" />
+				<include name="*.class" />
+				<include name="Default.theme" />
 			</fileset>
 		</jar>
 	</target>
 
-	<!--  datenerfasser is obsolete -->
-	<target name="makejarsAdmin" depends="init, compile">
-		<manifest file="adminassistent/MANIFEST.MF">
-			<attribute name="Main-Class" value="adminassistent.OVTAdmin" />
-			<attribute name="Class-Path" value="jars/mail.jar jars/activation.jar jars/animation-1.2.0.jar jars/commons-collections-3.2.jar jars/commons-dbcp-1.2.2.jar jars/commons-logging-1.1.jar jars/commons-net-1.4.1.jar jars/commons-pool-1.3.jar jars/forms-1.1.0.jar jars/jakarta-oro-2.0.8.jar jars/jcalendar-1.3.2.jar jars/jcommon-1.0.8.jar jars/jfreechart-1.0.6.jar jars/junit-3.8.1.jar jars/log4j-1.2.14.jar jars/looks-2.1.4.jar jars/mysql-connector-java-5.0.7-bin.jar jars/ostermillerutils_1_06_01.jar jars/poi-3.0.1-FINAL-20070705.jar jars/xnap-commons-0.9.6.jar jars/gettext-commons-0.9.1.jar" />
-		</manifest>
-		<jar destfile="finaljars/RMKAdmin.jar" manifest="adminassistent/MANIFEST.MF">
-			<fileset dir="." casesensitive="no">
-				<include name="adminassistent/*.class" />
-				<include name="ui/*.class" />
-				<include name="com/**" />
-				<include name="org/**" />
-				<include name="statistics/**" />
-				<include name="importer/**" />
-				<include name="tools/*.class" />
-				<include name="db/*.class" />
-				<include name="ovt.properties" />
-				<exclude name="**/.svn*" />
-				<exclude name="**/*.java" />
-			</fileset>
-		</jar>
-	</target>
-
-	<!--  datenerfasser is obsolete -->
-	<target name="makejarsDatenErfasser" depends="init, compile">
-		<manifest file="datenerfasser/MANIFEST.MF">
-			<attribute name="Main-Class" value="datenerfasser.Datenerfasser" />
-			<attribute name="Class-Path" value="jars/mail.jar jars/activation.jar jars/animation-1.2.0.jar jars/commons-collections-3.2.jar jars/commons-dbcp-1.2.2.jar jars/commons-logging-1.1.jar jars/commons-net-1.4.1.jar jars/commons-pool-1.3.jar jars/forms-1.1.0.jar jars/jakarta-oro-2.0.8.jar jars/jcalendar-1.3.2.jar jars/jcommon-1.0.8.jar jars/jfreechart-1.0.6.jar jars/junit-3.8.1.jar jars/log4j-1.2.14.jar jars/looks-2.1.4.jar jars/mysql-connector-java-5.0.7-bin.jar jars/ostermillerutils_1_06_01.jar jars/poi-3.0.1-FINAL-20070705.jar" />
-		</manifest>
-		<!--
-     	<jar destfile="finaljars/OVTDatenerfasser.jar" 
-          	manifest="datenerfasser/MANIFEST.MF">
-         	<fileset dir="." casesensitive="no">
-         	  <include name="datenerfasser/*.class"/>
-         	  <include name="ui/*.class"/>
-         	  <include name="com/**"/>
-         	  <include name="org/**"/>
-         	  <include name="tools/*.class"/>
-         	  <include name="db/*.class"/>
-         	  <include name="ovt.properties"/>
-         	  <exclude name="**/.svn*"/>
-         	  <exclude name="**/*.java"/>
-         	</fileset>
-        </jar>
-        -->
-	</target>
-
-
-	<!-- makensis is obsolete because there two scripts for teamcity -->
-	<target name="makensis" depends="makensisMFAssiDev, makensisAdmin" />
-
-	<!-- this is for the automatic build. not for deployment -->
-	<target name="makensisMFAssiDev" depends="makejarsMFAssi">
-		<!-- pack jars to nsis-files -->
-		<exec dir="installer" executable="${nsisExe}">
-			<arg line="rmk_mfassistent.nsi" />
-		</exec>
-		<copy file="installer/rmkmfassistent.exe" tofile="/var/www/rmkmafo/mf/new/rmkmfassistent${myMaFoVersionShort}.exe">
-		</copy>
-		<copy file="installer/rmkmfassistent.exe" tofile="/var/www/rmkmafo/mf/new/rmkmfassistent.exe">
-		</copy>
-		<copy file="installer/mafoversion" tofile="/var/www/rmkmafo/mf/new/mafoversion">
-		</copy>
-	</target>
-
-	<!-- this is for deployment. used to be started manually -->
-	<target name="makensisMFAssiDeploy" depends="makejarsMFAssi">
-		<!-- pack jars to nsis-files -->
-		<exec dir="installer" executable="${nsisExe}">
-			<arg line="rmk_mfassistent.nsi" />
-		</exec>
-		<copy file="installer/rmkmfassistent.exe" tofile="/var/www/rmkmafo/mf/rmkmfassistent${myMaFoVersionShort}.exe">
-		</copy>
-		<copy file="installer/rmkmfassistent.exe" tofile="/var/www/rmkmafo/mf/rmkmfassistent.exe">
-		</copy>
-		<copy file="installer/mafoversion" tofile="/var/www/rmkmafo/mafoversion">
-		</copy>
-	</target>
-		
-	<!--
-	<target name="makensisMFAssiDeployWithMacOS" depends="makeMacOSDMG">
-		<zip destfile="installer/rmkmafo.zip" update="true" encoding="ISO-8859-1">
-			<fileset dir="installer" includes="RMK*app/**" />
-		</zip>
-		<copy file="installer/rmkmafo.zip" tofile="/var/www/rmkmafo/mf/rmkmafo.zip">
-		</copy>
-	</target>
--->
-	
-	<target name="makensisAdmin" depends="makejarsAdmin">
-		<exec dir="installer" executable="${nsisExe}">
-			<arg line="rmk_adminassistent.nsi" />
-		</exec>
-		<copy file="installer/rmkadminassistent.exe" tofile="/var/www/rmkmafo/admin/rmkadminassistent${myAdminVersionShort}.exe">
-		</copy>
-		<copy file="installer/rmkadminassistent.exe" tofile="/var/www/rmkmafo/admin/rmkadminassistent.exe">
-		</copy>
-		<copy file="installer/adminversion" tofile="/var/www/rmkmafo/adminversion">
-		</copy>
-	</target>
-
-	<!--  datenerfasser is obsolete -->
-	<target name="makensisDatenErfasser" depends="makejarsDatenErfasser">
-		<exec dir="installer" executable="${nsisExe}">
-			<arg line="ovt_datenerfasser.nsi" />
-		</exec>
-	</target>
-
-	<!--  upload is obsolete because of teamcity -->
-	<target name="upload-admin" depends="makensisAdmin">
-		<ftp server="ftp.overtuer.de" port="21" remotedir="overtuer/admin" userid="www-data" password="oon9law8op" depends="yes">
-			<fileset dir="installer">
-				<include name="adminversion" />
-				<include name="ovtadminassistent.exe" />
-			</fileset>
-		</ftp>
-	</target>
-
-	<!--  upload is obsolete because of teamcity -->
-	<target name="upload-mafo" depends="makensisMFAssiDev">
-		<ftp server="ftp.overtuer.de" port="21" remotedir="rmkmafo/mf" userid="www-data" password="oon9law8op" depends="yes">
-			<fileset dir="installer">
-				<include name="mafoversion" />
-				<include name="rmkmfassistent.exe" />
-			</fileset>
-		</ftp>
-	</target>
-
-	<target name="upload-html">
-		<ftp server="ftp.overtuer.de" port="21" remotedir="overtuer/admin" userid="www-data" password="oon9law8op" depends="yes">
-			<fileset dir="html/admin">
-				<include name="**" />
-			</fileset>
-		</ftp>
-		<ftp server="ftp.overtuer.de" port="21" remotedir="rmkmafo/mf" userid="www-data" password="oon9law8op" depends="yes">
-			<fileset dir="html/mf">
-				<include name="**" />
-			</fileset>
-		</ftp>
-		<ftp server="ftp.overtuer.de" port="21" remotedir="rmkmafo/java" userid="www-data" password="oon9law8op" depends="yes">
-			<fileset dir="html/java">
-				<include name="**" />
-			</fileset>
-		</ftp>
-	</target>
-
-	<target name="upload-all" depends="upload-admin, upload-mafo, upload-html" />
-<!--
-	<target name="makeMacOSDMG" depends="makensisMFAssiDev">
-		<jarbundler dir="installer" name="RMK MF-Assistent" mainclass="mfassistent.OVTMafo" build="${myMaFoVersion}" version="${myMaFoVersion}" stubfile="installer/JavaApplicationStub">
-			<jarfileset file="finaljars/RMKMafo.jar" />
-			<javafileset dir="jars">
+	<target name="makeMacOSDMG" depends="makejars">
+		<jarbundler dir="build" name="lgs" mainclass="Lgs" build="${version}" version="${version}" stubfile="build/JavaApplicationStub" icon="build/lgs_icon.icns">
+			<jarfileset file="lgs.jar" />
+			<javafileset dir=".">
 				<include name="*.jar" />
 			</javafileset>
-			<extraclasspathfileset dir="jars">
+			<extraclasspathfileset dir=".">
 				<include name="*.jar" />
 			</extraclasspathfileset>
 		</jarbundler>
 	</target>
-	-->
 </project>
 

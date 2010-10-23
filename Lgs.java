@@ -15,6 +15,8 @@ import java.util.Vector;
 
 
 public class Lgs extends TransferHandler implements ActionListener {
+    private static final String versionString = "${build.number}";
+
     //TODO: make this configurable
     String[] ext = {"jpg", "xmp"};
 
@@ -46,7 +48,7 @@ public class Lgs extends TransferHandler implements ActionListener {
         this.outputArea = new JTextArea();
         this.outputArea.append(setLafResult);
 
-        this.frame = new JFrame("lgsGUI");
+        this.frame = new JFrame("lgs v"+versionString);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setPreferredSize(new Dimension(600, 500));
         Container contentPane = this.frame.getContentPane();
