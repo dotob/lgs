@@ -71,7 +71,7 @@
         </zip>-->
         <exec executable="zip" dir="build/macapp">
             <arg value="-qR"/>
-            <arg value="lgs-@{version}"/>
+            <arg value="lgs-${version}"/>
             <arg value="*"/>
         </exec>
     </target>
