@@ -19,6 +19,7 @@ public class Lgs extends TransferHandler implements ActionListener {
 
     //TODO: make this configurable
     String[] ext = {"jpg", "xmp"};
+    private JRadioButton dbRadioButton;
 
     public static void main(String[] args) {
         // Schedule a job for the event-dispatching thread:
@@ -49,6 +50,7 @@ public class Lgs extends TransferHandler implements ActionListener {
         this.outputArea.append(setLafResult);
 
         this.frame = new JFrame("lgs v"+versionString);
+        this.frame.setIconImage(new ImageIcon("lgs.gif").getImage());
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setPreferredSize(new Dimension(600, 500));
         Container contentPane = this.frame.getContentPane();
@@ -79,7 +81,7 @@ public class Lgs extends TransferHandler implements ActionListener {
         gc.gridy++;
         gc.gridx = 1;
         gc.weightx = lWeight;
-        JRadioButton dbRadioButton = new JRadioButton("db-album");
+        dbRadioButton = new JRadioButton("db-album");
         dbRadioButton.setActionCommand("db");
         dbRadioButton.addActionListener(this);
         contentPane.add(dbRadioButton, gc);
@@ -178,7 +180,6 @@ public class Lgs extends TransferHandler implements ActionListener {
     private Vector<String> getAlbums() {
         Vector<String> ret = new Vector<String>();
         ret.add("");
-        String err;
         try {
             // get last version info from internet
             URL updateURL = new URL("http://www.lichtographie.de/lgsFuncs.php");
@@ -191,22 +192,20 @@ public class Lgs extends TransferHandler implements ActionListener {
             // close stream
             in.close();
         } catch (FileNotFoundException e) {
-            err = "Kein Zugang zum Internet gefunden.";
-            // e.printStackTrace();
+            this.outputArea.append("konnte album information nicht laden (FileNotFoundException)\n");
+            dbRadioButton.setEnabled(false);
         } catch (UnknownHostException e) {
-            err = "Kein Zugang zum Internet gefunden.";
-            // e.printStackTrace();
+            this.outputArea.append("konnte album information nicht laden (UnknownHostException)\n");
+            dbRadioButton.setEnabled(false);
         } catch (ConnectException e) {
-            err = "Kein Zugang zum Internet gefunden.";
-            // e.printStackTrace();
+            this.outputArea.append("konnte album information nicht laden (ConnectException)\n");
+            dbRadioButton.setEnabled(false);
         } catch (MalformedURLException e) {
-            err = "Kein Zugang zum Internet gefunden.";
-            // MyLog.exceptionError(e);
-            e.printStackTrace();
+            this.outputArea.append("konnte album information nicht laden (MalformedURLException)\n");
+            dbRadioButton.setEnabled(false);
         } catch (IOException e) {
-            err = "Kein Zugang zum Internet gefunden.";
-            // MyLog.exceptionError(e);
-            e.printStackTrace();
+            this.outputArea.append("konnte album information nicht laden (IOException)\n");
+            dbRadioButton.setEnabled(false);
         }
         return ret;
     }

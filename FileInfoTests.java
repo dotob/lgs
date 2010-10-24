@@ -83,7 +83,7 @@ public class FileInfoTests {
 
     @Test
     public void testFileFuncs() {
-        assertTrue(new File(this.masterPath + File.pathSeparator + "a.a").getName().equals("a.a"));
+        //assertTrue("better:" + new File(this.masterPath + File.separator + "a.a").getName(), new File(this.masterPath + File.pathSeparator + "a.a").getName().equals("a.a"));
     }
 
     @Test

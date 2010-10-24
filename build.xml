@@ -19,16 +19,16 @@
     <property name="version" value="${build.number}"/>
 
     <target name="init">
-        <mkdir dir="build/macapp" />
+        <mkdir dir="build/macapp"/>
     </target>
 
-    <target name="addVersion">
+    <target name="addVersion" if="build.number">
         <replace file="Lgs.java" token="buildnumber" value="${version}" encoding="UTF-8"/>
         <!-- ISO-8859-1 -->
     </target>
 
     <target name="compile" depends="addVersion">
-        <javac srcdir="." excludes="*Tests*.java" encoding="UTF-8"><!-- ISO-8859-1 -->
+        <javac srcdir="." encoding="UTF-8"><!-- ISO-8859-1 -->
             <classpath>
                 <fileset dir=".">
                     <include name="*.jar"/>
@@ -37,7 +37,14 @@
         </javac>
     </target>
 
-    <target name="makejars" depends="init, compile">
+    <target name="junit">
+        <junit haltonfailure="off">
+            <classpath path="./junit-4.7.jar"/>
+            <test name="FileInfoTests"/>
+        </junit>
+    </target>
+
+    <target name="makejars" depends="init, compile, junit">
         <!-- make manifest files -->
         <manifest file="build/MANIFEST.MF">
             <attribute name="Main-Class" value="Lgs"/>
