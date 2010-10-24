@@ -44,7 +44,7 @@
         </junit>
     </target>
 
-    <target name="makejars" depends="init, compile, junit">
+    <target name="makejars" depends="init, compile">
         <!-- make manifest files -->
         <manifest file="build/MANIFEST.MF">
             <attribute name="Main-Class" value="Lgs"/>
