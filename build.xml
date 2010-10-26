@@ -1,19 +1,6 @@
 <?xml version="1.0"?>
 <project name="lgs" default="makeMacOSAppZip" basedir=".">
 
-    <!--
-
-     //////////////////////////////////////////////////////////////////////////////////
-     //
-     //    need the following to be installed:
-     //      - nsis (c:\programme\nsis)
-     //      - common-net*.jar (\java\jre\lib\ext)
-     //      - jakarta-oro*.jar (\java\jre\lib\ext)
-     //
-     //////////////////////////////////////////////////////////////////////////////////
-
-     -->
-
     <taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler"/>
 
     <property name="version" value="${build.number}"/>
