@@ -16,7 +16,7 @@ public class FileInfo {
 
     public FileInfo(File aFile) {
         this.file = aFile;
-        this.matchName = this.GetMatchName(aFile);
+        this.matchName = GetMatchName(aFile);
     }
 
     public static String GetMatchName(File aFile) {
@@ -58,7 +58,7 @@ public class FileInfo {
     }
 
     public Boolean IsMatch(File other) {
-        return this.matchName.equals(this.GetMatchName(other));
+        return this.matchName.equals(GetMatchName(other));
     }
 
     public String GetString() {

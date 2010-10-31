@@ -107,12 +107,12 @@ public class FileInfoTests {
     @Test
     public void testGetFileInfoItems() {
         String[] exts = {"a", "b"};
-        Vector<FileInfo> fis = FileSyncer.GetFileInfoItems(this.masterPath, exts);
+        Vector<FileInfo> fis = FileSyncerUtils.GetFileInfoItems(this.masterPath, exts);
         assertTrue(fis.size() == 5);
-        fis = FileSyncer.GetFileInfoItems(this.slavePath, exts);
+        fis = FileSyncerUtils.GetFileInfoItems(this.slavePath, exts);
         assertTrue(fis.size() == 3);
         String[] exts2 = {"a"};
-        fis = FileSyncer.GetFileInfoItems(this.slavePath, exts2);
+        fis = FileSyncerUtils.GetFileInfoItems(this.slavePath, exts2);
         assertTrue(fis.size() == 2);
     }
 

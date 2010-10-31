@@ -41,6 +41,7 @@
         <jar destfile="build/lgs.jar" manifest="build/MANIFEST.MF">
             <fileset dir="." casesensitive="no">
                 <include name="*.class"/>
+                <include name="*.gif"/>
                 <include name="Default.theme"/>
             </fileset>
         </jar>

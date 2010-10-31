@@ -1,0 +1,72 @@
+import org.apache.commons.io.FileUtils;
+
+import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.AbstractCollection;
+import java.util.Vector;
+
+/**
+ * Created by IntelliJ IDEA.
+ * User: basti
+ * Date: 31.10.2010
+ * Time: 15:43:03
+ * To change this template use File | Settings | File Templates.
+ */
+public class FileSyncerUtils {
+    public static boolean doChecking(AbstractCollection master, File slaveDirFile, File targetDirFile, JTextArea outputArea) {
+        boolean result = true;
+        if (master.size() <= 0) {
+            outputArea.append("master information ist leer\n");
+            result = false;
+        }
+        if (!slaveDirFile.isDirectory()) {
+            outputArea.append("slave-verzeichnis existiert nicht oder ist kein verzeichnis\n");
+            result = false;
+        }
+        if (!targetDirFile.isDirectory()) {
+            outputArea.append("ziel-verzeichnis existiert nicht oder ist kein verzeichnis\n");
+            result = false;
+        }
+        return result;
+    }
+
+    public static void doCopying(Vector<File> toCopy, File targetDirFile, JTextArea outputArea) {
+        outputArea.append("starte kopieren von " + toCopy.size() + " dateien, master ist verzeichnis\n");
+        int current = 0;
+        for (File f : toCopy) {
+            try {
+                current++;
+                outputArea.append("cp " + current + "/" + toCopy.size() + " :" + f.getName() + " \n");
+                FileUtils.copyFileToDirectory(f, targetDirFile);
+            } catch (IOException e) {
+                outputArea.append("fehler beim kopieren von:" + f.getName() + "\n");
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+    }
+
+    public static Vector<FileInfo> GetFileInfoItems(String absPath, String[] extensions) {
+        Vector<FileInfo> ret = new Vector<FileInfo>();
+        for (FileInfo aFile : GetFileInfoItems(absPath)) {
+            boolean extMatch = false;
+            for (String ext : extensions) {
+                extMatch |= aFile.getFile().getName().toLowerCase().endsWith(ext.toLowerCase());
+            }
+            if (extMatch) {
+                ret.add(aFile);
+            }
+        }
+        return ret;
+    }
+
+    public static Vector<FileInfo> GetFileInfoItems(String absPath) {
+        Vector<FileInfo> ret = new Vector<FileInfo>();
+        File f = new File(absPath);
+        File[] files = f.listFiles();
+        for (File aFile : files) {
+            ret.add(new FileInfo(aFile));
+        }
+        return ret;
+    }
+}

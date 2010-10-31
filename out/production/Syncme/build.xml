@@ -1,19 +1,6 @@
 <?xml version="1.0"?>
 <project name="lgs" default="makeMacOSAppZip" basedir=".">
 
-    <!--
-
-     //////////////////////////////////////////////////////////////////////////////////
-     //
-     //    need the following to be installed:
-     //      - nsis (c:\programme\nsis)
-     //      - common-net*.jar (\java\jre\lib\ext)
-     //      - jakarta-oro*.jar (\java\jre\lib\ext)
-     //
-     //////////////////////////////////////////////////////////////////////////////////
-
-     -->
-
     <taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler"/>
 
     <property name="version" value="${build.number}"/>
@@ -38,13 +25,13 @@
     </target>
 
     <target name="junit">
-        <junit haltonerror="on">
+        <junit haltonfailure="off">
             <classpath path="./junit-4.7.jar"/>
             <test name="FileInfoTests"/>
         </junit>
     </target>
 
-    <target name="makejars" depends="init, compile, junit">
+    <target name="makejars" depends="init, compile">
         <!-- make manifest files -->
         <manifest file="build/MANIFEST.MF">
             <attribute name="Main-Class" value="Lgs"/>
@@ -54,6 +41,7 @@
         <jar destfile="build/lgs.jar" manifest="build/MANIFEST.MF">
             <fileset dir="." casesensitive="no">
                 <include name="*.class"/>
+                <include name="*.gif"/>
                 <include name="Default.theme"/>
             </fileset>
         </jar>
