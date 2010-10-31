@@ -71,6 +71,7 @@ public class Lgs extends TransferHandler implements ActionListener {
         this.dirRadioButton = new JRadioButton("verzeichnis", true);
         this.dirRadioButton.setActionCommand("dir");
         this.dirRadioButton.addActionListener(this);
+        this.dirRadioButton.setToolTipText("hier klicken um ein verzeichnis als master zu nutzen");
         contentPane.add(this.dirRadioButton, gc);
         gc.gridx++;
         gc.gridwidth = 5;
@@ -78,6 +79,7 @@ public class Lgs extends TransferHandler implements ActionListener {
         this.masterDirectory = new JTextField();
         this.masterDirectory.setName("master");
         this.masterDirectory.setTransferHandler(this);
+        this.masterDirectory.setToolTipText("<html>das <b>master</b>verzeichnis ist die vorlage. dateien die in diesem verzeichnis existieren, werden im <b>slave</b>verzeichnis gesucht und von dort (slave) ins <b>ziel</b>verzeichnis kopiert</html>");
         contentPane.add(this.masterDirectory, gc);
         gc.gridwidth = 1;
         gc.gridy++;
@@ -85,6 +87,7 @@ public class Lgs extends TransferHandler implements ActionListener {
         gc.weightx = lWeight;
         dbRadioButton.setActionCommand("db");
         dbRadioButton.addActionListener(this);
+        dbRadioButton.setToolTipText("hier klicken um ein datenbank-album als master zu nutzen");
         contentPane.add(dbRadioButton, gc);
         gc.gridx++;
         gc.weightx = 1;
@@ -95,6 +98,7 @@ public class Lgs extends TransferHandler implements ActionListener {
         this.masterAlbum.addActionListener(this);
         this.masterAlbum.setEnabled(false);
         this.masterAlbum.setMaximumRowCount(30);
+        this.masterAlbum.setToolTipText("<html>ist ein album als <b>master</b> gewählt, so werden dateien aus dem album im <b>slave</b>verzeichnis gesucht und ins <b>ziel</b>verzeichnis kopiert.</html>");
         contentPane.add(this.masterAlbum, gc);
 
         ButtonGroup bgroup = new ButtonGroup();
@@ -112,6 +116,7 @@ public class Lgs extends TransferHandler implements ActionListener {
         this.slaveDirectory = new JTextField();
         this.slaveDirectory.setName("slave");
         this.slaveDirectory.setTransferHandler(this);
+        this.slaveDirectory.setToolTipText("<html>im <b>slave</b>verzeichnis liegen die <b>originale</b>. diese werden dann ins zielverzeichnis kopiert.<br /> dabei dient der master als vorlage welche dateien kopiert werden müssen</html>");
         contentPane.add(this.slaveDirectory, gc);
 
         gc.gridy++;
@@ -125,6 +130,7 @@ public class Lgs extends TransferHandler implements ActionListener {
         this.targetDirectory = new JTextField();
         this.targetDirectory.setName("ziel");
         this.targetDirectory.setTransferHandler(this);
+        this.targetDirectory.setToolTipText("<html>hier werden die dateien aus dem <b>slave</b>verzeichnis hin kopiert</html>");
         contentPane.add(this.targetDirectory, gc);
 
         gc.gridy++;
@@ -134,10 +140,12 @@ public class Lgs extends TransferHandler implements ActionListener {
         JButton startButton = new JButton("start");
         startButton.setActionCommand("start");
         startButton.addActionListener(this);
+        startButton.setToolTipText("das kopieren starten");
         contentPane.add(startButton, gc);
 
         gc.gridx += 2;
         JButton endButton = new JButton("ende");
+        endButton.setToolTipText("lgs beenden");
         endButton.setActionCommand("end");
         endButton.addActionListener(this);
         contentPane.add(endButton, gc);
