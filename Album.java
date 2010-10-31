@@ -1,17 +1,9 @@
 import java.util.Vector;
 
-/**
- * Created by IntelliJ IDEA.
- * User: basti
- * Date: 31.10.2010
- * Time: 16:09:16
- * To change this template use File | Settings | File Templates.
- */
 public class Album {
     String name;
-    int count;
     String id;
-    Vector<String> images;
+    Vector<String> images = new Vector<String>();
     Boolean initiated;
 
     public Boolean isInitiated() {
@@ -48,11 +40,7 @@ public class Album {
     }
 
     public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
+        return this.images.size();
     }
 
     public String getName() {
@@ -61,5 +49,9 @@ public class Album {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getInfoString() {
+        return id +":"+name+", "+initiated+", #="+this.getCount();
     }
 }

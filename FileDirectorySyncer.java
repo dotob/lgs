@@ -3,12 +3,12 @@ import java.io.File;
 import java.util.Vector;
 
 public class FileDirectorySyncer extends SwingWorker<Boolean, Object> {
-    private JTextArea outputArea;
+    private IMessageDisplay outputArea;
     private String slaveDir;
     private String targetDir;
     private Vector<FileInfo> masterFileInfos;
 
-    public FileDirectorySyncer(JTextArea outputArea) {
+    public FileDirectorySyncer(IMessageDisplay outputArea) {
         this.outputArea = outputArea;
     }
 
@@ -20,6 +20,16 @@ public class FileDirectorySyncer extends SwingWorker<Boolean, Object> {
         this.masterFileInfos = master;
         this.slaveDir = slaveDir;
         this.targetDir = targetDir;
+        File slaveDirFile = new File(slaveDir);
+        File targetDirFile = new File(targetDir);
+        if (!FileSyncerUtils.doChecking(masterFileInfos, slaveDirFile, targetDirFile, this.outputArea)) {
+            return false;
+        }
+        // output image names
+        this.outputArea.showMessage("im verzeichnis enthaltene bilder:\n", IMessageDisplay.VERBOSE);
+        for (FileInfo s : master) {
+            this.outputArea.showMessage("  " + s.toString()+"\n", IMessageDisplay.VERBOSE);
+        }
         try {
             return doInBackground();
         } catch (Exception e) {
@@ -30,12 +40,8 @@ public class FileDirectorySyncer extends SwingWorker<Boolean, Object> {
 
     @Override
     protected Boolean doInBackground() throws Exception {
-        // directory
         File slaveDirFile = new File(slaveDir);
         File targetDirFile = new File(targetDir);
-        if (!FileSyncerUtils.doChecking(masterFileInfos, slaveDirFile, targetDirFile, this.outputArea)) {
-            return false;
-        }
         Vector<File> toCopy = new Vector<File>();
         for (FileInfo fi : masterFileInfos) {
             for (File siblingInSlave : fi.GetSiblings(slaveDirFile)) {

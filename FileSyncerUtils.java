@@ -1,46 +1,41 @@
 import org.apache.commons.io.FileUtils;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.AbstractCollection;
 import java.util.Vector;
 
-/**
- * Created by IntelliJ IDEA.
- * User: basti
- * Date: 31.10.2010
- * Time: 15:43:03
- * To change this template use File | Settings | File Templates.
- */
 public class FileSyncerUtils {
-    public static boolean doChecking(AbstractCollection master, File slaveDirFile, File targetDirFile, JTextArea outputArea) {
-        boolean result = true;
+    public static boolean doChecking(AbstractCollection master, File slaveDirFile, File targetDirFile, IMessageDisplay outputArea) {
+        if (master == null) {
+            outputArea.showMessage("master information ist leer (null)\n");
+            return false;
+        }
         if (master.size() <= 0) {
-            outputArea.append("master information ist leer\n");
-            result = false;
+            outputArea.showMessage("master information ist leer\n");
+            return false;
         }
         if (!slaveDirFile.isDirectory()) {
-            outputArea.append("slave-verzeichnis existiert nicht oder ist kein verzeichnis\n");
-            result = false;
+            outputArea.showMessage("slave-verzeichnis existiert nicht oder ist kein verzeichnis\n");
+            return false;
         }
         if (!targetDirFile.isDirectory()) {
-            outputArea.append("ziel-verzeichnis existiert nicht oder ist kein verzeichnis\n");
-            result = false;
+            outputArea.showMessage("ziel-verzeichnis existiert nicht oder ist kein verzeichnis\n");
+            return false;
         }
-        return result;
+        return true;
     }
 
-    public static void doCopying(Vector<File> toCopy, File targetDirFile, JTextArea outputArea) {
-        outputArea.append("starte kopieren von " + toCopy.size() + " dateien, master ist verzeichnis\n");
+    public static void doCopying(Vector<File> toCopy, File targetDirFile, IMessageDisplay outputArea) {
+        outputArea.showMessage("starte kopieren von " + toCopy.size() + " dateien, master ist verzeichnis\n");
         int current = 0;
         for (File f : toCopy) {
             try {
                 current++;
-                outputArea.append("cp " + current + "/" + toCopy.size() + " :" + f.getName() + " \n");
+                outputArea.showMessage("cp " + current + "/" + toCopy.size() + " :" + f.getName() + " \n");
                 FileUtils.copyFileToDirectory(f, targetDirFile);
             } catch (IOException e) {
-                outputArea.append("fehler beim kopieren von:" + f.getName() + "\n");
+                outputArea.showMessage("fehler beim kopieren von:" + f.getName() + "\n");
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
         }

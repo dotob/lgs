@@ -2,8 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="a84c7358-d7c7-428e-866a-8118c85b4d62" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FileDirectorySyncer.java" afterPath="$PROJECT_DIR$/FileDirectorySyncer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/IMessageDisplay.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Lgs.java" afterPath="$PROJECT_DIR$/Lgs.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FileSyncerUtils.java" afterPath="$PROJECT_DIR$/FileSyncerUtils.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/projectCodeStyle.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Album.java" afterPath="$PROJECT_DIR$/Album.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FileDBSyncer.java" afterPath="$PROJECT_DIR$/FileDBSyncer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlbumImageProvider.java" afterPath="$PROJECT_DIR$/AlbumImageProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlbumProvider.java" afterPath="$PROJECT_DIR$/AlbumProvider.java" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="java.iws" />
@@ -23,7 +31,7 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/Album.java" line="35" class="Album" package="">
+      <breakpoint url="file://$PROJECT_DIR$/Album.java" line="27" class="Album" package="">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -78,13 +86,86 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Lgs.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Lgs.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lgs.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="132" column="112" selection-start="5557" selection-end="5557" vertical-scroll-proportion="0.69512194">
+            <state line="252" column="91" selection-start="10469" selection-end="10469" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Album.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Album.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="48" selection-start="127" selection-end="127" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AlbumProvider.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AlbumProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="66" column="68" selection-start="2906" selection-end="2906" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AlbumImageProvider.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AlbumImageProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="0" selection-start="751" selection-end="751" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileDBSyncer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FileDBSyncer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="52" selection-start="1020" selection-end="1020" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileDirectorySyncer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FileDirectorySyncer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="28" column="70" selection-start="974" selection-end="974" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileSyncerUtils.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/FileSyncerUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="19" selection-start="977" selection-end="977" vertical-scroll-proportion="0.6438152">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IMessageDisplay.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IMessageDisplay.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="20" selection-start="170" selection-end="181" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -106,15 +187,16 @@
         <option value="$PROJECT_DIR$/AlbumChecker.java" />
         <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/FileSyncer.java" />
-        <option value="$PROJECT_DIR$/FileSyncerUtils.java" />
+        <option value="$PROJECT_DIR$/FileInfo.java" />
+        <option value="$PROJECT_DIR$/FileInfoTests.java" />
+        <option value="$PROJECT_DIR$/IMessageDisplay.java" />
+        <option value="$PROJECT_DIR$/AlbumProvider.java" />
         <option value="$PROJECT_DIR$/FileDBSyncer.java" />
         <option value="$PROJECT_DIR$/FileDirectorySyncer.java" />
-        <option value="$PROJECT_DIR$/FileInfo.java" />
         <option value="$PROJECT_DIR$/AlbumImageProvider.java" />
-        <option value="$PROJECT_DIR$/FileInfoTests.java" />
-        <option value="$PROJECT_DIR$/Album.java" />
-        <option value="$PROJECT_DIR$/AlbumProvider.java" />
         <option value="$PROJECT_DIR$/Lgs.java" />
+        <option value="$PROJECT_DIR$/Album.java" />
+        <option value="$PROJECT_DIR$/FileSyncerUtils.java" />
       </list>
     </option>
   </component>
@@ -191,7 +273,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="GenerateAntBuildDialog.generateSingleFile" value="true" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="File.Encoding" />
+    <property name="options.lastSelected" value="preferences.sourceCode.HTML" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="GenerateAntBuildDialog.inclineRuntiemClasspath" value="false" />
     <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
@@ -202,7 +284,7 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="GenerateAntBuildDialog.backupFiles" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.splitter.details.proportions" value="0.2583732" />
     <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
   </component>
@@ -462,24 +544,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FileDBSyncer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="10" selection-start="373" selection-end="373" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FileDirectorySyncer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="10" selection-start="432" selection-end="432" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FileInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="63" column="18" selection-start="1623" selection-end="1623" vertical-scroll-proportion="0.0">
@@ -494,25 +558,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FileSyncerUtils.java">
+    <entry file="file://$PROJECT_DIR$/IMessageDisplay.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="17" selection-start="2305" selection-end="2305" vertical-scroll-proportion="0.0">
+        <state line="4" column="20" selection-start="170" selection-end="181" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FileDirectorySyncer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="70" selection-start="974" selection-end="974" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Album.java">
+    <entry file="file://$PROJECT_DIR$/FileDBSyncer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="651" selection-end="651" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AlbumImageProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="28" selection-start="339" selection-end="339" vertical-scroll-proportion="0.0">
+        <state line="26" column="52" selection-start="1020" selection-end="1020" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -521,7 +585,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AlbumProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="0" selection-start="2724" selection-end="2724" vertical-scroll-proportion="0.0">
+        <state line="66" column="68" selection-start="2906" selection-end="2906" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -530,7 +594,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Lgs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="132" column="112" selection-start="5557" selection-end="5557" vertical-scroll-proportion="0.69512194">
+        <state line="252" column="91" selection-start="10469" selection-end="10469" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Album.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="48" selection-start="127" selection-end="127" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AlbumImageProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="751" selection-end="751" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FileSyncerUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="19" selection-start="977" selection-end="977" vertical-scroll-proportion="0.6438152">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

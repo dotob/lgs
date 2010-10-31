@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Vector;
 
 
-public class Lgs extends TransferHandler implements ActionListener {
+public class Lgs extends TransferHandler implements ActionListener, IMessageDisplay {
     private static final String versionString = "buildnumber";
 
     //TODO: make this configurable
@@ -21,6 +21,7 @@ public class Lgs extends TransferHandler implements ActionListener {
     private AlbumImageProvider albumImageProvider;
     private FileDBSyncer fileDBSyncer;
     private FileDirectorySyncer fileDirectorySyncer;
+    private JCheckBox verboseOutputCB;
 
     public static void main(String[] args) {
         // Schedule a job for the event-dispatching thread:
@@ -134,6 +135,15 @@ public class Lgs extends TransferHandler implements ActionListener {
         contentPane.add(this.targetDirectory, gc);
 
         gc.gridy++;
+        gc.gridx = 1;
+        gc.gridwidth = 2;
+        gc.weightx = lWeight;
+        verboseOutputCB = new JCheckBox("mehr info");
+        verboseOutputCB.setToolTipText("detailliertere ausgaben machen");
+        //TODO: make visible when we have more detailled output
+        //verboseOutputCB.setVisible(false);
+        contentPane.add(this.verboseOutputCB, gc);
+
         gc.gridx = 3;
         gc.gridwidth = 2;
         gc.weightx = lWeight;
@@ -159,10 +169,10 @@ public class Lgs extends TransferHandler implements ActionListener {
         JScrollPane jsp = new JScrollPane(this.outputArea);
         contentPane.add(jsp, gc);
 
-        albumProvider = new AlbumProvider(this.masterAlbum, this.outputArea, this.dbRadioButton);
-        albumImageProvider = new AlbumImageProvider(this.outputArea);
-        this.fileDirectorySyncer = new FileDirectorySyncer(this.outputArea);
-        this.fileDBSyncer = new FileDBSyncer(this.outputArea);
+        albumProvider = new AlbumProvider(this.masterAlbum, this, this.dbRadioButton);
+        albumImageProvider = new AlbumImageProvider(this);
+        this.fileDirectorySyncer = new FileDirectorySyncer(this);
+        this.fileDBSyncer = new FileDBSyncer(this);
 
         // gather albums in background
         try {
@@ -228,18 +238,19 @@ public class Lgs extends TransferHandler implements ActionListener {
 
     private void startLGS() {
         if (this.dirRadioButton.isSelected()) {
-            this.outputArea.append("start with directory");
+            this.outputArea.append("start with directory"+ "\n");
             // use supplied directory
             String masterDir = this.masterDirectory.getText();
             String slaveDir = this.slaveDirectory.getText();
             String targetDir = this.targetDirectory.getText();
             this.fileDirectorySyncer.syncItems(FileSyncerUtils.GetFileInfoItems(masterDir, this.ext), slaveDir, targetDir);
         } else {
-            this.outputArea.append("start with db");
+            this.outputArea.append("start with db"+ "\n");
             // use album from db
             String slaveDir = this.slaveDirectory.getText();
             String targetDir = this.targetDirectory.getText();
             Album album = (Album) this.masterAlbum.getSelectedItem();
+            this.showMessage("album: "+album.getInfoString()+ "\n", IMessageDisplay.VERBOSE);
             this.albumImageProvider.setAlbum(album);
             Vector<String> foddos = null;
             try {
@@ -295,5 +306,16 @@ public class Lgs extends TransferHandler implements ActionListener {
             return false;
         }
         return false;
+    }
+
+    @Override
+    public void showMessage(String msg) {
+        showMessage(msg, NORMAL);
+    }
+    @Override
+    public void showMessage(String msg, int level) {
+        if (level < VERBOSE || this.verboseOutputCB.isSelected()) {
+            this.outputArea.append(msg);
+        }
     }
 }

@@ -10,12 +10,12 @@ import java.net.UnknownHostException;
 import java.util.Vector;
 
 public class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
-    private JTextArea outputArea;
+    private IMessageDisplay outputArea;
     private JRadioButton dbRadioButton;
     private JComboBox masterAlbum;
     private Vector<Album> albumList;
 
-    public AlbumProvider(JComboBox masterAlbum, JTextArea output, JRadioButton dbRadioButton) {
+    public AlbumProvider(JComboBox masterAlbum, IMessageDisplay output, JRadioButton dbRadioButton) {
         this.masterAlbum = masterAlbum;
         this.outputArea = output;
         this.dbRadioButton = dbRadioButton;
@@ -42,19 +42,19 @@ public class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
             // close stream
             in.close();
         } catch (FileNotFoundException e) {
-            this.outputArea.append("konnte album information nicht laden (FileNotFoundException)\n");
+            this.outputArea.showMessage("konnte album information nicht laden (FileNotFoundException)\n");
             dbRadioButton.setEnabled(false);
         } catch (UnknownHostException e) {
-            this.outputArea.append("konnte album information nicht laden (UnknownHostException)\n");
+            this.outputArea.showMessage("konnte album information nicht laden (UnknownHostException)\n");
             dbRadioButton.setEnabled(false);
         } catch (ConnectException e) {
-            this.outputArea.append("konnte album information nicht laden (ConnectException)\n");
+            this.outputArea.showMessage("konnte album information nicht laden (ConnectException)\n");
             dbRadioButton.setEnabled(false);
         } catch (MalformedURLException e) {
-            this.outputArea.append("konnte album information nicht laden (MalformedURLException)\n");
+            this.outputArea.showMessage("konnte album information nicht laden (MalformedURLException)\n");
             dbRadioButton.setEnabled(false);
         } catch (IOException e) {
-            this.outputArea.append("konnte album information nicht laden (IOException)\n");
+            this.outputArea.showMessage("konnte album information nicht laden (IOException)\n");
             dbRadioButton.setEnabled(false);
         }
         return this.albumList;
@@ -64,6 +64,6 @@ public class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
     protected void done() {
         this.dbRadioButton.setEnabled(true);
         this.masterAlbum.setModel(new DefaultComboBoxModel(this.albumList));
-        this.outputArea.append(this.albumList.size() + " alben gefunden\n");
+        this.outputArea.showMessage(this.albumList.size() + " alben gefunden\n");
     }
 }

@@ -10,10 +10,10 @@ import java.net.UnknownHostException;
 import java.util.Vector;
 
 public class AlbumImageProvider extends SwingWorker<Vector<String>, Object> {
-    private JTextArea outputArea;
+    private IMessageDisplay outputArea;
     private Album album;
 
-    public AlbumImageProvider(JTextArea output) {
+    public AlbumImageProvider(IMessageDisplay output) {
         this.outputArea = output;
     }
 
@@ -36,20 +36,20 @@ public class AlbumImageProvider extends SwingWorker<Vector<String>, Object> {
                 // close stream
                 in.close();
             } catch (FileNotFoundException e) {
-                outputArea.append("Kein Zugang zum Internet gefunden.");
+                outputArea.showMessage("Kein Zugang zum Internet gefunden."+ "\n");
                 // e.printStackTrace();
             } catch (UnknownHostException e) {
-                outputArea.append("Kein Zugang zum Internet gefunden.");
+                outputArea.showMessage("Kein Zugang zum Internet gefunden."+ "\n");
                 // e.printStackTrace();
             } catch (ConnectException e) {
-                outputArea.append("Kein Zugang zum Internet gefunden.");
+                outputArea.showMessage("Kein Zugang zum Internet gefunden."+ "\n");
                 // e.printStackTrace();
             } catch (MalformedURLException e) {
-                outputArea.append("Kein Zugang zum Internet gefunden.");
+                outputArea.showMessage("Kein Zugang zum Internet gefunden."+ "\n");
                 // MyLog.exceptionError(e);
                 e.printStackTrace();
             } catch (IOException e) {
-                outputArea.append("Kein Zugang zum Internet gefunden.");
+                outputArea.showMessage("Kein Zugang zum Internet gefunden."+ "\n");
                 // MyLog.exceptionError(e);
                 e.printStackTrace();
             }
@@ -61,7 +61,7 @@ public class AlbumImageProvider extends SwingWorker<Vector<String>, Object> {
     protected void done() {
         try {
             Vector<String> pics = get();
-            this.outputArea.append(+pics.size() + " bilder in album " + this.album.getName() + " gefunden\n");
+            this.outputArea.showMessage(+pics.size() + " bilder in album " + this.album.getName() + " gefunden\n");
         } catch (Exception ignore) {
         }
     }
