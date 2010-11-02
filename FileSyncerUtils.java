@@ -27,12 +27,12 @@ public class FileSyncerUtils {
     }
 
     public static void doCopying(Vector<File> toCopy, File targetDirFile, IMessageDisplay outputArea) {
-        outputArea.showMessage("starte kopieren von " + toCopy.size() + " dateien, master ist verzeichnis\n");
+        outputArea.showMessage("starte kopieren von " + toCopy.size() + " dateien\n");
         int current = 0;
         for (File f : toCopy) {
             try {
                 current++;
-                outputArea.showMessage("cp " + current + "/" + toCopy.size() + " :" + f.getName() + " \n");
+                outputArea.showMessage("  cp " + current + "/" + toCopy.size() + " :" + f.getName() + " \n");
                 FileUtils.copyFileToDirectory(f, targetDirFile);
             } catch (IOException e) {
                 outputArea.showMessage("fehler beim kopieren von:" + f.getName() + "\n");
@@ -58,9 +58,11 @@ public class FileSyncerUtils {
     public static Vector<FileInfo> GetFileInfoItems(String absPath) {
         Vector<FileInfo> ret = new Vector<FileInfo>();
         File f = new File(absPath);
-        File[] files = f.listFiles();
-        for (File aFile : files) {
-            ret.add(new FileInfo(aFile));
+        if (f.exists() && f.isDirectory()) {
+            File[] files = f.listFiles();
+            for (File aFile : files) {
+                ret.add(new FileInfo(aFile));
+            }
         }
         return ret;
     }

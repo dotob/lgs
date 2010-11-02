@@ -1,7 +1,7 @@
 <? 
 
 // Make a database connection.
-if(!$db = @mysql_connect("mysql5.lichtographie.de", "db214075_57", "licht2oo9"))
+if(!$db = @mysql_connect("mysql5.lichtographie.de", "xxxxx", "yyyyyy"))
         die('<b>An Error Occured</b><br>I was unable to connect to the database.');
 if(!@mysql_select_db("db214075_57",$db))
         die("<b>An Error Occured</b><br>I was unable to find the database on your MySQL server.<br>");

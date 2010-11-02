@@ -16,19 +16,19 @@ public class FileDirectorySyncer extends SwingWorker<Boolean, Object> {
     /*
    * return false if fail
     */
-    public boolean syncItems(Vector<FileInfo> master, String slaveDir, String targetDir) {
-        this.masterFileInfos = master;
+    public boolean syncItems(String master, String[] ext, String slaveDir, String targetDir) {
         this.slaveDir = slaveDir;
         this.targetDir = targetDir;
         File slaveDirFile = new File(slaveDir);
         File targetDirFile = new File(targetDir);
+        this.masterFileInfos = FileSyncerUtils.GetFileInfoItems(master, ext);
         if (!FileSyncerUtils.doChecking(masterFileInfos, slaveDirFile, targetDirFile, this.outputArea)) {
             return false;
         }
         // output image names
         this.outputArea.showMessage("im verzeichnis enthaltene bilder:\n", IMessageDisplay.VERBOSE);
-        for (FileInfo s : master) {
-            this.outputArea.showMessage("  " + s.toString()+"\n", IMessageDisplay.VERBOSE);
+        for (FileInfo s : masterFileInfos) {
+            this.outputArea.showMessage("  " + s.GetString() + "\n", IMessageDisplay.VERBOSE);
         }
         try {
             return doInBackground();

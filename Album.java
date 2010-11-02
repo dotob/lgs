@@ -4,9 +4,9 @@ public class Album {
     String name;
     String id;
     Vector<String> images = new Vector<String>();
-    Boolean initiated;
+    boolean initiated = false;
 
-    public Boolean isInitiated() {
+    public boolean isInitiated() {
         return initiated;
     }
 

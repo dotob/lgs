@@ -170,9 +170,6 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         contentPane.add(jsp, gc);
 
         albumProvider = new AlbumProvider(this.masterAlbum, this, this.dbRadioButton);
-        albumImageProvider = new AlbumImageProvider(this);
-        this.fileDirectorySyncer = new FileDirectorySyncer(this);
-        this.fileDBSyncer = new FileDBSyncer(this);
 
         // gather albums in background
         try {
@@ -226,6 +223,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         } else if (e.getActionCommand().equals("dbalbums")) {
             // album is selected
             Album album = (Album) this.masterAlbum.getSelectedItem();
+            this.albumImageProvider = new AlbumImageProvider(this);
             this.albumImageProvider.setAlbum(album);
             try {
                 this.albumImageProvider.execute();
@@ -243,15 +241,13 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
             String masterDir = this.masterDirectory.getText();
             String slaveDir = this.slaveDirectory.getText();
             String targetDir = this.targetDirectory.getText();
-            this.fileDirectorySyncer.syncItems(FileSyncerUtils.GetFileInfoItems(masterDir, this.ext), slaveDir, targetDir);
+            this.fileDirectorySyncer = new FileDirectorySyncer(this);
+            this.fileDirectorySyncer.syncItems(masterDir, this.ext, slaveDir, targetDir);
         } else {
             this.outputArea.append("start with db"+ "\n");
             // use album from db
             String slaveDir = this.slaveDirectory.getText();
             String targetDir = this.targetDirectory.getText();
-            Album album = (Album) this.masterAlbum.getSelectedItem();
-            this.showMessage("album: "+album.getInfoString()+ "\n", IMessageDisplay.VERBOSE);
-            this.albumImageProvider.setAlbum(album);
             Vector<String> foddos = null;
             try {
                 // this is SYNC, but usually we retrieved the images already
@@ -259,6 +255,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
             } catch (Exception e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
+            this.fileDBSyncer = new FileDBSyncer(this);
             this.fileDBSyncer.syncItems(foddos, slaveDir, targetDir);
         }
     }
