@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="a84c7358-d7c7-428e-866a-8118c85b4d62" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FileDirectorySyncer.java" afterPath="$PROJECT_DIR$/FileDirectorySyncer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FileDBSyncer.java" afterPath="$PROJECT_DIR$/FileDBSyncer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlbumImageProvider.java" afterPath="$PROJECT_DIR$/AlbumImageProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Lgs.java" afterPath="$PROJECT_DIR$/Lgs.java" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="java.iws" />
@@ -25,7 +23,7 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/Lgs.java" line="230" class="Lgs" package="">
+      <breakpoint url="file://$PROJECT_DIR$/Lgs.java" line="268" class="Lgs" package="">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -80,10 +78,10 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Lgs.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Lgs.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Lgs.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="247" column="32" selection-start="10110" selection-end="10110" vertical-scroll-proportion="0.0">
+            <state line="256" column="23" selection-start="10362" selection-end="10362" vertical-scroll-proportion="0.5929878">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -122,10 +120,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileDBSyncer.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="FileDBSyncer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FileDBSyncer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="0" selection-start="1469" selection-end="1469" vertical-scroll-proportion="0.3546945">
+            <state line="40" column="0" selection-start="1469" selection-end="1469" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -194,12 +192,12 @@
         <option value="$PROJECT_DIR$/IMessageDisplay.java" />
         <option value="$PROJECT_DIR$/AlbumProvider.java" />
         <option value="$PROJECT_DIR$/Album.java" />
-        <option value="$PROJECT_DIR$/Lgs.java" />
         <option value="$PROJECT_DIR$/FileSyncerUtils.java" />
         <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/FileDirectorySyncer.java" />
         <option value="$PROJECT_DIR$/AlbumImageProvider.java" />
         <option value="$PROJECT_DIR$/FileDBSyncer.java" />
+        <option value="$PROJECT_DIR$/Lgs.java" />
       </list>
     </option>
   </component>
@@ -605,15 +603,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Lgs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="247" column="32" selection-start="10110" selection-end="10110" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="49" column="18" selection-start="1607" selection-end="1607" vertical-scroll-proportion="-7.9259257">
@@ -657,7 +646,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/FileDBSyncer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="0" selection-start="1469" selection-end="1469" vertical-scroll-proportion="0.3546945">
+        <state line="40" column="0" selection-start="1469" selection-end="1469" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lgs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="256" column="23" selection-start="10362" selection-end="10362" vertical-scroll-proportion="0.5929878">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

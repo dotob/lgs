@@ -67,7 +67,11 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         gc.gridx = 0;
         gc.gridy = 0;
         gc.weightx = lWeight;
-        contentPane.add(new JLabel("master"), gc);
+
+        String masterMsg = "<html>das <b>master</b>verzeichnis ist die vorlage. dateien die in diesem verzeichnis existieren, werden im <b>slave</b>verzeichnis gesucht und von dort (slave) ins <b>ziel</b>verzeichnis kopiert</html>";
+        JLabel masterLabel = new JLabel("master");
+        masterLabel.setToolTipText(masterMsg);
+        contentPane.add(masterLabel, gc);
         gc.gridx++;
         this.dirRadioButton = new JRadioButton("verzeichnis", true);
         this.dirRadioButton.setActionCommand("dir");
@@ -75,13 +79,21 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         this.dirRadioButton.setToolTipText("hier klicken um ein verzeichnis als master zu nutzen");
         contentPane.add(this.dirRadioButton, gc);
         gc.gridx++;
-        gc.gridwidth = 5;
+        gc.gridwidth = 4;
         gc.weightx = 1;
         this.masterDirectory = new JTextField();
         this.masterDirectory.setName("master");
         this.masterDirectory.setTransferHandler(this);
-        this.masterDirectory.setToolTipText("<html>das <b>master</b>verzeichnis ist die vorlage. dateien die in diesem verzeichnis existieren, werden im <b>slave</b>verzeichnis gesucht und von dort (slave) ins <b>ziel</b>verzeichnis kopiert</html>");
+        this.masterDirectory.setToolTipText(masterMsg);
         contentPane.add(this.masterDirectory, gc);
+        gc.gridwidth = 1;
+        gc.weightx = lWeight;
+        gc.gridx += 4;
+        JButton browsebutton = new JButton("...");
+        browsebutton.addActionListener(this);
+        browsebutton.setActionCommand("browseMaster");
+        contentPane.add(browsebutton, gc);
+
         gc.gridwidth = 1;
         gc.gridy++;
         gc.gridx = 1;
@@ -110,29 +122,49 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         gc.gridy++;
         gc.gridwidth = 1;
         gc.weightx = lWeight;
-        contentPane.add(new JLabel("slave"), gc);
+        String slaveMsg = "<html>im <b>slave</b>verzeichnis liegen die <b>originale</b>. diese werden dann ins zielverzeichnis kopiert.<br /> dabei dient der master als vorlage welche dateien kopiert werden müssen</html>";
+        JLabel slaveLabel = new JLabel("slave");
+        slaveLabel.setToolTipText(slaveMsg);
+        contentPane.add(slaveLabel, gc);
         gc.gridx++;
         gc.weightx = 1;
-        gc.gridwidth = 6;
+        gc.gridwidth = 5;
         this.slaveDirectory = new JTextField();
         this.slaveDirectory.setName("slave");
         this.slaveDirectory.setTransferHandler(this);
-        this.slaveDirectory.setToolTipText("<html>im <b>slave</b>verzeichnis liegen die <b>originale</b>. diese werden dann ins zielverzeichnis kopiert.<br /> dabei dient der master als vorlage welche dateien kopiert werden müssen</html>");
+        this.slaveDirectory.setToolTipText(slaveMsg);
         contentPane.add(this.slaveDirectory, gc);
+        gc.gridwidth = 1;
+        gc.weightx = lWeight;
+        gc.gridx += 5;
+        browsebutton = new JButton("...");
+        browsebutton.addActionListener(this);
+        browsebutton.setActionCommand("browseSlave");
+        contentPane.add(browsebutton, gc);
 
         gc.gridy++;
         gc.gridx = 0;
         gc.gridwidth = 1;
         gc.weightx = lWeight;
-        contentPane.add(new JLabel("ziel"), gc);
+        String targetMsg = "<html>hier werden die dateien aus dem <b>slave</b>verzeichnis hin kopiert</html>";
+        JLabel targetLabel = new JLabel("ziel");
+        targetLabel.setToolTipText(targetMsg);
+        contentPane.add(targetLabel, gc);
         gc.gridx++;
         gc.weightx = 1;
-        gc.gridwidth = 6;
+        gc.gridwidth = 5;
         this.targetDirectory = new JTextField();
         this.targetDirectory.setName("ziel");
         this.targetDirectory.setTransferHandler(this);
-        this.targetDirectory.setToolTipText("<html>hier werden die dateien aus dem <b>slave</b>verzeichnis hin kopiert</html>");
+        this.targetDirectory.setToolTipText(targetMsg);
         contentPane.add(this.targetDirectory, gc);
+        gc.gridwidth = 1;
+        gc.weightx = lWeight;
+        gc.gridx += 5;
+        browsebutton = new JButton("...");
+        browsebutton.addActionListener(this);
+        browsebutton.setActionCommand("browseTarget");
+        contentPane.add(browsebutton, gc);
 
         gc.gridy++;
         gc.gridx = 1;
@@ -217,6 +249,12 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         } else if (e.getActionCommand().equals("db")) {
             this.masterAlbum.setEnabled(true);
             this.masterDirectory.setEnabled(false);
+        } else if (e.getActionCommand().equals("browseMaster")) {
+            this.masterDirectory.setText(getPathFromUser("master verzeichnis auswählen"));
+        } else if (e.getActionCommand().equals("browseSlave")) {
+            this.slaveDirectory.setText(getPathFromUser("slave verzeichnis auswählen"));
+        } else if (e.getActionCommand().equals("browseTarget")) {
+            this.targetDirectory.setText(getPathFromUser("ziel verzeichnis auswählen"));
         } else if (e.getActionCommand().equals("dir")) {
             this.masterAlbum.setEnabled(false);
             this.masterDirectory.setEnabled(true);
@@ -236,7 +274,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
 
     private void startLGS() {
         if (this.dirRadioButton.isSelected()) {
-            this.outputArea.append("start with directory"+ "\n");
+            this.outputArea.append("start with directory" + "\n");
             // use supplied directory
             String masterDir = this.masterDirectory.getText();
             String slaveDir = this.slaveDirectory.getText();
@@ -244,7 +282,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
             this.fileDirectorySyncer = new FileDirectorySyncer(this);
             this.fileDirectorySyncer.syncItems(masterDir, this.ext, slaveDir, targetDir);
         } else {
-            this.outputArea.append("start with db"+ "\n");
+            this.outputArea.append("start with db" + "\n");
             // use album from db
             String slaveDir = this.slaveDirectory.getText();
             String targetDir = this.targetDirectory.getText();
@@ -261,8 +299,23 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
     }
 
     /*
-    DRAG & DROP
+    FILE CHOOOSER
      */
+    private String getPathFromUser(String header) throws HeadlessException {
+        String absPath = null;
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int erg = fc.showDialog(this.frame, header);
+        if (erg == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            absPath = file.getAbsolutePath();
+        }
+        return absPath;
+    }
+
+    /*
+   DRAG & DROP
+    */
     @Override
     public boolean importData(JComponent comp, Transferable t) {
         // Make sure we have the right starting points
@@ -309,6 +362,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
     public void showMessage(String msg) {
         showMessage(msg, NORMAL);
     }
+
     @Override
     public void showMessage(String msg, int level) {
         if (level < VERBOSE || this.verboseOutputCB.isSelected()) {
