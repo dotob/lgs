@@ -23,7 +23,7 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/Lgs.java" line="268" class="Lgs" package="">
+      <breakpoint url="file://$PROJECT_DIR$/Lgs.java" line="282" class="Lgs" package="">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -81,7 +81,7 @@
       <file leaf-file-name="Lgs.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Lgs.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="256" column="23" selection-start="10362" selection-end="10362" vertical-scroll-proportion="0.5929878">
+            <state line="117" column="24" selection-start="4831" selection-end="4831" vertical-scroll-proportion="0.7957317">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -655,7 +655,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Lgs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="256" column="23" selection-start="10362" selection-end="10362" vertical-scroll-proportion="0.5929878">
+        <state line="117" column="24" selection-start="4831" selection-end="4831" vertical-scroll-proportion="0.7957317">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -104,7 +104,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         contentPane.add(dbRadioButton, gc);
         gc.gridx++;
         gc.weightx = 1;
-        gc.gridwidth = 5;
+        gc.gridwidth = 4;
         this.masterAlbum = new JComboBox();
 
         this.masterAlbum.setActionCommand("dbalbums");
@@ -113,7 +113,15 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         this.masterAlbum.setMaximumRowCount(30);
         this.masterAlbum.setToolTipText("<html>ist ein album als <b>master</b> gewählt, so werden dateien aus dem album im <b>slave</b>verzeichnis gesucht und ins <b>ziel</b>verzeichnis kopiert.</html>");
         contentPane.add(this.masterAlbum, gc);
+        gc.gridx += 4;
+        gc.weightx = lWeight;
+        gc.gridwidth = 1;
+        browsebutton = new JButton("*");
+        browsebutton.addActionListener(this);
+        browsebutton.setActionCommand("updateAlbums");
+        contentPane.add(browsebutton, gc);
 
+        // radiobutton group
         ButtonGroup bgroup = new ButtonGroup();
         bgroup.add(this.dirRadioButton);
         bgroup.add(dbRadioButton);
@@ -201,6 +209,13 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         JScrollPane jsp = new JScrollPane(this.outputArea);
         contentPane.add(jsp, gc);
 
+        gatherAlbumsInBackground();
+
+        this.frame.pack();
+        this.frame.setVisible(true);
+    }
+
+    private void gatherAlbumsInBackground() {
         albumProvider = new AlbumProvider(this.masterAlbum, this, this.dbRadioButton);
 
         // gather albums in background
@@ -210,9 +225,6 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
             this.outputArea.append(e.getMessage());
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-
-        this.frame.pack();
-        this.frame.setVisible(true);
     }
 
     private String setLAF() {
@@ -255,6 +267,8 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
             this.slaveDirectory.setText(getPathFromUser("slave verzeichnis auswählen"));
         } else if (e.getActionCommand().equals("browseTarget")) {
             this.targetDirectory.setText(getPathFromUser("ziel verzeichnis auswählen"));
+        } else if (e.getActionCommand().equals("updateAlbums")) {
+            gatherAlbumsInBackground();
         } else if (e.getActionCommand().equals("dir")) {
             this.masterAlbum.setEnabled(false);
             this.masterDirectory.setEnabled(true);
