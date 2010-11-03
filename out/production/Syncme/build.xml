@@ -48,7 +48,7 @@
     </target>
 
     <target name="makeMacOSApp" depends="makejars">
-        <jarbundler dir="build/macapp" name="lgs" mainclass="Lgs" build="${version}" version="${version}"
+        <jarbundler dir="build/macapp" name="lgs-${version}" mainclass="Lgs" build="${version}" version="${version}"
                     stubfile="build/JavaApplicationStub" icon="build/lgs_icon.icns">
             <jarfileset file="build/lgs.jar"/>
             <javafileset dir=".">

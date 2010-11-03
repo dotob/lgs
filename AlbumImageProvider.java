@@ -36,20 +36,20 @@ public class AlbumImageProvider extends SwingWorker<Vector<String>, Object> {
                 // close stream
                 in.close();
             } catch (FileNotFoundException e) {
-                outputArea.showMessage("Kein Zugang zum Internet gefunden."+ "\n");
+                outputArea.showMessage("Kein Zugang zum Internet gefunden." + "\n");
                 // e.printStackTrace();
             } catch (UnknownHostException e) {
-                outputArea.showMessage("Kein Zugang zum Internet gefunden."+ "\n");
+                outputArea.showMessage("Kein Zugang zum Internet gefunden." + "\n");
                 // e.printStackTrace();
             } catch (ConnectException e) {
-                outputArea.showMessage("Kein Zugang zum Internet gefunden."+ "\n");
+                outputArea.showMessage("Kein Zugang zum Internet gefunden." + "\n");
                 // e.printStackTrace();
             } catch (MalformedURLException e) {
-                outputArea.showMessage("Kein Zugang zum Internet gefunden."+ "\n");
+                outputArea.showMessage("Kein Zugang zum Internet gefunden." + "\n");
                 // MyLog.exceptionError(e);
                 e.printStackTrace();
             } catch (IOException e) {
-                outputArea.showMessage("Kein Zugang zum Internet gefunden."+ "\n");
+                outputArea.showMessage("Kein Zugang zum Internet gefunden." + "\n");
                 // MyLog.exceptionError(e);
                 e.printStackTrace();
             }
@@ -61,6 +61,10 @@ public class AlbumImageProvider extends SwingWorker<Vector<String>, Object> {
     protected void done() {
         try {
             Vector<String> pics = get();
+            int i = 0;
+            for (String pic : pics) {
+                this.outputArea.showMessage("  " + i++ + ": " + pic + "\n", IMessageDisplay.VERBOSE);
+            }
             this.outputArea.showMessage(+pics.size() + " bilder in album " + this.album.getName() + " gefunden\n");
         } catch (Exception ignore) {
         }

@@ -16,14 +16,14 @@ public class FileDirectorySyncer extends SwingWorker<Boolean, Object> {
     /*
    * return false if fail
     */
-    public boolean syncItems(String master, String[] ext, String slaveDir, String targetDir) {
+    public void syncItems(String master, String[] ext, String slaveDir, String targetDir) {
         this.slaveDir = slaveDir;
         this.targetDir = targetDir;
         File slaveDirFile = new File(slaveDir);
         File targetDirFile = new File(targetDir);
         this.masterFileInfos = FileSyncerUtils.GetFileInfoItems(master, ext);
         if (!FileSyncerUtils.doChecking(masterFileInfos, slaveDirFile, targetDirFile, this.outputArea)) {
-            return false;
+            return;
         }
         // output image names
         this.outputArea.showMessage("im verzeichnis enthaltene bilder:\n", IMessageDisplay.VERBOSE);
@@ -31,11 +31,10 @@ public class FileDirectorySyncer extends SwingWorker<Boolean, Object> {
             this.outputArea.showMessage("  " + s.GetString() + "\n", IMessageDisplay.VERBOSE);
         }
         try {
-            return doInBackground();
+            execute();
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        return false;
     }
 
     @Override

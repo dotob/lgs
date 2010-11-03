@@ -12,14 +12,14 @@ public class FileDBSyncer extends SwingWorker<Boolean, Object> {
         this.outputArea = outputArea;
     }
 
-    public boolean syncItems(Vector<String> master, String slaveDir, String targetDir) {
+    public void syncItems(Vector<String> master, String slaveDir, String targetDir) {
         this.slaveDir = slaveDir;
         this.masterDBInfos = master;
         this.targetDir = targetDir;
         File slaveDirFile = new File(slaveDir);
         File targetDirFile = new File(targetDir);
         if (!FileSyncerUtils.doChecking(masterDBInfos, slaveDirFile, targetDirFile, this.outputArea)) {
-            return false;
+            return;
         }
         // output image names
         this.outputArea.showMessage("im album enthaltene bilder:\n", IMessageDisplay.VERBOSE);
@@ -27,11 +27,10 @@ public class FileDBSyncer extends SwingWorker<Boolean, Object> {
             this.outputArea.showMessage("  " + s+"\n", IMessageDisplay.VERBOSE);
         }
         try {
-            return doInBackground();
+            execute();
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        return false;
     }
 
     @Override
@@ -41,7 +40,7 @@ public class FileDBSyncer extends SwingWorker<Boolean, Object> {
         // get all files, do not consider extensions
         for (FileInfo fi : FileSyncerUtils.GetFileInfoItems(slaveDir)) {
             for (String masterRequired : masterDBInfos) {
-                if (fi.getMatchName().equals(masterRequired)) {
+                if (fi.getMatchName().equals(FileInfo.GetMatchName(masterRequired))) {
                     toCopy.add(fi.getFile());
                 }
             }
