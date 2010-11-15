@@ -56,8 +56,9 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         this.frame.setIconImage(new ImageIcon("lgs.gif").getImage());
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setPreferredSize(new Dimension(600, 500));
-        Container contentPane = this.frame.getContentPane();
+        Container realContentPane = this.frame.getContentPane();
         GridBagLayout gbl = new GridBagLayout();
+        JPanel contentPane = new JPanel(gbl);
         contentPane.setLayout(gbl);
         double lWeight = 0.1;
         GridBagConstraints gc = new GridBagConstraints();
@@ -211,6 +212,9 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
 
         gatherAlbumsInBackground();
 
+        realContentPane.add(contentPane, BorderLayout.CENTER);
+        JLabel statusLabel = new JLabel("du bekommst hilfe wenn du die maus über ein element bewegst");
+        realContentPane.add(statusLabel, BorderLayout.SOUTH);
         this.frame.pack();
         this.frame.setVisible(true);
     }
@@ -315,14 +319,26 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
     /*
     FILE CHOOOSER
      */
-    private String getPathFromUser(String header) throws HeadlessException {
-        String absPath = null;
-        JFileChooser fc = new JFileChooser();
-        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int erg = fc.showDialog(this.frame, header);
-        if (erg == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-            absPath = file.getAbsolutePath();
+    private String getPathFromUser(String header) {
+        String absPath = "";
+        // not so nice...
+//        JFileChooser fc = new JFileChooser();
+//        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//        int erg = fc.showDialog(this.frame, header);
+//        if (erg == JFileChooser.APPROVE_OPTION) {
+//            File file = fc.getSelectedFile();
+//            absPath = file.getAbsolutePath();
+//        }
+
+        // better
+        try {
+            JFrame frame = new JFrame();
+            System.setProperty("apple.awt.fileDialogForDirectories", "true");
+            FileDialog d = new FileDialog(frame);
+            d.setVisible(true);
+            absPath = d.getDirectory();
+        } catch (Exception e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
         return absPath;
     }
