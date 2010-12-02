@@ -57,9 +57,37 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setPreferredSize(new Dimension(600, 500));
         Container realContentPane = this.frame.getContentPane();
+
+        JPanel manualSyncPanel = createManualSyncPanel();
+        JPanel automaticSyncPanel = createAutomaticSyncPanel();
+
+        JTabbedPane mainTabs = new JTabbedPane();
+        mainTabs.add("handsync", manualSyncPanel);
+        mainTabs.add("autosync", automaticSyncPanel);
+
+        realContentPane.add(mainTabs, BorderLayout.CENTER);
+        JLabel statusLabel = new JLabel("du bekommst hilfe wenn du die maus über ein element bewegst");
+        realContentPane.add(statusLabel, BorderLayout.SOUTH);
+        this.frame.pack();
+        this.frame.setVisible(true);
+    }
+
+    private JPanel createAutomaticSyncPanel() {
         GridBagLayout gbl = new GridBagLayout();
-        JPanel contentPane = new JPanel(gbl);
-        contentPane.setLayout(gbl);
+        JPanel autoSyncPanel = new JPanel(gbl);
+
+        // what do we need?
+        // timeinterval chooser
+        // start/stop-button
+        // list of directories where to look for slavedir
+        // output textpane
+
+        return autoSyncPanel;
+    }
+
+    private JPanel createManualSyncPanel() {
+        GridBagLayout gbl = new GridBagLayout();
+        JPanel manualSyncPanel = new JPanel(gbl);
         double lWeight = 0.1;
         GridBagConstraints gc = new GridBagConstraints();
         gc.fill = GridBagConstraints.BOTH;
@@ -72,13 +100,13 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         String masterMsg = "<html>das <b>master</b>verzeichnis ist die vorlage. dateien die in diesem verzeichnis existieren, werden im <b>slave</b>verzeichnis gesucht und von dort (slave) ins <b>ziel</b>verzeichnis kopiert</html>";
         JLabel masterLabel = new JLabel("master");
         masterLabel.setToolTipText(masterMsg);
-        contentPane.add(masterLabel, gc);
+        manualSyncPanel.add(masterLabel, gc);
         gc.gridx++;
         this.dirRadioButton = new JRadioButton("verzeichnis", true);
         this.dirRadioButton.setActionCommand("dir");
         this.dirRadioButton.addActionListener(this);
         this.dirRadioButton.setToolTipText("hier klicken um ein verzeichnis als master zu nutzen");
-        contentPane.add(this.dirRadioButton, gc);
+        manualSyncPanel.add(this.dirRadioButton, gc);
         gc.gridx++;
         gc.gridwidth = 4;
         gc.weightx = 1;
@@ -86,14 +114,14 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         this.masterDirectory.setName("master");
         this.masterDirectory.setTransferHandler(this);
         this.masterDirectory.setToolTipText(masterMsg);
-        contentPane.add(this.masterDirectory, gc);
+        manualSyncPanel.add(this.masterDirectory, gc);
         gc.gridwidth = 1;
         gc.weightx = lWeight;
         gc.gridx += 4;
         JButton browsebutton = new JButton("...");
         browsebutton.addActionListener(this);
         browsebutton.setActionCommand("browseMaster");
-        contentPane.add(browsebutton, gc);
+        manualSyncPanel.add(browsebutton, gc);
 
         gc.gridwidth = 1;
         gc.gridy++;
@@ -102,7 +130,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         dbRadioButton.setActionCommand("db");
         dbRadioButton.addActionListener(this);
         dbRadioButton.setToolTipText("hier klicken um ein datenbank-album als master zu nutzen");
-        contentPane.add(dbRadioButton, gc);
+        manualSyncPanel.add(dbRadioButton, gc);
         gc.gridx++;
         gc.weightx = 1;
         gc.gridwidth = 4;
@@ -113,14 +141,14 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         this.masterAlbum.setEnabled(false);
         this.masterAlbum.setMaximumRowCount(30);
         this.masterAlbum.setToolTipText("<html>ist ein album als <b>master</b> gewählt, so werden dateien aus dem album im <b>slave</b>verzeichnis gesucht und ins <b>ziel</b>verzeichnis kopiert.</html>");
-        contentPane.add(this.masterAlbum, gc);
+        manualSyncPanel.add(this.masterAlbum, gc);
         gc.gridx += 4;
         gc.weightx = lWeight;
         gc.gridwidth = 1;
         browsebutton = new JButton("*");
         browsebutton.addActionListener(this);
         browsebutton.setActionCommand("updateAlbums");
-        contentPane.add(browsebutton, gc);
+        manualSyncPanel.add(browsebutton, gc);
 
         // radiobutton group
         ButtonGroup bgroup = new ButtonGroup();
@@ -134,7 +162,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         String slaveMsg = "<html>im <b>slave</b>verzeichnis liegen die <b>originale</b>. diese werden dann ins zielverzeichnis kopiert.<br /> dabei dient der master als vorlage welche dateien kopiert werden müssen</html>";
         JLabel slaveLabel = new JLabel("slave");
         slaveLabel.setToolTipText(slaveMsg);
-        contentPane.add(slaveLabel, gc);
+        manualSyncPanel.add(slaveLabel, gc);
         gc.gridx++;
         gc.weightx = 1;
         gc.gridwidth = 5;
@@ -142,14 +170,14 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         this.slaveDirectory.setName("slave");
         this.slaveDirectory.setTransferHandler(this);
         this.slaveDirectory.setToolTipText(slaveMsg);
-        contentPane.add(this.slaveDirectory, gc);
+        manualSyncPanel.add(this.slaveDirectory, gc);
         gc.gridwidth = 1;
         gc.weightx = lWeight;
         gc.gridx += 5;
         browsebutton = new JButton("...");
         browsebutton.addActionListener(this);
         browsebutton.setActionCommand("browseSlave");
-        contentPane.add(browsebutton, gc);
+        manualSyncPanel.add(browsebutton, gc);
 
         gc.gridy++;
         gc.gridx = 0;
@@ -158,7 +186,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         String targetMsg = "<html>hier werden die dateien aus dem <b>slave</b>verzeichnis hin kopiert</html>";
         JLabel targetLabel = new JLabel("ziel");
         targetLabel.setToolTipText(targetMsg);
-        contentPane.add(targetLabel, gc);
+        manualSyncPanel.add(targetLabel, gc);
         gc.gridx++;
         gc.weightx = 1;
         gc.gridwidth = 5;
@@ -166,14 +194,14 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         this.targetDirectory.setName("ziel");
         this.targetDirectory.setTransferHandler(this);
         this.targetDirectory.setToolTipText(targetMsg);
-        contentPane.add(this.targetDirectory, gc);
+        manualSyncPanel.add(this.targetDirectory, gc);
         gc.gridwidth = 1;
         gc.weightx = lWeight;
         gc.gridx += 5;
         browsebutton = new JButton("...");
         browsebutton.addActionListener(this);
         browsebutton.setActionCommand("browseTarget");
-        contentPane.add(browsebutton, gc);
+        manualSyncPanel.add(browsebutton, gc);
 
         gc.gridy++;
         gc.gridx = 1;
@@ -183,7 +211,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         verboseOutputCB.setToolTipText("detailliertere ausgaben machen");
         //TODO: make visible when we have more detailled output
         //verboseOutputCB.setVisible(false);
-        contentPane.add(this.verboseOutputCB, gc);
+        manualSyncPanel.add(this.verboseOutputCB, gc);
 
         gc.gridx = 3;
         gc.gridwidth = 2;
@@ -192,14 +220,14 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         startButton.setActionCommand("start");
         startButton.addActionListener(this);
         startButton.setToolTipText("das kopieren starten");
-        contentPane.add(startButton, gc);
+        manualSyncPanel.add(startButton, gc);
 
         gc.gridx += 2;
         JButton endButton = new JButton("ende");
         endButton.setToolTipText("lgs beenden");
         endButton.setActionCommand("end");
         endButton.addActionListener(this);
-        contentPane.add(endButton, gc);
+        manualSyncPanel.add(endButton, gc);
 
         gc.gridy++;
         gc.gridx = 0;
@@ -208,15 +236,10 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         gc.gridwidth = 7;
         gc.gridheight = 8;
         JScrollPane jsp = new JScrollPane(this.outputArea);
-        contentPane.add(jsp, gc);
+        manualSyncPanel.add(jsp, gc);
 
         gatherAlbumsInBackground();
-
-        realContentPane.add(contentPane, BorderLayout.CENTER);
-        JLabel statusLabel = new JLabel("du bekommst hilfe wenn du die maus über ein element bewegst");
-        realContentPane.add(statusLabel, BorderLayout.SOUTH);
-        this.frame.pack();
-        this.frame.setVisible(true);
+        return manualSyncPanel;
     }
 
     private void gatherAlbumsInBackground() {
@@ -337,6 +360,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
             FileDialog d = new FileDialog(frame);
             d.setVisible(true);
             absPath = d.getDirectory();
+            absPath += d.getFile();
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
