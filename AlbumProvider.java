@@ -9,15 +9,14 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.Vector;
 
-public class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
-    private IMessageDisplay outputArea;
+public class AlbumProvider extends BaseAlbumProvider {
     private JRadioButton dbRadioButton;
     private JComboBox masterAlbum;
     private Vector<Album> albumList;
 
     public AlbumProvider(JComboBox masterAlbum, IMessageDisplay output, JRadioButton dbRadioButton) {
+        super(output);
         this.masterAlbum = masterAlbum;
-        this.outputArea = output;
         this.dbRadioButton = dbRadioButton;
         this.albumList = new Vector<Album>();
     }
@@ -25,36 +24,9 @@ public class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
     @Override
     protected Vector<Album> doInBackground() throws Exception {
         this.dbRadioButton.setEnabled(false);
-        this.albumList.add(new Album());
         try {
-            // get last version info from internet
-            URL updateURL = new URL("http://www.lichtographie.de/lgsFuncs.php");
-            BufferedReader in = new BufferedReader(new InputStreamReader(updateURL.openStream()));
-            String album;
-            while ((album = in.readLine()) != null) {
-                String albumName = album.substring(album.indexOf(";") + 1).trim();
-                String albumID = album.substring(0, album.indexOf(";")).trim();
-                Album a = new Album();
-                a.setId(albumID);
-                a.setName(albumName);
-                this.albumList.add(a);
-            }
-            // close stream
-            in.close();
-        } catch (FileNotFoundException e) {
-            this.outputArea.showMessage("konnte album information nicht laden (FileNotFoundException)\n");
-            dbRadioButton.setEnabled(false);
-        } catch (UnknownHostException e) {
-            this.outputArea.showMessage("konnte album information nicht laden (UnknownHostException)\n");
-            dbRadioButton.setEnabled(false);
-        } catch (ConnectException e) {
-            this.outputArea.showMessage("konnte album information nicht laden (ConnectException)\n");
-            dbRadioButton.setEnabled(false);
-        } catch (MalformedURLException e) {
-            this.outputArea.showMessage("konnte album information nicht laden (MalformedURLException)\n");
-            dbRadioButton.setEnabled(false);
-        } catch (IOException e) {
-            this.outputArea.showMessage("konnte album information nicht laden (IOException)\n");
+            super.execute();
+        } catch (Exception e) {
             dbRadioButton.setEnabled(false);
         }
         return this.albumList;
@@ -64,6 +36,5 @@ public class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
     protected void done() {
         this.dbRadioButton.setEnabled(true);
         this.masterAlbum.setModel(new DefaultComboBoxModel(this.albumList));
-        this.outputArea.showMessage(this.albumList.size() + " alben gefunden\n");
     }
 }
