@@ -17,5 +17,7 @@ public class AlbumDirectorySearch {
     }
 
     // walk through the configured directories and search for the directory where the originals reside (slave directory)
-    public File FindSlaveDirectory4Album(Album a, Vector<File> configuredParentPathsToSearchIn)
+    public File FindSlaveDirectory4Album(Album a, Vector<File> configuredParentPathsToSearchIn){
+        return null;
+    }
 }
