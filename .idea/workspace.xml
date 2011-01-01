@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a84c7358-d7c7-428e-866a-8118c85b4d62" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/projectCodeStyle.xml" afterPath="$PROJECT_DIR$/.idea/projectCodeStyle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlbumSyncJob.java" afterPath="$PROJECT_DIR$/AlbumSyncJob.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AlbumDirectorySearch.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="java.iws" />
@@ -87,10 +86,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AlbumSyncJob.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AlbumSyncJob.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AlbumSyncJob.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="12" selection-start="3079" selection-end="3079" vertical-scroll-proportion="0.6292683">
+            <state line="84" column="12" selection-start="3079" selection-end="3079" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -101,6 +100,17 @@
           <provider selected="true" editor-type-id="text-editor">
             <state line="16" column="16" selection-start="315" selection-end="315" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AlbumDirectorySearch.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AlbumDirectorySearch.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="119" selection-start="724" selection-end="724" vertical-scroll-proportion="0.31512195">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -161,6 +171,7 @@
         <option value="$PROJECT_DIR$/AlbumProvider.java" />
         <option value="$PROJECT_DIR$/BaseAlbumProvider.java" />
         <option value="$PROJECT_DIR$/AlbumSyncJob.java" />
+        <option value="$PROJECT_DIR$/AlbumDirectorySearch.java" />
       </list>
     </option>
   </component>
@@ -180,7 +191,7 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="2" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
@@ -250,6 +261,10 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -534,11 +549,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Classes/classes.jar!/javax/swing/SwingWorker.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="0" selection-start="4277" selection-end="4277" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Classes/ui.jar!/com/apple/laf/AquaComboBoxRendererInternal.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="30" selection-start="713" selection-end="713" vertical-scroll-proportion="0.0" />
@@ -606,15 +616,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/AlbumSyncJob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="12" selection-start="3079" selection-end="3079" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Album.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="16" selection-start="315" selection-end="315" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AlbumSyncJob.java">
+    <entry file="file://$PROJECT_DIR$/AlbumDirectorySearch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="12" selection-start="3079" selection-end="3079" vertical-scroll-proportion="0.6292683">
-          <folding />
+        <state line="18" column="119" selection-start="724" selection-end="724" vertical-scroll-proportion="0.31512195">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
