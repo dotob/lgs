@@ -24,7 +24,7 @@ public class FileDBSyncer extends SwingWorker<Boolean, Object> {
         // output image names
         this.outputArea.showMessage("im album enthaltene bilder:\n", IMessageDisplay.VERBOSE);
         for (String s : master) {
-            this.outputArea.showMessage("  " + s+"\n", IMessageDisplay.VERBOSE);
+            this.outputArea.showMessage("  " + s + "\n", IMessageDisplay.VERBOSE);
         }
         try {
             execute();

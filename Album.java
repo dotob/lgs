@@ -52,6 +52,6 @@ public class Album {
     }
 
     public String getInfoString() {
-        return id +":"+name+", "+initiated+", #="+this.getCount();
+        return id + ":" + name + ", " + initiated + ", #=" + this.getCount();
     }
 }
