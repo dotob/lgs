@@ -22,7 +22,7 @@ public class SlaveDirectorySearchService extends SwingWorker<File, Object> {
 
     @Override
     protected File doInBackground() throws Exception {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return new File("slaveteeeeest");  //TODO
     }
 
     public Album getHandleAlbum() {

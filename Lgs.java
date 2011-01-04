@@ -22,6 +22,8 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
     private FileDBSyncer fileDBSyncer;
     private FileDirectorySyncer fileDirectorySyncer;
     private JCheckBox verboseOutputCB;
+    private AlbumSyncJob albumSyncJob;
+    private ConfigurationService confService;
 
     public static void main(String[] args) {
         // Schedule a job for the event-dispatching thread:
@@ -76,12 +78,31 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         GridBagLayout gbl = new GridBagLayout();
         JPanel autoSyncPanel = new JPanel(gbl);
 
+        double lWeight = 0.1;
+        GridBagConstraints gc = new GridBagConstraints();
+        gc.fill = GridBagConstraints.BOTH;
+        gc.anchor = GridBagConstraints.WEST;
+        gc.insets = new Insets(1, 3, 1, 3);
+        gc.gridx = 0;
+        gc.gridy = 0;
+        gc.weightx = lWeight;
+
+        JButton startButton = new JButton("start");
+        startButton.setActionCommand("startAutoSync");
+        startButton.addActionListener(this);
+        autoSyncPanel.add(startButton, gc);
+
+
         // what do we need?
         // timeinterval chooser
         // start/stop-button
         // list of directories where to look for slavedir
         // output textpane
 
+
+        this.confService = new ConfigurationService();
+        this.albumSyncJob = new AlbumSyncJob(this, this.confService);
+        
         return autoSyncPanel;
     }
 
@@ -285,6 +306,8 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
             this.startLGS();
         } else if (e.getActionCommand().equals("end")) {
             this.frame.dispose();
+        } else if (e.getActionCommand().equals("startAutoSync")) {
+            this.albumSyncJob.StartChecking();
         } else if (e.getActionCommand().equals("db")) {
             this.masterAlbum.setEnabled(true);
             this.masterDirectory.setEnabled(false);

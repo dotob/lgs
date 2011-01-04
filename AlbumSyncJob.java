@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutionException;
 
 public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
     Timer checkTimer;
-    int checkIntervalInSeconds = 60;
+    int checkIntervalInSeconds = 3;
     private IMessageDisplay output;
     private BaseAlbumProvider albumProvider;
     private TargetDirectorySearchService targetDirectorySearchService;
@@ -23,8 +23,8 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
     }
 
     public void StartChecking() {
-        checkTimer = new Timer(checkIntervalInSeconds, this);
-        checkTimer.setInitialDelay(checkIntervalInSeconds);
+        checkTimer = new Timer(checkIntervalInSeconds * 1000, this);
+        checkTimer.setInitialDelay(checkIntervalInSeconds * 1000);
         checkTimer.start();
     }
 
@@ -56,13 +56,15 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
-        // who is throwing this event?
-        if (propertyChangeEvent.getSource() == this.albumProvider) {
-            albumProviderIsReady();
-        } else if (propertyChangeEvent.getSource() == this.targetDirectorySearchService) {
-            targetDirectorySearchServiceIsReady();
-        } else if (propertyChangeEvent.getSource() == this.slaveDirectorySearchService) {
-            slaveDirectorySearchServiceIsReady();
+        // who is throwing this event? we are only interested in done...
+        if (propertyChangeEvent.getNewValue() == SwingWorker.StateValue.DONE) {
+            if (propertyChangeEvent.getSource() == this.albumProvider) {
+                albumProviderIsReady();
+            } else if (propertyChangeEvent.getSource() == this.targetDirectorySearchService) {
+                targetDirectorySearchServiceIsReady();
+            } else if (propertyChangeEvent.getSource() == this.slaveDirectorySearchService) {
+                slaveDirectorySearchServiceIsReady();
+            }
         }
     }
 
@@ -149,7 +151,15 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
         Vector<Album> todoList = new Vector<Album>();
         // compare album vectors
         for (Album a : albums) {
-            if (!this.lastSyncAlbums.contains(a)) {
+            // uuuu this is ugly
+            boolean known = false;
+            for (Album aa : this.lastSyncAlbums) {
+                if(a.getId().equals(aa.getId())){
+                    known = true;
+                    break;
+                }
+            }
+            if (!known) {
                 // add it to todolist
                 todoList.add(a);
                 this.output.showMessage("album " + a.getName() + " mit " + a.getCount() + " bildern zur todoliste hinzugefügt");

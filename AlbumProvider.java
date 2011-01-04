@@ -1,12 +1,4 @@
 import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.ConnectException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.Vector;
 
 public class AlbumProvider extends BaseAlbumProvider {
@@ -25,6 +17,8 @@ public class AlbumProvider extends BaseAlbumProvider {
     protected Vector<Album> doInBackground() throws Exception {
         this.dbRadioButton.setEnabled(false);
         try {
+            // add empty row to select nothing
+            this.albumList.add(new Album());
             super.execute();
         } catch (Exception e) {
             dbRadioButton.setEnabled(false);

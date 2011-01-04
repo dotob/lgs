@@ -16,7 +16,7 @@ public class TargetDirectorySearchService extends SwingWorker<File, Object> {
 
     @Override
     protected File doInBackground() throws Exception {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return new File("targetteeeest");  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     // is there already a targetdirectory and are all images already there?

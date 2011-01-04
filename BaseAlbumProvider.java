@@ -20,7 +20,6 @@ public class BaseAlbumProvider extends SwingWorker<Vector<Album>, Object> {
 
     @Override
     protected Vector<Album> doInBackground() throws Exception {
-        this.albumList.add(new Album());
         try {
             // get last version info from internet
             URL updateURL = new URL("http://www.lichtographie.de/lgsFuncs.php");
