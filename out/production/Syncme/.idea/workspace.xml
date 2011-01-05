@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a84c7358-d7c7-428e-866a-8118c85b4d62" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlbumProvider.java" afterPath="$PROJECT_DIR$/AlbumProvider.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlbumSyncJob.java" afterPath="$PROJECT_DIR$/AlbumSyncJob.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BaseAlbumProvider.java" afterPath="$PROJECT_DIR$/BaseAlbumProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Lgs.java" afterPath="$PROJECT_DIR$/Lgs.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SlaveDirectorySearchService.java" afterPath="$PROJECT_DIR$/SlaveDirectorySearchService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TargetDirectorySearchService.java" afterPath="$PROJECT_DIR$/TargetDirectorySearchService.java" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="java.iws" />
@@ -41,7 +37,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/AlbumSyncJob.java" line="61" class="AlbumSyncJob" package="">
+      <breakpoint url="file://$PROJECT_DIR$/AlbumSyncJob.java" line="114" class="AlbumSyncJob" package="">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -54,7 +50,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/AlbumSyncJob.java" line="63" class="AlbumSyncJob" package="">
+      <breakpoint url="file://$PROJECT_DIR$/AlbumImageProvider.java" line="26" class="AlbumImageProvider" package="">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -67,7 +63,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/AlbumSyncJob.java" line="65" class="AlbumSyncJob" package="">
+      <breakpoint url="file://$PROJECT_DIR$/AlbumSyncJob.java" line="128" class="AlbumSyncJob" package="">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -80,7 +76,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/AlbumSyncJob.java" line="76" class="AlbumSyncJob" package="">
+      <breakpoint url="file://$PROJECT_DIR$/AlbumSyncJob.java" line="124" class="AlbumSyncJob" package="">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -93,46 +89,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/AlbumSyncJob.java" line="74" class="AlbumSyncJob" package="">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/AlbumSyncJob.java" line="152" class="AlbumSyncJob" package="">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/AlbumSyncJob.java" line="167" class="AlbumSyncJob" package="">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/AlbumSyncJob.java" line="157" class="AlbumSyncJob" package="">
+      <breakpoint url="file://$PROJECT_DIR$/AlbumImageProvider.java" line="61" class="AlbumImageProvider" package="">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -186,57 +143,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AlbumSyncJob.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="AlbumSyncJob.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AlbumSyncJob.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="161" column="22" selection-start="7827" selection-end="7827" vertical-scroll-proportion="0.0">
+            <state line="126" column="0" selection-start="6040" selection-end="6040" vertical-scroll-proportion="0.5323993">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseAlbumProvider.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BaseAlbumProvider.java">
+      <file leaf-file-name="Unsafe.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Classes/classes.jar!/sun/misc/Unsafe.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="0" selection-start="685" selection-end="685" vertical-scroll-proportion="0.0">
+            <state line="295" column="23" selection-start="9256" selection-end="9256" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AlbumProvider.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/AlbumProvider.java">
+      <file leaf-file-name="Object.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Classes/classes.jar!/java/lang/Object.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="43" selection-start="659" selection-end="659" vertical-scroll-proportion="0.54452056">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Lgs.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Lgs.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="309" column="46" selection-start="12048" selection-end="12048" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConfigurationService.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ConfigurationService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="1" selection-start="179" selection-end="179" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Album.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Album.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="16" selection-start="315" selection-end="315" vertical-scroll-proportion="0.0">
+            <state line="25" column="29" selection-start="724" selection-end="724" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -245,7 +173,7 @@
       <file leaf-file-name="TargetDirectorySearchService.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TargetDirectorySearchService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="38" selection-start="624" selection-end="624" vertical-scroll-proportion="0.0">
+            <state line="18" column="0" selection-start="586" selection-end="586" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -253,13 +181,47 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SlaveDirectorySearchService.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SlaveDirectorySearchService.java">
+      <file leaf-file-name="IMessageDisplay.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IMessageDisplay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="30" selection-start="977" selection-end="977" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="4" column="9" selection-start="170" selection-end="170" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AlbumImageProvider.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AlbumImageProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="61" column="0" selection-start="2372" selection-end="2372" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BaseAlbumProvider.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BaseAlbumProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="0" selection-start="466" selection-end="466" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AlbumProvider.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AlbumProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="23" selection-start="927" selection-end="927" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Lgs.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Lgs.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="419" column="63" selection-start="16855" selection-end="16857" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -291,9 +253,9 @@
         <option value="$PROJECT_DIR$/TestGUI.java" />
         <option value="$PROJECT_DIR$/lgsFuncs.php" />
         <option value="$PROJECT_DIR$/Lgs.java" />
-        <option value="$PROJECT_DIR$/AlbumSyncJob.java" />
-        <option value="$PROJECT_DIR$/BaseAlbumProvider.java" />
         <option value="$PROJECT_DIR$/AlbumProvider.java" />
+        <option value="$PROJECT_DIR$/BaseAlbumProvider.java" />
+        <option value="$PROJECT_DIR$/AlbumSyncJob.java" />
       </list>
     </option>
   </component>
@@ -831,7 +793,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32959402" sideWeight="0.67172676" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32922202" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39943075" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39943075" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32922202" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23814042" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -887,28 +849,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/FileInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="44" selection-start="1435" selection-end="1435" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="18" selection-start="1607" selection-end="1607" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FileSyncerUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="19" selection-start="2031" selection-end="2031" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AlbumImageProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="12" selection-start="2462" selection-end="2487" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lgsFuncs.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="21" selection-start="360" selection-end="360" vertical-scroll-proportion="0.23065251">
@@ -939,27 +879,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Lgs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="309" column="46" selection-start="12048" selection-end="12048" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Album.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="16" selection-start="315" selection-end="315" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TargetDirectorySearchService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="38" selection-start="624" selection-end="624" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SlaveDirectorySearchService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="24" column="30" selection-start="977" selection-end="977" vertical-scroll-proportion="0.0">
@@ -969,23 +888,77 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AlbumSyncJob.java">
+    <entry file="file://$PROJECT_DIR$/Album.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="161" column="22" selection-start="7827" selection-end="7827" vertical-scroll-proportion="0.0">
+        <state line="16" column="16" selection-start="315" selection-end="315" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AlbumProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="23" selection-start="927" selection-end="927" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BaseAlbumProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="685" selection-end="685" vertical-scroll-proportion="0.0">
+        <state line="14" column="0" selection-start="466" selection-end="466" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AlbumProvider.java">
+    <entry file="file://$PROJECT_DIR$/IMessageDisplay.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="43" selection-start="659" selection-end="659" vertical-scroll-proportion="0.54452056">
+        <state line="4" column="9" selection-start="170" selection-end="170" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lgs.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lgs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="419" column="63" selection-start="16855" selection-end="16857" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Classes/classes.jar!/java/lang/Object.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="29" selection-start="724" selection-end="724" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Classes/classes.jar!/sun/misc/Unsafe.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="295" column="23" selection-start="9256" selection-end="9256" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TargetDirectorySearchService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="0" selection-start="586" selection-end="586" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AlbumImageProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="0" selection-start="2372" selection-end="2372" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AlbumSyncJob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="126" column="0" selection-start="6040" selection-end="6040" vertical-scroll-proportion="0.5323993">
           <folding />
         </state>
       </provider>

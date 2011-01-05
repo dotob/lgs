@@ -28,7 +28,9 @@ public class AlbumProvider extends BaseAlbumProvider {
 
     @Override
     protected void done() {
+        this.outputArea.showMessage(this.albumList.size() + " alben gefunden\n");
         this.dbRadioButton.setEnabled(true);
         this.masterAlbum.setModel(new DefaultComboBoxModel(this.albumList));
     }
+
 }

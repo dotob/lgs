@@ -10,7 +10,7 @@ import java.net.UnknownHostException;
 import java.util.Vector;
 
 public class BaseAlbumProvider extends SwingWorker<Vector<Album>, Object> {
-    private IMessageDisplay outputArea;
+    protected IMessageDisplay outputArea;
     private Vector<Album> albumList;
 
     public BaseAlbumProvider(IMessageDisplay output) {
@@ -47,10 +47,5 @@ public class BaseAlbumProvider extends SwingWorker<Vector<Album>, Object> {
             this.outputArea.showMessage("konnte album information nicht laden (IOException)\n");
         }
         return this.albumList;
-    }
-
-    @Override
-    protected void done() {
-        this.outputArea.showMessage(this.albumList.size() + " alben gefunden\n");
     }
 }
