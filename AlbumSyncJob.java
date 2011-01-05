@@ -25,14 +25,17 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
 
     public void StartChecking() {
         checkCounter = 0;
+        this.lastSyncAlbums = null;
         checkTimer = new Timer(checkIntervalInSeconds * 1000, this);
         checkTimer.setInitialDelay(checkIntervalInSeconds * 1000);
         checkTimer.start();
+        this.output.showMessage("starte autosync\n");
     }
 
     public void StopChecking() {
         if (checkTimer != null) {
             checkTimer.stop();
+            this.output.showMessage("stoppe autosync\n");
         }
     }
 
@@ -186,7 +189,7 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
     private void doFirstTimeCheck() {
         try {
             this.lastSyncAlbums = this.albumProvider.get();
-            this.output.showMessage(this.lastSyncAlbums.size() + " alben beim ersten check gefunden\n");
+            this.output.showMessage(this.lastSyncAlbums.size() + " alben beim 1. check gefunden\n");
             checkCounter++;
         } catch (InterruptedException e) {
             this.output.showMessage("something bad happened... " + e.getMessage() + "\n");

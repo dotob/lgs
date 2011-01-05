@@ -24,6 +24,18 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
     private JCheckBox verboseOutputCB;
     private AlbumSyncJob albumSyncJob;
     private ConfigurationService confService;
+    private JTextArea outputAreaAutoSync = new JTextArea();
+    private JTextArea outputAreaManualSync = new JTextArea();
+    private MyMessageDisplay manualSyncOutput = new MyMessageDisplay(this.outputAreaManualSync);
+    private MyMessageDisplay autoSyncOutput = new MyMessageDisplay(this.outputAreaAutoSync);
+    private JFrame frame;
+    private JTextField masterDirectory;
+    private JComboBox masterAlbum;
+    private JRadioButton dirRadioButton;
+    private JTextField targetDirectory;
+    private JTextField slaveDirectory;
+    private JButton startAutoSyncButton;
+    private JButton stopAutoSyncButton;
 
     public static void main(String[] args) {
         // Schedule a job for the event-dispatching thread:
@@ -40,18 +52,10 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         });
     }
 
-    private JFrame frame;
-    private JTextField masterDirectory;
-    private JComboBox masterAlbum;
-    private JRadioButton dirRadioButton;
-    private JTextField targetDirectory;
-    private JTextField slaveDirectory;
-    private JTextArea outputArea;
 
     private void createAndShowGUI() {
         String setLafResult = ""; //this.setLAF();
-        this.outputArea = new JTextArea();
-        this.outputArea.append(setLafResult);
+        this.outputAreaManualSync.append(setLafResult);
         dbRadioButton = new JRadioButton("db-album");
 
         this.frame = new JFrame("lgs v" + versionString);
@@ -85,12 +89,24 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         gc.insets = new Insets(1, 3, 1, 3);
         gc.gridx = 0;
         gc.gridy = 0;
+        gc.gridwidth = 4;
         gc.weightx = lWeight;
 
-        JButton startButton = new JButton("start");
-        startButton.setActionCommand("startAutoSync");
-        startButton.addActionListener(this);
-        autoSyncPanel.add(startButton, gc);
+        this.startAutoSyncButton = new JButton("start");
+        this.startAutoSyncButton.setActionCommand("startAutoSync");
+        this.startAutoSyncButton.addActionListener(this);
+        autoSyncPanel.add(this.startAutoSyncButton, gc);
+
+        gc.gridx = 4;
+        gc.gridy = 0;
+        gc.gridwidth = 4;
+        gc.weightx = lWeight;
+
+        this.stopAutoSyncButton = new JButton("stop");
+        this.stopAutoSyncButton.setActionCommand("stopAutoSync");
+        this.stopAutoSyncButton.addActionListener(this);
+        this.stopAutoSyncButton.setEnabled(false);
+        autoSyncPanel.add(this.stopAutoSyncButton, gc);
 
 
         // what do we need?
@@ -98,11 +114,18 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         // start/stop-button
         // list of directories where to look for slavedir
         // output textpane
-
+        gc.gridy++;
+        gc.gridx = 0;
+        gc.weightx = 1;
+        gc.weighty = 1;
+        gc.gridwidth = 8;
+        gc.gridheight = 8;
+        JScrollPane jsp = new JScrollPane(this.outputAreaAutoSync);
+        autoSyncPanel.add(jsp, gc);
 
         this.confService = new ConfigurationService();
-        this.albumSyncJob = new AlbumSyncJob(this, this.confService);
-        
+        this.albumSyncJob = new AlbumSyncJob(this.autoSyncOutput, this.confService);
+
         return autoSyncPanel;
     }
 
@@ -256,7 +279,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         gc.weighty = 1;
         gc.gridwidth = 7;
         gc.gridheight = 8;
-        JScrollPane jsp = new JScrollPane(this.outputArea);
+        JScrollPane jsp = new JScrollPane(this.outputAreaManualSync);
         manualSyncPanel.add(jsp, gc);
 
         gatherAlbumsInBackground();
@@ -264,13 +287,13 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
     }
 
     private void gatherAlbumsInBackground() {
-        albumProvider = new AlbumProvider(this.masterAlbum, this, this.dbRadioButton);
+        albumProvider = new AlbumProvider(this.masterAlbum, this.manualSyncOutput, this.dbRadioButton);
 
         // gather albums in background
         try {
             this.albumProvider.execute();
         } catch (Exception e) {
-            this.outputArea.append(e.getMessage());
+            this.outputAreaManualSync.append(e.getMessage());
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
     }
@@ -289,13 +312,13 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
             e.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
-            this.outputArea.append("black theme nicht gefunden\n");
+            this.outputAreaManualSync.append("black theme nicht gefunden\n");
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-            this.outputArea.append("black theme nicht gefunden\n");
+            this.outputAreaManualSync.append("black theme nicht gefunden\n");
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
-            this.outputArea.append("black theme nicht gefunden\n");
+            this.outputAreaManualSync.append("black theme nicht gefunden\n");
         }
         return result;
     }
@@ -308,6 +331,12 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
             this.frame.dispose();
         } else if (e.getActionCommand().equals("startAutoSync")) {
             this.albumSyncJob.StartChecking();
+            this.startAutoSyncButton.setEnabled(false);
+            this.stopAutoSyncButton.setEnabled(true);
+        } else if (e.getActionCommand().equals("stopAutoSync")) {
+            this.albumSyncJob.StopChecking();
+            this.startAutoSyncButton.setEnabled(true);
+            this.stopAutoSyncButton.setEnabled(false);
         } else if (e.getActionCommand().equals("db")) {
             this.masterAlbum.setEnabled(true);
             this.masterDirectory.setEnabled(false);
@@ -325,7 +354,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         } else if (e.getActionCommand().equals("dbalbums")) {
             // album is selected
             Album album = (Album) this.masterAlbum.getSelectedItem();
-            this.albumImageProvider = new AlbumImageProvider(this);
+            this.albumImageProvider = new AlbumImageProvider(this.manualSyncOutput);
             this.albumImageProvider.setAlbum(album);
             try {
                 this.albumImageProvider.execute();
@@ -338,7 +367,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
 
     private void startLGS() {
         if (this.dirRadioButton.isSelected()) {
-            this.outputArea.append("start with directory" + "\n");
+            this.outputAreaManualSync.append("start with directory" + "\n");
             // use supplied directory
             String masterDir = this.masterDirectory.getText();
             String slaveDir = this.slaveDirectory.getText();
@@ -346,7 +375,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
             this.fileDirectorySyncer = new FileDirectorySyncer(this);
             this.fileDirectorySyncer.syncItems(masterDir, this.ext, slaveDir, targetDir);
         } else {
-            this.outputArea.append("start with db" + "\n");
+            this.outputAreaManualSync.append("start with db" + "\n");
             // use album from db
             String slaveDir = this.slaveDirectory.getText();
             String targetDir = this.targetDirectory.getText();
@@ -411,7 +440,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
                 File f = (File) object;
                 textField.setText(f.getAbsolutePath());
                 Vector<FileInfo> fis = FileSyncerUtils.GetFileInfoItems(f.getAbsolutePath(), this.ext);
-                this.outputArea.append(fis.size() + " dateien in " + textField.getName() + " gefunden\n");
+                this.outputAreaManualSync.append(fis.size() + " dateien in " + textField.getName() + " gefunden\n");
             }
             return true;
         } catch (UnsupportedFlavorException ufe) {
@@ -443,7 +472,33 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
     @Override
     public void showMessage(String msg, int level) {
         if (level < VERBOSE || this.verboseOutputCB.isSelected()) {
-            this.outputArea.append(msg);
+            this.outputAreaManualSync.append(msg);
         }
+    }
+}
+
+class MyMessageDisplay implements IMessageDisplay {
+
+    private JTextArea output;
+    private boolean verbose;
+
+    public MyMessageDisplay(JTextArea output) {
+        this.output = output;
+    }
+
+    public void SetVerboseOutput(boolean verbose) {
+        this.verbose = verbose;
+    }
+
+    @Override
+    public void showMessage(String msg, int level) {
+        if (level < VERBOSE || this.verbose) {
+            this.output.append(msg);
+        }
+    }
+
+    @Override
+    public void showMessage(String msg) {
+        showMessage(msg, NORMAL);
     }
 }
