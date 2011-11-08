@@ -1,5 +1,7 @@
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+
 import javax.swing.*;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,6 +9,8 @@ import java.net.ConnectException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 public class BaseAlbumProvider extends SwingWorker<Vector<Album>, Object> {
@@ -22,19 +26,19 @@ public class BaseAlbumProvider extends SwingWorker<Vector<Album>, Object> {
     protected Vector<Album> doInBackground() throws Exception {
         try {
             // get last version info from internet
-            URL updateURL = new URL("http://www.lichtographie.de/lgsFuncs.php");
-            BufferedReader in = new BufferedReader(new InputStreamReader(updateURL.openStream()));
-            String album;
-            while ((album = in.readLine()) != null) {
-                String albumName = album.substring(album.indexOf(";") + 1).trim();
-                String albumID = album.substring(0, album.indexOf(";")).trim();
-                Album a = new Album();
-                a.setId(albumID);
-                a.setName(albumName);
-                this.albumList.add(a);
+            URL updateURL = new URL("http://dev.thalora.com/php/index.php?mode=desktop_get_orders");
+
+            Gson gson = new Gson();
+            JsonReader reader = new JsonReader(new InputStreamReader(updateURL.openStream()));
+            List<Album> albums = new ArrayList<Album>();
+            reader.beginArray();
+            while (reader.hasNext()) {
+                Album album = gson.fromJson(reader, Album.class);
+                this.albumList.add(album);
             }
-            // close stream
-            in.close();
+            reader.endArray();
+            reader.close();
+
         } catch (FileNotFoundException e) {
             this.outputArea.showMessage("konnte album information nicht laden (FileNotFoundException)\n");
         } catch (UnknownHostException e) {

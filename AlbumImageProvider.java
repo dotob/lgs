@@ -1,5 +1,7 @@
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+
 import javax.swing.*;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -27,14 +29,16 @@ public class AlbumImageProvider extends SwingWorker<Vector<String>, Object> {
         if (this.album != null && !this.album.isInitiated()) {
             try {
                 // get last version info from internet
-                URL updateURL = new URL("http://www.lichtographie.de/lgsFuncs.php?album=" + this.album.getId());
-                BufferedReader in = new BufferedReader(new InputStreamReader(updateURL.openStream()));
-                String inputLine;
-                while ((inputLine = in.readLine()) != null) {
-                    this.album.addImage(inputLine);
+                URL updateURL = new URL("http://dev.thalora.com/php/index.php?mode=desktop_get_orders&id=" + this.album.getId());
+                Gson gson = new Gson();
+                JsonReader reader = new JsonReader(new InputStreamReader(updateURL.openStream()));
+                reader.beginArray();
+                while (reader.hasNext()) {
+                    Image image = gson.fromJson(reader, Image.class);
+                    this.album.addImage(image.getFilenameOrig());
                 }
-                // close stream
-                in.close();
+                reader.endArray();
+                reader.close();
             } catch (FileNotFoundException e) {
                 outputArea.showMessage("Kein Zugang zum Internet gefunden." + "\n");
                 // e.printStackTrace();

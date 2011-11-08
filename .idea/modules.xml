@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Syncme.iml" filepath="$PROJECT_DIR$/Syncme.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lgs.iml" filepath="$PROJECT_DIR$/lgs.iml" />
     </modules>
   </component>
 </project>

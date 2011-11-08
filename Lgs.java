@@ -69,7 +69,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
 
         JTabbedPane mainTabs = new JTabbedPane();
         mainTabs.add("handsync", manualSyncPanel);
-        mainTabs.add("autosync", automaticSyncPanel);
+        //mainTabs.add("autosync", automaticSyncPanel);
 
         realContentPane.add(mainTabs, BorderLayout.CENTER);
         JLabel statusLabel = new JLabel("du bekommst hilfe wenn du die maus über ein element bewegst");
@@ -287,7 +287,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
     }
 
     private void gatherAlbumsInBackground() {
-        albumProvider = new AlbumProvider(this.masterAlbum, this.manualSyncOutput, this.dbRadioButton);
+        this.albumProvider = new AlbumProvider(this.masterAlbum, this.manualSyncOutput, this.dbRadioButton);
 
         // gather albums in background
         try {
