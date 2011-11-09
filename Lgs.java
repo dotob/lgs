@@ -56,12 +56,12 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
     private void createAndShowGUI() {
         String setLafResult = ""; //this.setLAF();
         this.outputAreaManualSync.append(setLafResult);
-        dbRadioButton = new JRadioButton("db-album");
+        dbRadioButton = new JRadioButton("db-album", true);
 
         this.frame = new JFrame("lgs v" + versionString);
         this.frame.setIconImage(new ImageIcon("lgs.gif").getImage());
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.frame.setPreferredSize(new Dimension(600, 500));
+        this.frame.setPreferredSize(new Dimension(800, 500));
         Container realContentPane = this.frame.getContentPane();
 
         JPanel manualSyncPanel = createManualSyncPanel();
@@ -146,7 +146,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         masterLabel.setToolTipText(masterMsg);
         manualSyncPanel.add(masterLabel, gc);
         gc.gridx++;
-        this.dirRadioButton = new JRadioButton("verzeichnis", true);
+        this.dirRadioButton = new JRadioButton("verzeichnis");
         this.dirRadioButton.setActionCommand("dir");
         this.dirRadioButton.addActionListener(this);
         this.dirRadioButton.setToolTipText("hier klicken um ein verzeichnis als master zu nutzen");
@@ -158,6 +158,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         this.masterDirectory.setName("master");
         this.masterDirectory.setTransferHandler(this);
         this.masterDirectory.setToolTipText(masterMsg);
+        this.masterDirectory.setEnabled(false);
         manualSyncPanel.add(this.masterDirectory, gc);
         gc.gridwidth = 1;
         gc.weightx = lWeight;
@@ -182,7 +183,6 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
 
         this.masterAlbum.setActionCommand("dbalbums");
         this.masterAlbum.addActionListener(this);
-        this.masterAlbum.setEnabled(false);
         this.masterAlbum.setMaximumRowCount(30);
         this.masterAlbum.setToolTipText("<html>ist ein album als <b>master</b> gewählt, so werden dateien aus dem album im <b>slave</b>verzeichnis gesucht und ins <b>ziel</b>verzeichnis kopiert.</html>");
         manualSyncPanel.add(this.masterAlbum, gc);

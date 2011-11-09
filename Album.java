@@ -2,6 +2,8 @@ import java.util.Vector;
 
 public class Album {
     String name;
+    String login;
+    String total;
     String id;
     Vector<String> images = new Vector<String>();
     boolean initiated = false;
@@ -25,7 +27,7 @@ public class Album {
 
     public String toString() {
         if (id != null) {
-            return "<html><b>" + name + "</b> (" + id + ")</html>";
+            return "<html><b>" + name + "</b> (" + id + ") von <b>"+login+"</b> mit <b>"+total+"</b> bildern</html>";
         } else {
             return "";
         }
@@ -37,6 +39,23 @@ public class Album {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
     }
 
     public int getCount() {
