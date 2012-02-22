@@ -26,8 +26,9 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
     private ConfigurationService confService;
     private JTextArea outputAreaAutoSync = new JTextArea();
     private JTextArea outputAreaManualSync = new JTextArea();
-    private MyMessageDisplay manualSyncOutput = new MyMessageDisplay(this.outputAreaManualSync);
-    private MyMessageDisplay autoSyncOutput = new MyMessageDisplay(this.outputAreaAutoSync);
+    private GrowlNetwork growl = new GrowlNetwork();
+    private MyMessageDisplay manualSyncOutput = new MyMessageDisplay(this.outputAreaManualSync, this.growl);
+    private MyMessageDisplay autoSyncOutput = new MyMessageDisplay(this.outputAreaAutoSync, this.growl);
     private JFrame frame;
     private JTextField masterDirectory;
     private JComboBox masterAlbum;
@@ -69,7 +70,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
 
         JTabbedPane mainTabs = new JTabbedPane();
         mainTabs.add("handsync", manualSyncPanel);
-        //mainTabs.add("autosync", automaticSyncPanel);
+        mainTabs.add("autosync", automaticSyncPanel);
 
         realContentPane.add(mainTabs, BorderLayout.CENTER);
         JLabel statusLabel = new JLabel("du bekommst hilfe wenn du die maus über ein element bewegst");
@@ -473,6 +474,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
     public void showMessage(String msg, int level) {
         if (level < VERBOSE || this.verboseOutputCB.isSelected()) {
             this.outputAreaManualSync.append(msg);
+            this.growl.notify("lgs info", msg);
         }
     }
 }
@@ -481,9 +483,11 @@ class MyMessageDisplay implements IMessageDisplay {
 
     private JTextArea output;
     private boolean verbose;
+    private GrowlNetwork growl;
 
-    public MyMessageDisplay(JTextArea output) {
+    public MyMessageDisplay(JTextArea output, GrowlNetwork growl) {
         this.output = output;
+        this.growl = growl;
     }
 
     public void SetVerboseOutput(boolean verbose) {
@@ -494,6 +498,7 @@ class MyMessageDisplay implements IMessageDisplay {
     public void showMessage(String msg, int level) {
         if (level < VERBOSE || this.verbose) {
             this.output.append(msg);
+            this.growl.notify("lgs info", msg);
         }
     }
 
