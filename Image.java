@@ -1,3 +1,4 @@
+// just the
 public class Image {
     public String getFilenameOrig() {
         return filename_orig;

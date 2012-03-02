@@ -37,6 +37,9 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
     private JTextField slaveDirectory;
     private JButton startAutoSyncButton;
     private JButton stopAutoSyncButton;
+    private JRadioButton slaveDirRadioButton;
+    private JRadioButton websearchRadioButton;
+    private JTextField websearchURL;
 
     public static void main(String[] args) {
         // Schedule a job for the event-dispatching thread:
@@ -58,6 +61,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         String setLafResult = ""; //this.setLAF();
         this.outputAreaManualSync.append(setLafResult);
         dbRadioButton = new JRadioButton("db-album", true);
+        websearchRadioButton = new JRadioButton("suchservice", true);
 
         this.frame = new JFrame("lgs v" + versionString);
         this.frame.setIconImage(new ImageIcon("lgs.gif").getImage());
@@ -181,7 +185,6 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         gc.weightx = 1;
         gc.gridwidth = 4;
         this.masterAlbum = new JComboBox();
-
         this.masterAlbum.setActionCommand("dbalbums");
         this.masterAlbum.addActionListener(this);
         this.masterAlbum.setMaximumRowCount(30);
@@ -198,31 +201,68 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         // radiobutton group
         ButtonGroup bgroup = new ButtonGroup();
         bgroup.add(this.dirRadioButton);
-        bgroup.add(dbRadioButton);
+        bgroup.add(this.dbRadioButton);
 
-        gc.gridx = 0;
+
         gc.gridy++;
-        gc.gridwidth = 1;
-        gc.weightx = lWeight;
+        gc.gridx=0;
         String slaveMsg = "<html>im <b>slave</b>verzeichnis liegen die <b>originale</b>. diese werden dann ins zielverzeichnis kopiert.<br /> dabei dient der master als vorlage welche dateien kopiert werden müssen</html>";
         JLabel slaveLabel = new JLabel("slave");
         slaveLabel.setToolTipText(slaveMsg);
         manualSyncPanel.add(slaveLabel, gc);
         gc.gridx++;
+        this.slaveDirRadioButton = new JRadioButton("verzeichnis");
+        this.slaveDirRadioButton.setActionCommand("slavedir");
+        this.slaveDirRadioButton.addActionListener(this);
+        this.slaveDirRadioButton.setToolTipText("hier klicken um ein verzeichnis als master zu nutzen");
+        manualSyncPanel.add(this.slaveDirRadioButton, gc);
+        gc.gridx++;
+        gc.gridwidth = 4;
         gc.weightx = 1;
-        gc.gridwidth = 5;
         this.slaveDirectory = new JTextField();
         this.slaveDirectory.setName("slave");
         this.slaveDirectory.setTransferHandler(this);
         this.slaveDirectory.setToolTipText(slaveMsg);
+        this.slaveDirectory.setEnabled(false);
         manualSyncPanel.add(this.slaveDirectory, gc);
         gc.gridwidth = 1;
         gc.weightx = lWeight;
-        gc.gridx += 5;
+        gc.gridx += 4;
         browsebutton = new JButton("...");
         browsebutton.addActionListener(this);
         browsebutton.setActionCommand("browseSlave");
         manualSyncPanel.add(browsebutton, gc);
+
+        gc.gridwidth = 1;
+        gc.gridy++;
+        gc.gridx = 1;
+        gc.weightx = lWeight;
+        String websearchMsg = "<html>ist der webservice als <b>slave</b> gewählt, so werden die master-dateien vom webservice gesucht</html>";
+        websearchRadioButton.setActionCommand("websearch");
+        websearchRadioButton.addActionListener(this);
+        websearchRadioButton.setToolTipText(websearchMsg);
+        manualSyncPanel.add(websearchRadioButton, gc);
+        gc.gridx++;
+        gc.weightx = 1;
+        gc.gridwidth = 4;
+        this.websearchURL = new JTextField("http://localhost:82/xml/syncreply/FileInformations?SearchPattern=");
+        this.websearchURL.setName("websearch");
+        this.websearchURL.setTransferHandler(this);
+        this.websearchURL.setToolTipText(websearchMsg);
+        manualSyncPanel.add(this.websearchURL, gc);
+        gc.gridx += 4;
+        gc.weightx = lWeight;
+        gc.gridwidth = 1;
+        browsebutton = new JButton("*");
+        browsebutton.addActionListener(this);
+        browsebutton.setActionCommand("updateAlbums");
+        manualSyncPanel.add(browsebutton, gc);
+
+        // radiobutton group
+        ButtonGroup bgroupSlave = new ButtonGroup();
+        bgroupSlave.add(this.slaveDirRadioButton);
+        bgroupSlave.add(this.websearchRadioButton);
+
 
         gc.gridy++;
         gc.gridx = 0;
@@ -341,6 +381,12 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         } else if (e.getActionCommand().equals("db")) {
             this.masterAlbum.setEnabled(true);
             this.masterDirectory.setEnabled(false);
+        } else if (e.getActionCommand().equals("websearch")) {
+            this.websearchURL.setEnabled(true);
+            this.slaveDirectory.setEnabled(false);
+        } else if (e.getActionCommand().equals("slavedir")) {
+            this.websearchURL.setEnabled(false);
+            this.slaveDirectory.setEnabled(true);
         } else if (e.getActionCommand().equals("browseMaster")) {
             this.masterDirectory.setText(getPathFromUser("master verzeichnis auswählen"));
         } else if (e.getActionCommand().equals("browseSlave")) {
