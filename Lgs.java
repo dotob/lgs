@@ -425,6 +425,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
             this.outputAreaManualSync.append("start with db" + "\n");
             // use album from db
             String slaveDir = this.slaveDirectory.getText();
+            String websearchURL = this.websearchURL.getText();
             String targetDir = this.targetDirectory.getText();
             Vector<String> foddos = null;
             try {
@@ -434,7 +435,8 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
             this.fileDBSyncer = new FileDBSyncer(this);
-            this.fileDBSyncer.syncItems(foddos, slaveDir, targetDir);
+            Boolean useWebsearch = this.websearchRadioButton.isSelected();
+            this.fileDBSyncer.syncItems(foddos, slaveDir,websearchURL,useWebsearch, targetDir);
         }
     }
 

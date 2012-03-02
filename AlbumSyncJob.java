@@ -132,7 +132,7 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
                         this.output.showMessage("slaveDirectorySearchServiceIsReady: beim laden der bilder für album: " + handleAlbum.getName() + " ist ein fehler aufgetreten: " + e.getMessage() + "\n");
                     }
                     FileDBSyncer fdbs = new FileDBSyncer(this.output);
-                    fdbs.syncItems(foddos, slaveDir.getAbsolutePath(), this.slaveDirectorySearchService.getTarget().getAbsolutePath());
+                    fdbs.syncItems(foddos, slaveDir.getAbsolutePath(), this.slaveDirectorySearchService.getTarget().getAbsolutePath(), useWebsearch, targetDir);
                 } else {
                     this.output.showMessage("kein gültiges target gefunden für album: " + handleAlbum.getName() + "\n");
 
