@@ -250,13 +250,6 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         this.websearchURL.setTransferHandler(this);
         this.websearchURL.setToolTipText(websearchMsg);
         manualSyncPanel.add(this.websearchURL, gc);
-        gc.gridx += 4;
-        gc.weightx = lWeight;
-        gc.gridwidth = 1;
-        browsebutton = new JButton("*");
-        browsebutton.addActionListener(this);
-        browsebutton.setActionCommand("updateAlbums");
-        manualSyncPanel.add(browsebutton, gc);
 
         // radiobutton group
         ButtonGroup bgroupSlave = new ButtonGroup();
@@ -371,6 +364,8 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         } else if (e.getActionCommand().equals("end")) {
             this.frame.dispose();
         } else if (e.getActionCommand().equals("startAutoSync")) {
+            this.albumSyncJob.setUseWebsearch(true);
+            this.albumSyncJob.setWebSearchServiceURL(this.websearchURL.getText());
             this.albumSyncJob.StartChecking();
             this.startAutoSyncButton.setEnabled(false);
             this.stopAutoSyncButton.setEnabled(true);

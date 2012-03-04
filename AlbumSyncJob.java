@@ -18,6 +18,25 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
     private Vector<Album> lastSyncAlbums;
     private ConfigurationService configurationService;
 
+    public String getWebSearchServiceURL() {
+        return webSearchServiceURL;
+    }
+
+    public void setWebSearchServiceURL(String webSearchServiceURL) {
+        this.webSearchServiceURL = webSearchServiceURL;
+    }
+
+    public Boolean getUseWebsearch() {
+        return useWebsearch;
+    }
+
+    public void setUseWebsearch(Boolean useWebsearch) {
+        this.useWebsearch = useWebsearch;
+    }
+
+    private String webSearchServiceURL;
+    private Boolean useWebsearch;
+
     public AlbumSyncJob(IMessageDisplay output, ConfigurationService configurationService) {
         this.output = output;
         this.configurationService = configurationService;
@@ -132,7 +151,7 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
                         this.output.showMessage("slaveDirectorySearchServiceIsReady: beim laden der bilder für album: " + handleAlbum.getName() + " ist ein fehler aufgetreten: " + e.getMessage() + "\n");
                     }
                     FileDBSyncer fdbs = new FileDBSyncer(this.output);
-                    fdbs.syncItems(foddos, slaveDir.getAbsolutePath(), this.slaveDirectorySearchService.getTarget().getAbsolutePath(), useWebsearch, targetDir);
+                    fdbs.syncItems(foddos, slaveDir.getAbsolutePath(), this.slaveDirectorySearchService.getTarget().getAbsolutePath(), this.useWebsearch, this.webSearchServiceURL);
                 } else {
                     this.output.showMessage("kein gültiges target gefunden für album: " + handleAlbum.getName() + "\n");
 
