@@ -8,6 +8,14 @@ public class Album {
     Vector<String> images = new Vector<String>();
     boolean initiated = false;
 
+    public Album(){}
+
+    public Album(String name, String total, String id) {
+        this.name = name;
+        this.total = total;
+        this.id = id;
+    }
+
     public boolean isInitiated() {
         return initiated;
     }

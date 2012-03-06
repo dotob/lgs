@@ -9,9 +9,11 @@ public class FileDBSyncer extends SwingWorker<Boolean, Object> {
     private String websearchURL;
     private Boolean useWebsearch;
     private String targetDir;
+    private WebSearchService webSearch;
 
     public FileDBSyncer(IMessageDisplay outputArea) {
         this.outputArea = outputArea;
+        this.webSearch = new WebSearchService();
     }
 
     public void syncItems(Vector<String> master, String slaveDir, String websearchURL, Boolean useWebsearch, String targetDir) {
@@ -44,19 +46,23 @@ public class FileDBSyncer extends SwingWorker<Boolean, Object> {
         File targetDirFile = new File(targetDir);
         Vector<File> toCopy = new Vector<File>();
         if (useWebsearch) {
-            getFileFromWebSearch(toCopy);
+            getFilesFromWebSearch(toCopy);
         } else {
             getFilesFromSlaveDir(toCopy);
-
         }
         FileSyncerUtils.doCopying(toCopy, targetDirFile, this.outputArea);
         return true;
     }
 
-    private void getFileFromWebSearch(Vector<File> toCopy) {
+    private void getFilesFromWebSearch(Vector<File> toCopy) {
         for (String masterRequired : masterDBInfos) {
             String masterFileMatchName = FileInfo.GetMatchName(masterRequired);
-
+            Vector<FileInformation> fileInformations = this.webSearch.Search4Files(this.websearchURL, masterFileMatchName);
+            if (fileInformations.size() == 1) {
+              toCopy.add(new File(fileInformations.get(0).getFileName()));
+            } else {
+                //TODO what now???
+            }
         }
     }
 

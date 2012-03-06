@@ -16,6 +16,7 @@ public class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
     private JRadioButton dbRadioButton;
     private JComboBox masterAlbum;
     private Vector<Album> albumList;
+    private int executeCount = 0;
 
     public AlbumProvider(JComboBox masterAlbum, IMessageDisplay output, JRadioButton dbRadioButton) {
         //super(output);
@@ -28,42 +29,52 @@ public class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
     @Override
     protected Vector<Album> doInBackground() throws Exception {
         this.dbRadioButton.setEnabled(false);
-        try {
-            // add empty row to select nothing
-            this.albumList.add(new Album());
+        // add empty row to select nothing
+        this.albumList.add(new Album());
 
-            try {
-            // get last version info from internet
-            URL updateURL = new URL("http://dev.thalora.com/php/index.php?mode=desktop_get_orders");
+        //retrieveRealData();
+        retrieveFakeData();
 
-            Gson gson = new Gson();
-            JsonReader reader = new JsonReader(new InputStreamReader(updateURL.openStream()));
-            reader.beginArray();
-            while (reader.hasNext()) {
-                Album album = gson.fromJson(reader, Album.class);
-                this.albumList.add(album);
-            }
-            reader.endArray();
-            reader.close();
-
-        } catch (FileNotFoundException e) {
-            this.outputArea.showMessage("konnte album information nicht laden (FileNotFoundException)\n");
-        } catch (UnknownHostException e) {
-            this.outputArea.showMessage("konnte album information nicht laden (UnknownHostException)\n");
-        } catch (ConnectException e) {
-            this.outputArea.showMessage("konnte album information nicht laden (ConnectException)\n");
-        } catch (MalformedURLException e) {
-            this.outputArea.showMessage("konnte album information nicht laden (MalformedURLException)\n");
-        } catch (IOException e) {
-            this.outputArea.showMessage("konnte album information nicht laden (IOException)\n");
-        }
         return this.albumList;
+    }
 
-            //super.execute();
+    private void retrieveFakeData() {
+        this.albumList.add(new Album("test1", "2", "1"));
+        if (this.executeCount % 3 == 0) {
+            this.albumList.add(new Album("test2", "2", "2"));
+        }
+    }
+
+    private void retrieveRealData() {
+        try {
+            try {
+                // get last version info from internet
+                URL updateURL = new URL("http://dev.thalora.com/php/index.php?mode=desktop_get_orders");
+
+                Gson gson = new Gson();
+                JsonReader reader = new JsonReader(new InputStreamReader(updateURL.openStream()));
+                reader.beginArray();
+                while (reader.hasNext()) {
+                    Album album = gson.fromJson(reader, Album.class);
+                    this.albumList.add(album);
+                }
+                reader.endArray();
+                reader.close();
+
+            } catch (FileNotFoundException e) {
+                this.outputArea.showMessage("konnte album information nicht laden (FileNotFoundException)\n");
+            } catch (UnknownHostException e) {
+                this.outputArea.showMessage("konnte album information nicht laden (UnknownHostException)\n");
+            } catch (ConnectException e) {
+                this.outputArea.showMessage("konnte album information nicht laden (ConnectException)\n");
+            } catch (MalformedURLException e) {
+                this.outputArea.showMessage("konnte album information nicht laden (MalformedURLException)\n");
+            } catch (IOException e) {
+                this.outputArea.showMessage("konnte album information nicht laden (IOException)\n");
+            }
         } catch (Exception e) {
             dbRadioButton.setEnabled(false);
         }
-        return this.albumList;
     }
 
     @Override
@@ -72,5 +83,4 @@ public class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
         this.dbRadioButton.setEnabled(true);
         this.masterAlbum.setModel(new DefaultComboBoxModel(this.albumList));
     }
-
 }
