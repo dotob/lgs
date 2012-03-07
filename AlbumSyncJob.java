@@ -17,6 +17,7 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
     private SlaveDirectorySearchService slaveDirectorySearchService;
     private Vector<Album> lastSyncAlbums;
     private ConfigurationService configurationService;
+    private int execCount = 1;
 
     public String getWebSearchServiceURL() {
         return webSearchServiceURL;
@@ -73,6 +74,7 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
         } else {
             // ok albumprovider is null then create a new one and check
             this.albumProvider = new BaseAlbumProvider(this.output);
+            this.albumProvider.setExecuteCount(execCount++);
             this.albumProvider.addPropertyChangeListener(this);
             this.albumProvider.execute();
         }

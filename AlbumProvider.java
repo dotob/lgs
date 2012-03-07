@@ -35,6 +35,8 @@ public class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
         //retrieveRealData();
         retrieveFakeData();
 
+        this.executeCount++;
+
         return this.albumList;
     }
 

@@ -17,6 +17,16 @@ public class BaseAlbumProvider extends SwingWorker<Vector<Album>, Object> {
     protected IMessageDisplay outputArea;
     private Vector<Album> albumList;
 
+    public int getExecuteCount() {
+        return executeCount;
+    }
+
+    public void setExecuteCount(int executeCount) {
+        this.executeCount = executeCount;
+    }
+
+    private int executeCount = 1;
+
     public BaseAlbumProvider(IMessageDisplay output) {
         this.outputArea = output;
         this.albumList = new Vector<Album>();
@@ -24,6 +34,20 @@ public class BaseAlbumProvider extends SwingWorker<Vector<Album>, Object> {
 
     @Override
     protected Vector<Album> doInBackground() throws Exception {
+        //retrieveRealData();
+        retrieveFakeData();
+        this.executeCount++;
+        return this.albumList;
+    }
+
+    private void retrieveFakeData() {
+        this.albumList.add(new Album("test1", "2", "1"));
+        if (this.executeCount % 3 == 0) {
+            this.albumList.add(new Album("test2", "2", "2"));
+        }
+    }
+
+    private void retrieveRealData() {
         try {
             // get last version info from internet
             URL updateURL = new URL("http://dev.thalora.com/php/index.php?mode=desktop_get_orders");
@@ -50,6 +74,5 @@ public class BaseAlbumProvider extends SwingWorker<Vector<Album>, Object> {
         } catch (IOException e) {
             this.outputArea.showMessage("konnte album information nicht laden (IOException)\n");
         }
-        return this.albumList;
     }
 }

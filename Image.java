@@ -1,5 +1,12 @@
 // just the
 public class Image {
+    
+    public Image(){}
+    
+    public Image(String filenameOrig){
+    this.filename_orig = filenameOrig;
+    }
+
     public String getFilenameOrig() {
         return filename_orig;
     }

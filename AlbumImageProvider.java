@@ -34,10 +34,9 @@ public class AlbumImageProvider extends SwingWorker<Vector<String>, Object> {
     }
 
     private void retrieveFakeData() {
-        int c = Integer.parseInt(this.album.getTotal());
-        for (int i = 0; i <= c; i++) {
-
-        }
+        this.album.addImage("IMG_6762.jpg");
+        this.album.addImage("IMG_6763.jpg");
+        this.album.addImage("IMG_6764.jpg");
     }
 
     private void retrieveRealData() throws IOException {
