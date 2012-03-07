@@ -16,18 +16,16 @@ public class FileDBSyncer extends SwingWorker<Boolean, Object> {
         this.webSearch = new WebSearchService();
     }
 
-    public void syncItems(Vector<String> master, String slaveDir, String websearchURL, Boolean useWebsearch, String targetDir) {
+    public void syncItemsDirBased(Vector<String> master, String slaveDir, String targetDir) {
         this.slaveDir = slaveDir;
         this.masterDBInfos = master;
-        this.websearchURL = websearchURL;
-        this.useWebsearch = useWebsearch;
         this.targetDir = targetDir;
-        if (!useWebsearch) {
-            File slaveDirFile = new File(slaveDir);
-            File targetDirFile = new File(targetDir);
-            if (!FileSyncerUtils.doChecking(masterDBInfos, slaveDirFile, targetDirFile, this.outputArea)) {
-                return;
-            }
+        this.useWebsearch = false;
+
+        File slaveDirFile = new File(slaveDir);
+        File targetDirFile = new File(targetDir);
+        if (!FileSyncerUtils.doChecking(masterDBInfos, slaveDirFile, targetDirFile, this.outputArea)) {
+            return;
         }
         // output image names
         this.outputArea.showMessage("im album enthaltene bilder:\n", IMessageDisplay.VERBOSE);
@@ -36,6 +34,25 @@ public class FileDBSyncer extends SwingWorker<Boolean, Object> {
         }
         try {
             execute();
+        } catch (Exception e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
+
+    public void syncItemsWebSearchBased(Vector<String> master, String targetDir, String websearchURL) {
+        this.masterDBInfos = master;
+        this.websearchURL = websearchURL;
+        this.targetDir = targetDir;
+
+        this.useWebsearch = true;
+
+        // output image names
+        this.outputArea.showMessage("im album enthaltene bilder:\n", IMessageDisplay.VERBOSE);
+        for (String s : master) {
+            this.outputArea.showMessage("  " + s + "\n", IMessageDisplay.VERBOSE);
+        }
+        try {
+            this.execute();
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
@@ -59,7 +76,7 @@ public class FileDBSyncer extends SwingWorker<Boolean, Object> {
             String masterFileMatchName = FileInfo.GetMatchName(masterRequired);
             Vector<FileInformation> fileInformations = this.webSearch.Search4Files(this.websearchURL, masterFileMatchName);
             if (fileInformations.size() == 1) {
-              toCopy.add(new File(fileInformations.get(0).getFileName()));
+                toCopy.add(new File(fileInformations.get(0).getFileName()));
             } else {
                 //TODO what now???
             }

@@ -245,7 +245,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         gc.gridx++;
         gc.weightx = 1;
         gc.gridwidth = 4;
-        this.websearchURL = new JTextField("http://localhost:82/xml/syncreply/FileInformations?SearchPattern=");
+        this.websearchURL = new JTextField("http://localhost:82/json/syncreply/FileInformations?SearchPattern=");
         this.websearchURL.setName("websearch");
         this.websearchURL.setTransferHandler(this);
         this.websearchURL.setToolTipText(websearchMsg);
@@ -430,8 +430,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
             this.fileDBSyncer = new FileDBSyncer(this);
-            Boolean useWebsearch = this.websearchRadioButton.isSelected();
-            this.fileDBSyncer.syncItems(foddos, slaveDir,websearchURL,useWebsearch, targetDir);
+            this.fileDBSyncer.syncItemsDirBased(foddos, slaveDir, targetDir);
         }
     }
 

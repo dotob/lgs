@@ -42,7 +42,7 @@ public class BaseAlbumProvider extends SwingWorker<Vector<Album>, Object> {
 
     private void retrieveFakeData() {
         this.albumList.add(new Album("test1", "2", "1"));
-        if (this.executeCount % 3 == 0) {
+        if (this.executeCount % 2 == 0) {
             this.albumList.add(new Album("test2", "2", "2"));
         }
     }

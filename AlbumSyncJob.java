@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutionException;
 public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
     int checkCounter = 0;
     Timer checkTimer;
-    int checkIntervalInSeconds = 3;
+    int checkIntervalInSeconds = 1;
     private IMessageDisplay output;
     private BaseAlbumProvider albumProvider;
     private TargetDirectorySearchService targetDirectorySearchService;
@@ -88,8 +88,6 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
                 albumProviderIsReady();
             } else if (propertyChangeEvent.getSource() == this.targetDirectorySearchService) {
                 targetDirectorySearchServiceIsReady();
-            } else if (propertyChangeEvent.getSource() == this.slaveDirectorySearchService) {
-                slaveDirectorySearchServiceIsReady();
             }
         }
     }
@@ -113,12 +111,7 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
                 Album handleAlbum = this.targetDirectorySearchService.getHandleAlbum();
                 if (target != null) {
                     if (!TargetDirectorySearchService.IsAlbumAlreadyInSync(handleAlbum, target)) {
-                        // ok we found an unsynced target dir, so go and search for slavedir
-                        this.output.showMessage("search for slave directory for album:" + handleAlbum.getName() + "\n");
-                        this.targetDirectorySearchService = null; // do i need this?
-                        this.slaveDirectorySearchService = new SlaveDirectorySearchService(handleAlbum, target, this.configurationService.getSlaveParentDirectories());
-                        this.slaveDirectorySearchService.addPropertyChangeListener(this);
-                        this.slaveDirectorySearchService.execute();
+                        this.doSyncing(handleAlbum, target);
                     } else {
                         this.output.showMessage("album: " + handleAlbum.getName() + " schon fertig gesynced\n");
                     }
@@ -135,36 +128,22 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
         }
     }
 
-    private void slaveDirectorySearchServiceIsReady() {
-        if (this.slaveDirectorySearchService != null && this.slaveDirectorySearchService.isDone()) {
-            try {
-                File slaveDir = this.slaveDirectorySearchService.get();
-                Album handleAlbum = this.slaveDirectorySearchService.getHandleAlbum();
-                if (slaveDir != null) {
-                    this.output.showMessage("habe slave directory gefunden: " + slaveDir.getAbsolutePath() + " für album: " + handleAlbum.getName() + "\n");
-                    // start sync
-                    Vector<String> foddos = null;
-                    try {
-                        // this is SYNC, but usually we retrieved the images already
-                        AlbumImageProvider aip = new AlbumImageProvider(this.output);
-                        aip.setAlbum(handleAlbum);
-                        foddos = aip.get(); // this is syncronous
-                    } catch (Exception e) {
-                        this.output.showMessage("slaveDirectorySearchServiceIsReady: beim laden der bilder für album: " + handleAlbum.getName() + " ist ein fehler aufgetreten: " + e.getMessage() + "\n");
-                    }
-                    FileDBSyncer fdbs = new FileDBSyncer(this.output);
-                    fdbs.syncItems(foddos, slaveDir.getAbsolutePath(), this.slaveDirectorySearchService.getTarget().getAbsolutePath(), this.useWebsearch, this.webSearchServiceURL);
-                } else {
-                    this.output.showMessage("kein gültiges target gefunden für album: " + handleAlbum.getName() + "\n");
-
-                }
-            } catch (InterruptedException e) {
-                this.output.showMessage("something went wrong here...slaveDirectorySearchServiceIsReady:InterruptedException\n");
-            } catch (ExecutionException e) {
-                this.output.showMessage("something went wrong here...slaveDirectorySearchServiceIsReady:InterruptedException\n");
-            }
+    private void doSyncing(Album handleAlbum, File targetDir) {
+        // start sync
+        Vector<String> foddos = null;
+        try {
+            // this is SYNC, but usually we retrieved the images already
+            AlbumImageProvider aip = new AlbumImageProvider(this.output);
+            aip.setAlbum(handleAlbum);
+            aip.execute();
+            foddos = aip.get(); // this is syncronous
+        } catch (Exception e) {
+            this.output.showMessage("doSyncing: beim laden der bilder für album: " + handleAlbum.getName() + " ist ein fehler aufgetreten: " + e.getMessage() + "\n");
         }
+        FileDBSyncer fdbs = new FileDBSyncer(this.output);
+        fdbs.syncItemsWebSearchBased(foddos, targetDir.getAbsolutePath(), this.webSearchServiceURL);
     }
+
 
     private void doCheck4NewAlbums() {
         checkCounter++;
