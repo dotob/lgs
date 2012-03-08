@@ -52,7 +52,7 @@ public class FileDBSyncer extends SwingWorker<Boolean, Object> {
             this.outputArea.showMessage("  " + s + "\n", IMessageDisplay.VERBOSE);
         }
         try {
-            this.execute();
+            this.doInBackground();
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }

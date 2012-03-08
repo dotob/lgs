@@ -75,6 +75,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         JTabbedPane mainTabs = new JTabbedPane();
         mainTabs.add("handsync", manualSyncPanel);
         mainTabs.add("autosync", automaticSyncPanel);
+        mainTabs.setSelectedIndex(1);
 
         realContentPane.add(mainTabs, BorderLayout.CENTER);
         JLabel statusLabel = new JLabel("du bekommst hilfe wenn du die maus über ein element bewegst");

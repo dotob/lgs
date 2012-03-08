@@ -19,10 +19,18 @@ public class WebSearchService {
         try {
             URL updateURL = new URL(webServiceURL + fileNamePart);
             if (webServiceURL == null || webServiceURL.length() == 0) {
-                new URL("http://localhost:82/xml/syncreply/FileInformations?SearchPattern=" + fileNamePart);
+                new URL("http://localhost:82/json/syncreply/FileInformations?SearchPattern=" + fileNamePart);
             }
             Gson gson = new Gson();
             JsonReader reader = new JsonReader(new InputStreamReader(updateURL.openStream()));
+            reader.beginObject(); // {
+            reader.nextName();    // Responsestatus
+            reader.beginObject(); // {
+            String s = reader.nextName();    // Errors
+            reader.skipValue();   // usually [
+            reader.endObject();   // {
+            s = reader.nextName();    // Files
+
             reader.beginArray();
             while (reader.hasNext()) {
                 FileInformation fi = gson.fromJson(reader, FileInformation.class);
@@ -30,7 +38,7 @@ public class WebSearchService {
             }
             reader.endArray();
             reader.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
         return ret;
