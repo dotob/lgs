@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutionException;
 public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
     int checkCounter = 0;
     Timer checkTimer;
-    int checkIntervalInSeconds = 1;
+    int checkIntervalInSeconds = 3;
     private IMessageDisplay output;
     private BaseAlbumProvider albumProvider;
     private TargetDirectorySearchService targetDirectorySearchService;
@@ -73,7 +73,7 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
             output.showMessage("letzter album check noch nicht fertig, überspringe dieses mal\n");
         } else {
             // ok albumprovider is null then create a new one and check
-            this.albumProvider = new BaseAlbumProvider(this.output);
+            this.albumProvider = new BaseAlbumProvider(this.output, this.configurationService);
             this.albumProvider.setExecuteCount(execCount++);
             this.albumProvider.addPropertyChangeListener(this);
             this.albumProvider.execute();
@@ -133,7 +133,7 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
         Vector<String> foddos = null;
         try {
             // this is SYNC, but usually we retrieved the images already
-            AlbumImageProvider aip = new AlbumImageProvider(this.output);
+            AlbumImageProvider aip = new AlbumImageProvider(this.output, this.configurationService);
             aip.setAlbum(handleAlbum);
             aip.execute();
             foddos = aip.get(); // this is syncronous

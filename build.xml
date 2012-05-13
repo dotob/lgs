@@ -35,7 +35,7 @@
         <!-- make manifest files -->
         <manifest file="build/MANIFEST.MF">
             <attribute name="Main-Class" value="Lgs"/>
-            <attribute name="Class-Path" value="commons-io-2.0.jar tinylaf.jar gson-1.7.1.jar"/>
+            <attribute name="Class-Path" value="jars/*"/>
         </manifest>
         <!-- pack files to jar -->
         <jar destfile="build/lgs.jar" manifest="build/MANIFEST.MF">
@@ -51,7 +51,7 @@
         <jarbundler dir="build/macapp" name="lgs-${version}" mainclass="Lgs" build="${version}" version="${version}"
                     stubfile="build/JavaApplicationStub" icon="build/lgs_icon.icns">
             <jarfileset file="build/lgs.jar"/>
-            <javafileset dir=".">
+            <javafileset dir="jars">
                 <include name="*.jar"/>
             </javafileset>
             <extraclasspathfileset dir=".">

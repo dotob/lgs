@@ -15,6 +15,7 @@ import java.util.Vector;
 
 public class BaseAlbumProvider extends SwingWorker<Vector<Album>, Object> {
     protected IMessageDisplay outputArea;
+    private ConfigurationService configurationService;
     private Vector<Album> albumList;
 
     public int getExecuteCount() {
@@ -27,15 +28,16 @@ public class BaseAlbumProvider extends SwingWorker<Vector<Album>, Object> {
 
     private int executeCount = 1;
 
-    public BaseAlbumProvider(IMessageDisplay output) {
+    public BaseAlbumProvider(IMessageDisplay output, ConfigurationService configurationService) {
         this.outputArea = output;
+        this.configurationService = configurationService;
         this.albumList = new Vector<Album>();
     }
 
     @Override
     protected Vector<Album> doInBackground() throws Exception {
-        //retrieveRealData();
-        retrieveFakeData();
+        retrieveRealData();
+        //retrieveFakeData();
         this.executeCount++;
         return this.albumList;
     }
@@ -50,7 +52,7 @@ public class BaseAlbumProvider extends SwingWorker<Vector<Album>, Object> {
     private void retrieveRealData() {
         try {
             // get last version info from internet
-            URL updateURL = new URL("http://dev.thalora.com/php/index.php?mode=desktop_get_orders");
+            URL updateURL = new URL(configurationService.GetAlbumUrl());
 
             Gson gson = new Gson();
             JsonReader reader = new JsonReader(new InputStreamReader(updateURL.openStream()));

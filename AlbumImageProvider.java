@@ -13,10 +13,12 @@ import java.util.Vector;
 
 public class AlbumImageProvider extends SwingWorker<Vector<String>, Object> {
     private IMessageDisplay outputArea;
+    private ConfigurationService configurationService;
     private Album album;
 
-    public AlbumImageProvider(IMessageDisplay output) {
+    public AlbumImageProvider(IMessageDisplay output, ConfigurationService configurationService) {
         this.outputArea = output;
+        this.configurationService = configurationService;
     }
 
     public void setAlbum(Album album) {
@@ -42,7 +44,7 @@ public class AlbumImageProvider extends SwingWorker<Vector<String>, Object> {
     private void retrieveRealData() throws IOException {
         try {
             // get last version info from internet
-            URL updateURL = new URL("http://dev.thalora.com/php/index.php?mode=desktop_get_orders&id=" + this.album.getId());
+            URL updateURL = new URL(configurationService.GetImageUrl() + this.album.getId());
             Gson gson = new Gson();
             JsonReader reader = new JsonReader(new InputStreamReader(updateURL.openStream()));
             reader.beginArray();

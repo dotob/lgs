@@ -14,15 +14,17 @@ import java.util.Vector;
 public class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
     protected IMessageDisplay outputArea;
     private JRadioButton dbRadioButton;
+    private ConfigurationService confService;
     private JComboBox masterAlbum;
     private Vector<Album> albumList;
     private int executeCount = 0;
 
-    public AlbumProvider(JComboBox masterAlbum, IMessageDisplay output, JRadioButton dbRadioButton) {
+    public AlbumProvider(JComboBox masterAlbum, IMessageDisplay output, JRadioButton dbRadioButton, ConfigurationService confService) {
         //super(output);
         this.outputArea = output;
         this.masterAlbum = masterAlbum;
         this.dbRadioButton = dbRadioButton;
+        this.confService = confService;
         this.albumList = new Vector<Album>();
     }
 
@@ -32,8 +34,8 @@ public class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
         // add empty row to select nothing
         this.albumList.add(new Album());
 
-        //retrieveRealData();
-        retrieveFakeData();
+        retrieveRealData();
+        //retrieveFakeData();
 
         this.executeCount++;
 
@@ -42,7 +44,7 @@ public class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
 
     private void retrieveFakeData() {
         this.albumList.add(new Album("test1", "2", "1"));
-        if (this.executeCount == 3) {
+        if (this.executeCount == 4) {
             this.albumList.add(new Album("test2", "2", "2"));
         }
     }
@@ -51,7 +53,8 @@ public class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
         try {
             try {
                 // get last version info from internet
-                URL updateURL = new URL("http://dev.thalora.com/php/index.php?mode=desktop_get_orders");
+                //URL updateURL = new URL("http://dev.thalora.com/php/index.php?mode=desktop_get_orders");
+                URL updateURL = new URL(confService.GetAlbumUrl());
 
                 Gson gson = new Gson();
                 JsonReader reader = new JsonReader(new InputStreamReader(updateURL.openStream()));

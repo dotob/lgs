@@ -56,6 +56,9 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         });
     }
 
+    public Lgs(){
+        this.confService = new ConfigurationService();
+    }
 
     private void createAndShowGUI() {
         String setLafResult = ""; //this.setLAF();
@@ -75,7 +78,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         JTabbedPane mainTabs = new JTabbedPane();
         mainTabs.add("handsync", manualSyncPanel);
         mainTabs.add("autosync", automaticSyncPanel);
-        mainTabs.setSelectedIndex(1);
+        mainTabs.setSelectedIndex(0);
 
         realContentPane.add(mainTabs, BorderLayout.CENTER);
         JLabel statusLabel = new JLabel("du bekommst hilfe wenn du die maus über ein element bewegst");
@@ -129,7 +132,6 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         JScrollPane jsp = new JScrollPane(this.outputAreaAutoSync);
         autoSyncPanel.add(jsp, gc);
 
-        this.confService = new ConfigurationService();
         this.albumSyncJob = new AlbumSyncJob(this.autoSyncOutput, this.confService);
 
         return autoSyncPanel;
@@ -246,7 +248,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         gc.gridx++;
         gc.weightx = 1;
         gc.gridwidth = 4;
-        this.websearchURL = new JTextField("http://localhost:82/json/syncreply/FileInformations?SearchPattern=");
+        this.websearchURL = new JTextField(this.confService.GetLssmSearchUrl());
         this.websearchURL.setName("websearch");
         this.websearchURL.setTransferHandler(this);
         this.websearchURL.setToolTipText(websearchMsg);
@@ -322,7 +324,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
     }
 
     private void gatherAlbumsInBackground() {
-        this.albumProvider = new AlbumProvider(this.masterAlbum, this.manualSyncOutput, this.dbRadioButton);
+        this.albumProvider = new AlbumProvider(this.masterAlbum, this.manualSyncOutput, this.dbRadioButton, this.confService);
 
         // gather albums in background
         try {
@@ -397,7 +399,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         } else if (e.getActionCommand().equals("dbalbums")) {
             // album is selected
             Album album = (Album) this.masterAlbum.getSelectedItem();
-            this.albumImageProvider = new AlbumImageProvider(this.manualSyncOutput);
+            this.albumImageProvider = new AlbumImageProvider(this.manualSyncOutput, this.confService);
             this.albumImageProvider.setAlbum(album);
             try {
                 this.albumImageProvider.execute();
