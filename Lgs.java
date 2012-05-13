@@ -64,12 +64,12 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         String setLafResult = ""; //this.setLAF();
         this.outputAreaManualSync.append(setLafResult);
         dbRadioButton = new JRadioButton("db-album", true);
-        websearchRadioButton = new JRadioButton("suchservice", true);
+        websearchRadioButton = new JRadioButton("suchservice");
 
         this.frame = new JFrame("lgs v" + versionString);
         this.frame.setIconImage(new ImageIcon("lgs.gif").getImage());
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.frame.setPreferredSize(new Dimension(800, 500));
+        this.frame.setPreferredSize(new Dimension(900, 500));
         Container realContentPane = this.frame.getContentPane();
 
         JPanel manualSyncPanel = createManualSyncPanel();
@@ -214,7 +214,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         slaveLabel.setToolTipText(slaveMsg);
         manualSyncPanel.add(slaveLabel, gc);
         gc.gridx++;
-        this.slaveDirRadioButton = new JRadioButton("verzeichnis");
+        this.slaveDirRadioButton = new JRadioButton("verzeichnis", true);
         this.slaveDirRadioButton.setActionCommand("slavedir");
         this.slaveDirRadioButton.addActionListener(this);
         this.slaveDirRadioButton.setToolTipText("hier klicken um ein verzeichnis als master zu nutzen");
@@ -399,6 +399,8 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         } else if (e.getActionCommand().equals("dbalbums")) {
             // album is selected
             Album album = (Album) this.masterAlbum.getSelectedItem();
+            String orderTargetPath = this.confService.GetOrderTargetPath() + album.getId() + "_" + album.getLogin();
+            this.targetDirectory.setText(orderTargetPath);
             this.albumImageProvider = new AlbumImageProvider(this.manualSyncOutput, this.confService);
             this.albumImageProvider.setAlbum(album);
             try {

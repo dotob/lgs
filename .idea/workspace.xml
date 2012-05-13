@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a84c7358-d7c7-428e-866a-8118c85b4d62" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ConfigurationService.java" afterPath="$PROJECT_DIR$/ConfigurationService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Lgs.java" afterPath="$PROJECT_DIR$/Lgs.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lgs.properties" afterPath="$PROJECT_DIR$/lgs.properties" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="java.iws" />
@@ -22,7 +23,7 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/Lgs.java" line="406" class="Lgs" package="">
+      <breakpoint url="file://$PROJECT_DIR$/Lgs.java" line="408" class="Lgs" package="">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -76,19 +77,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Lgs.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Lgs.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Lgs.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="250" column="78" selection-start="10331" selection-end="10331" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/build.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="201" selection-start="1355" selection-end="1355" vertical-scroll-proportion="0.36072144">
+            <state line="71" column="52" selection-start="2850" selection-end="2850" vertical-scroll-proportion="1.1919386">
               <folding />
             </state>
           </provider>
@@ -97,25 +89,7 @@
       <file leaf-file-name="ConfigurationService.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ConfigurationService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="31" selection-start="922" selection-end="922" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BaseAlbumProvider.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BaseAlbumProvider.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="10" selection-start="1180" selection-end="1180" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AlbumProvider.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AlbumProvider.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="65" selection-start="1877" selection-end="1877" vertical-scroll-proportion="0.0">
+            <state line="41" column="32" selection-start="1081" selection-end="1081" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -124,25 +98,7 @@
       <file leaf-file-name="lgs.properties" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lgs.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="0" selection-start="238" selection-end="252" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AlbumImageProvider.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AlbumImageProvider.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="0" selection-start="2601" selection-end="2601" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AlbumSyncJob.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AlbumSyncJob.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="66" selection-start="1324" selection-end="1324" vertical-scroll-proportion="0.0">
+            <state line="4" column="57" selection-start="237" selection-end="237" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -177,10 +133,10 @@
         <option value="$PROJECT_DIR$/AlbumImageProvider.java" />
         <option value="$PROJECT_DIR$/AlbumSyncJob.java" />
         <option value="$PROJECT_DIR$/BaseAlbumProvider.java" />
-        <option value="$PROJECT_DIR$/lgs.properties" />
-        <option value="$PROJECT_DIR$/ConfigurationService.java" />
-        <option value="$PROJECT_DIR$/Lgs.java" />
         <option value="$PROJECT_DIR$/build.xml" />
+        <option value="$PROJECT_DIR$/ConfigurationService.java" />
+        <option value="$PROJECT_DIR$/lgs.properties" />
+        <option value="$PROJECT_DIR$/Lgs.java" />
       </list>
     </option>
   </component>
@@ -882,30 +838,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="201" selection-start="1355" selection-end="1355" vertical-scroll-proportion="0.27054107">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ConfigurationService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="31" selection-start="922" selection-end="922" vertical-scroll-proportion="0.0">
+        <state line="41" column="32" selection-start="1081" selection-end="1081" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lgs.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="238" selection-end="252" vertical-scroll-proportion="0.0">
+        <state line="4" column="57" selection-start="237" selection-end="237" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Lgs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="250" column="78" selection-start="10331" selection-end="10331" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="201" selection-start="1355" selection-end="1355" vertical-scroll-proportion="0.36072144">
+        <state line="71" column="52" selection-start="2850" selection-end="2850" vertical-scroll-proportion="1.1919386">
           <folding />
         </state>
       </provider>

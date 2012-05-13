@@ -38,4 +38,11 @@ public class ConfigurationService {
         }
         return "";
     }
+
+    public String GetOrderTargetPath() {
+        if(config!=null){
+            return config.getString("orderTargetPath");
+        }
+        return "";
+    }
 }
