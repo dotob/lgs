@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a84c7358-d7c7-428e-866a-8118c85b4d62" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lgs.properties" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-io-2.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gson-1.7.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/junit-4.7.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lgsFuncs.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lgsGui.bmml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libgrowl-0.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tinylaf.jar" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlbumImageProvider.java" afterPath="$PROJECT_DIR$/AlbumImageProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlbumProvider.java" afterPath="$PROJECT_DIR$/AlbumProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AlbumSyncJob.java" afterPath="$PROJECT_DIR$/AlbumSyncJob.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BaseAlbumProvider.java" afterPath="$PROJECT_DIR$/BaseAlbumProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ConfigurationService.java" afterPath="$PROJECT_DIR$/ConfigurationService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Lgs.java" afterPath="$PROJECT_DIR$/Lgs.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TargetDirectorySearchService.java" afterPath="$PROJECT_DIR$/TargetDirectorySearchService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lgs.iml" afterPath="$PROJECT_DIR$/lgs.iml" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="java.iws" />
@@ -104,7 +87,7 @@
       <file leaf-file-name="build.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/build.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="60" selection-start="296" selection-end="296" vertical-scroll-proportion="-1.0800781">
+            <state line="19" column="34" selection-start="651" selection-end="651" vertical-scroll-proportion="0.52734375">
               <folding />
             </state>
           </provider>
@@ -921,7 +904,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="60" selection-start="296" selection-end="296" vertical-scroll-proportion="-1.0800781">
+        <state line="19" column="34" selection-start="651" selection-end="651" vertical-scroll-proportion="0.52734375">
           <folding />
         </state>
       </provider>

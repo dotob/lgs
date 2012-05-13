@@ -17,7 +17,7 @@
     <target name="compile" depends="addVersion">
         <javac srcdir="." encoding="UTF-8"><!-- ISO-8859-1 -->
             <classpath>
-                <fileset dir=".">
+                <fileset dir="jars">
                     <include name="*.jar"/>
                 </fileset>
             </classpath>
