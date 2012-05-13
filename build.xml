@@ -18,7 +18,7 @@
         <javac srcdir="." encoding="UTF-8"><!-- ISO-8859-1 -->
             <classpath>
                 <fileset dir="jars">
-                    <include name="*.jar"/>
+                    <include name="."/>
                 </fileset>
             </classpath>
         </javac>
