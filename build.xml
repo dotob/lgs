@@ -42,6 +42,7 @@
             <fileset dir="." casesensitive="no">
                 <include name="*.class"/>
                 <include name="*.gif"/>
+                <include name="*.properties"/>
                 <include name="Default.theme"/>
             </fileset>
         </jar>
