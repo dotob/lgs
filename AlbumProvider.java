@@ -11,12 +11,12 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.Vector;
 
-public class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
-    protected IMessageDisplay outputArea;
-    private JRadioButton dbRadioButton;
-    private ConfigurationService confService;
-    private JComboBox masterAlbum;
-    private Vector<Album> albumList;
+class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
+    private final IMessageDisplay outputArea;
+    private final JRadioButton dbRadioButton;
+    private final ConfigurationService confService;
+    private final JComboBox masterAlbum;
+    private final Vector<Album> albumList;
     private int executeCount = 0;
 
     public AlbumProvider(JComboBox masterAlbum, IMessageDisplay output, JRadioButton dbRadioButton, ConfigurationService confService) {
@@ -54,7 +54,7 @@ public class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
             try {
                 // get last version info from internet
                 //URL updateURL = new URL("http://dev.thalora.com/php/index.php?mode=desktop_get_orders");
-                URL updateURL = new URL(confService.GetAlbumUrl());
+                URL updateURL = new URL(this.confService.GetAlbumUrl());
 
                 Gson gson = new Gson();
                 JsonReader reader = new JsonReader(new InputStreamReader(updateURL.openStream()));
@@ -78,7 +78,7 @@ public class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
                 this.outputArea.showMessage("konnte album information nicht laden (IOException)\n");
             }
         } catch (Exception e) {
-            dbRadioButton.setEnabled(false);
+            this.dbRadioButton.setEnabled(false);
         }
     }
 

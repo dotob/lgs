@@ -11,24 +11,21 @@ import java.util.List;
 import java.util.Vector;
 
 
-public class Lgs extends TransferHandler implements ActionListener, IMessageDisplay {
+public class Lgs extends TransferHandler implements ActionListener {
     private static final String versionString = "buildnumber";
 
     //TODO: make this configurable
-    String[] ext = {"jpg", "xmp"};
+    private final String[] ext = {"jpg", "xmp"};
     private JRadioButton dbRadioButton;
-    private AlbumProvider albumProvider;
     private AlbumImageProvider albumImageProvider;
-    private FileDBSyncer fileDBSyncer;
-    private FileDirectorySyncer fileDirectorySyncer;
     private JCheckBox verboseOutputCB;
     private AlbumSyncJob albumSyncJob;
-    private ConfigurationService confService;
-    private JTextArea outputAreaAutoSync = new JTextArea();
-    private JTextArea outputAreaManualSync = new JTextArea();
-    private GrowlNetwork growl = new GrowlNetwork();
-    private MyMessageDisplay manualSyncOutput = new MyMessageDisplay(this.outputAreaManualSync, this.growl);
-    private MyMessageDisplay autoSyncOutput = new MyMessageDisplay(this.outputAreaAutoSync, this.growl);
+    private final ConfigurationService confService;
+    private final JTextArea outputAreaAutoSync = new JTextArea();
+    private final JTextArea outputAreaManualSync = new JTextArea();
+    private final GrowlNetwork growl = new GrowlNetwork();
+    private final MyMessageDisplay manualSyncOutput = new MyMessageDisplay(this.outputAreaManualSync, this.growl);
+    private final MyMessageDisplay autoSyncOutput = new MyMessageDisplay(this.outputAreaAutoSync, this.growl);
     private JFrame frame;
     private JTextField masterDirectory;
     private JComboBox masterAlbum;
@@ -37,7 +34,6 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
     private JTextField slaveDirectory;
     private JButton startAutoSyncButton;
     private JButton stopAutoSyncButton;
-    private JRadioButton slaveDirRadioButton;
     private JRadioButton websearchRadioButton;
     private JTextField websearchURL;
 
@@ -63,8 +59,8 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
     private void createAndShowGUI() {
         String setLafResult = ""; //this.setLAF();
         this.outputAreaManualSync.append(setLafResult);
-        dbRadioButton = new JRadioButton("db-album", true);
-        websearchRadioButton = new JRadioButton("suchservice");
+        this.dbRadioButton = new JRadioButton("db-album", true);
+        this.websearchRadioButton = new JRadioButton("suchservice");
 
         this.frame = new JFrame("lgs v" + versionString);
         this.frame.setIconImage(new ImageIcon("lgs.gif").getImage());
@@ -180,10 +176,10 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         gc.gridy++;
         gc.gridx = 1;
         gc.weightx = lWeight;
-        dbRadioButton.setActionCommand("db");
-        dbRadioButton.addActionListener(this);
-        dbRadioButton.setToolTipText("hier klicken um ein datenbank-album als master zu nutzen");
-        manualSyncPanel.add(dbRadioButton, gc);
+        this.dbRadioButton.setActionCommand("db");
+        this.dbRadioButton.addActionListener(this);
+        this.dbRadioButton.setToolTipText("hier klicken um ein datenbank-album als master zu nutzen");
+        manualSyncPanel.add(this.dbRadioButton, gc);
         gc.gridx++;
         gc.weightx = 1;
         gc.gridwidth = 4;
@@ -214,11 +210,11 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         slaveLabel.setToolTipText(slaveMsg);
         manualSyncPanel.add(slaveLabel, gc);
         gc.gridx++;
-        this.slaveDirRadioButton = new JRadioButton("verzeichnis", true);
-        this.slaveDirRadioButton.setActionCommand("slavedir");
-        this.slaveDirRadioButton.addActionListener(this);
-        this.slaveDirRadioButton.setToolTipText("hier klicken um ein verzeichnis als master zu nutzen");
-        manualSyncPanel.add(this.slaveDirRadioButton, gc);
+        JRadioButton slaveDirRadioButton = new JRadioButton("verzeichnis", true);
+        slaveDirRadioButton.setActionCommand("slavedir");
+        slaveDirRadioButton.addActionListener(this);
+        slaveDirRadioButton.setToolTipText("hier klicken um ein verzeichnis als master zu nutzen");
+        manualSyncPanel.add(slaveDirRadioButton, gc);
         gc.gridx++;
         gc.gridwidth = 4;
         gc.weightx = 1;
@@ -241,10 +237,10 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         gc.gridx = 1;
         gc.weightx = lWeight;
         String websearchMsg = "<html>ist der webservice als <b>slave</b> gewählt, so werden die master-dateien vom webservice gesucht</html>";
-        websearchRadioButton.setActionCommand("websearch");
-        websearchRadioButton.addActionListener(this);
-        websearchRadioButton.setToolTipText(websearchMsg);
-        manualSyncPanel.add(websearchRadioButton, gc);
+        this.websearchRadioButton.setActionCommand("websearch");
+        this.websearchRadioButton.addActionListener(this);
+        this.websearchRadioButton.setToolTipText(websearchMsg);
+        manualSyncPanel.add(this.websearchRadioButton, gc);
         gc.gridx++;
         gc.weightx = 1;
         gc.gridwidth = 4;
@@ -256,7 +252,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
 
         // radiobutton group
         ButtonGroup bgroupSlave = new ButtonGroup();
-        bgroupSlave.add(this.slaveDirRadioButton);
+        bgroupSlave.add(slaveDirRadioButton);
         bgroupSlave.add(this.websearchRadioButton);
 
 
@@ -288,8 +284,10 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         gc.gridx = 1;
         gc.gridwidth = 2;
         gc.weightx = lWeight;
-        verboseOutputCB = new JCheckBox("mehr info");
-        verboseOutputCB.setToolTipText("detailliertere ausgaben machen");
+        this.verboseOutputCB = new JCheckBox("mehr info");
+        this.verboseOutputCB.setToolTipText("detailliertere ausgaben machen");
+        this.verboseOutputCB.setActionCommand("setVerboseOutput");
+        this.verboseOutputCB.addActionListener(this);
         //TODO: make visible when we have more detailled output
         //verboseOutputCB.setVisible(false);
         manualSyncPanel.add(this.verboseOutputCB, gc);
@@ -324,11 +322,11 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
     }
 
     private void gatherAlbumsInBackground() {
-        this.albumProvider = new AlbumProvider(this.masterAlbum, this.manualSyncOutput, this.dbRadioButton, this.confService);
+        AlbumProvider albumProvider = new AlbumProvider(this.masterAlbum, this.manualSyncOutput, this.dbRadioButton, this.confService);
 
         // gather albums in background
         try {
-            this.albumProvider.execute();
+            albumProvider.execute();
         } catch (Exception e) {
             this.outputAreaManualSync.append(e.getMessage());
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -349,13 +347,13 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
             e.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
-            this.outputAreaManualSync.append("black theme nicht gefunden\n");
+            this.manualSyncOutput.showMessage("black theme nicht gefunden\n");
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-            this.outputAreaManualSync.append("black theme nicht gefunden\n");
+            this.manualSyncOutput.showMessage("black theme nicht gefunden\n");
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
-            this.outputAreaManualSync.append("black theme nicht gefunden\n");
+            this.manualSyncOutput.showMessage("black theme nicht gefunden\n");
         }
         return result;
     }
@@ -386,13 +384,15 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
             this.websearchURL.setEnabled(false);
             this.slaveDirectory.setEnabled(true);
         } else if (e.getActionCommand().equals("browseMaster")) {
-            this.masterDirectory.setText(getPathFromUser("master verzeichnis auswählen"));
+            this.masterDirectory.setText(getPathFromUser());
         } else if (e.getActionCommand().equals("browseSlave")) {
-            this.slaveDirectory.setText(getPathFromUser("slave verzeichnis auswählen"));
+            this.slaveDirectory.setText(getPathFromUser());
         } else if (e.getActionCommand().equals("browseTarget")) {
-            this.targetDirectory.setText(getPathFromUser("ziel verzeichnis auswählen"));
+            this.targetDirectory.setText(getPathFromUser());
         } else if (e.getActionCommand().equals("updateAlbums")) {
             gatherAlbumsInBackground();
+        } else if (e.getActionCommand().equals("setVerboseOutput")) {
+            this.manualSyncOutput.SetVerboseOutput(this.verboseOutputCB.isSelected());
         } else if (e.getActionCommand().equals("dir")) {
             this.masterAlbum.setEnabled(false);
             this.masterDirectory.setEnabled(true);
@@ -414,18 +414,17 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
 
     private void startLGS() {
         if (this.dirRadioButton.isSelected()) {
-            this.outputAreaManualSync.append("start with directory" + "\n");
+            this.manualSyncOutput.showMessage("start with directory" + "\n");
             // use supplied directory
             String masterDir = this.masterDirectory.getText();
             String slaveDir = this.slaveDirectory.getText();
             String targetDir = this.targetDirectory.getText();
-            this.fileDirectorySyncer = new FileDirectorySyncer(this);
-            this.fileDirectorySyncer.syncItems(masterDir, this.ext, slaveDir, targetDir);
+            FileDirectorySyncer fileDirectorySyncer = new FileDirectorySyncer(this.manualSyncOutput);
+            fileDirectorySyncer.syncItems(masterDir, this.ext, slaveDir, targetDir);
         } else {
-            this.outputAreaManualSync.append("start with db" + "\n");
+            this.manualSyncOutput.showMessage("start with db" + "\n");
             // use album from db
             String slaveDir = this.slaveDirectory.getText();
-            String websearchURL = this.websearchURL.getText();
             String targetDir = this.targetDirectory.getText();
             Vector<String> foddos = null;
             try {
@@ -434,15 +433,15 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
             } catch (Exception e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
-            this.fileDBSyncer = new FileDBSyncer(this);
-            this.fileDBSyncer.syncItemsDirBased(foddos, slaveDir, targetDir);
+            FileDBSyncer fileDBSyncer = new FileDBSyncer(this.manualSyncOutput);
+            fileDBSyncer.syncItemsDirBased(foddos, slaveDir, targetDir);
         }
     }
 
     /*
     FILE CHOOOSER
      */
-    private String getPathFromUser(String header) {
+    private String getPathFromUser() {
         String absPath = "";
         // not so nice...
 //        JFileChooser fc = new JFileChooser();
@@ -488,7 +487,7 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
                 File f = (File) object;
                 textField.setText(f.getAbsolutePath());
                 Vector<FileInfo> fis = FileSyncerUtils.GetFileInfoItems(f.getAbsolutePath(), this.ext);
-                this.outputAreaManualSync.append(fis.size() + " dateien in " + textField.getName() + " gefunden\n");
+                this.manualSyncOutput.showMessage(fis.size() + " dateien in " + textField.getName() + " gefunden\n");
             }
             return true;
         } catch (UnsupportedFlavorException ufe) {
@@ -511,26 +510,13 @@ public class Lgs extends TransferHandler implements ActionListener, IMessageDisp
         }
         return false;
     }
-
-    @Override
-    public void showMessage(String msg) {
-        showMessage(msg, NORMAL);
-    }
-
-    @Override
-    public void showMessage(String msg, int level) {
-        if (level < VERBOSE || this.verboseOutputCB.isSelected()) {
-            this.outputAreaManualSync.append(msg);
-            this.growl.notify("lgs info", msg);
-        }
-    }
 }
 
 class MyMessageDisplay implements IMessageDisplay {
 
-    private JTextArea output;
+    private final JTextArea output;
     private boolean verbose;
-    private GrowlNetwork growl;
+    private final GrowlNetwork growl;
 
     public MyMessageDisplay(JTextArea output, GrowlNetwork growl) {
         this.output = output;
@@ -545,7 +531,10 @@ class MyMessageDisplay implements IMessageDisplay {
     public void showMessage(String msg, int level) {
         if (level < VERBOSE || this.verbose) {
             this.output.append(msg);
-            this.growl.notify("lgs info", msg);
+            // never growl verbose messages
+            if(level < VERBOSE){
+                this.growl.notify("lgs info", msg);
+            }
         }
     }
 

@@ -1,17 +1,17 @@
 import java.io.File;
 import java.util.Vector;
 
-public class FileInfo {
+class FileInfo {
 
     public File getFile() {
-        return file;
+        return this.file;
     }
 
     private final File file;
     private final String matchName;
 
     public String getMatchName() {
-        return matchName;
+        return this.matchName;
     }
 
     public FileInfo(File aFile) {

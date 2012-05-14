@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.AbstractCollection;
 import java.util.Vector;
 
-public class FileSyncerUtils {
+class FileSyncerUtils {
     public static boolean doChecking(AbstractCollection master, File slaveDirFile, File targetDirFile, IMessageDisplay outputArea) {
         if (master == null) {
             outputArea.showMessage("master information ist leer (null)\n");

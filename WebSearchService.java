@@ -13,7 +13,7 @@ import java.util.Vector;
  * Time: 19:47
  * this retrieves file information from the web file indexer
  */
-public class WebSearchService {
+class WebSearchService {
     public Vector<FileInformation> Search4Files(String webServiceURL, String fileNamePart) {
         Vector<FileInformation> ret = new Vector<FileInformation>();
         try {
@@ -26,10 +26,10 @@ public class WebSearchService {
             reader.beginObject(); // {
             reader.nextName();    // Responsestatus
             reader.beginObject(); // {
-            String s = reader.nextName();    // Errors
+            reader.nextName();    // Errors
             reader.skipValue();   // usually [
             reader.endObject();   // {
-            s = reader.nextName();    // Files
+            reader.nextName();    // Files
 
             reader.beginArray();
             while (reader.hasNext()) {

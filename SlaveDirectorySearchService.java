@@ -6,18 +6,16 @@ import java.util.Vector;
 // master: where the info comes from which images to use
 // slave: where the originals reside, we copy from here
 // target: where the originals from slave should be copied to
-public class SlaveDirectorySearchService extends SwingWorker<File, Object> {
+class SlaveDirectorySearchService extends SwingWorker<File, Object> {
 
-    private Album handleAlbum;
-    private Vector<File> configuredParentPathsToSearchIn;
-    private File target; // this is just for giving it to the next service
+    private final Album handleAlbum;
+    private final File target; // this is just for giving it to the next service
 
 
     // walk through the configured directories and search for the directory where the originals reside (slave directory)
-    public SlaveDirectorySearchService(Album a, File target, Vector<File> configuredParentPathsToSearchIn) {
+    public SlaveDirectorySearchService(Album a, File target) {
         this.handleAlbum = a;
         this.target = target;
-        this.configuredParentPathsToSearchIn = configuredParentPathsToSearchIn;
     }
 
     @Override
@@ -26,10 +24,10 @@ public class SlaveDirectorySearchService extends SwingWorker<File, Object> {
     }
 
     public Album getHandleAlbum() {
-        return handleAlbum;
+        return this.handleAlbum;
     }
 
     public File getTarget() {
-        return target;
+        return this.target;
     }
 }

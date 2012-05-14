@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-public class BaseAlbumProvider extends SwingWorker<Vector<Album>, Object> {
-    protected IMessageDisplay outputArea;
-    private ConfigurationService configurationService;
-    private Vector<Album> albumList;
+class BaseAlbumProvider extends SwingWorker<Vector<Album>, Object> {
+    private final IMessageDisplay outputArea;
+    private final ConfigurationService configurationService;
+    private final Vector<Album> albumList;
 
     public int getExecuteCount() {
-        return executeCount;
+        return this.executeCount;
     }
 
     public void setExecuteCount(int executeCount) {
@@ -52,11 +52,10 @@ public class BaseAlbumProvider extends SwingWorker<Vector<Album>, Object> {
     private void retrieveRealData() {
         try {
             // get last version info from internet
-            URL updateURL = new URL(configurationService.GetAlbumUrl());
+            URL updateURL = new URL(this.configurationService.GetAlbumUrl());
 
             Gson gson = new Gson();
             JsonReader reader = new JsonReader(new InputStreamReader(updateURL.openStream()));
-            List<Album> albums = new ArrayList<Album>();
             reader.beginArray();
             while (reader.hasNext()) {
                 Album album = gson.fromJson(reader, Album.class);

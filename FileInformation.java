@@ -5,30 +5,30 @@
  * Time: 19:03
  * this is a simple pojo for json data retrieval
  */
-public class FileInformation {
+class FileInformation {
     public String getFileName() {
-        return FileName;
+        return this.FileName;
     }
 
     public void setFileName(String fileName) {
-        FileName = fileName;
+        this.FileName = fileName;
     }
 
 
     public String getHost() {
-        return Host;
+        return this.Host;
     }
 
     public void setHost(String host) {
-        Host = host;
+        this.Host = host;
     }
 
     public String getId() {
-        return Id;
+        return this.Id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.Id = id;
     }
 
     private String FileName;

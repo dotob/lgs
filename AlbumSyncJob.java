@@ -7,20 +7,20 @@ import java.io.File;
 import java.util.Vector;
 import java.util.concurrent.ExecutionException;
 
-public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
-    int checkCounter = 0;
-    Timer checkTimer;
-    int checkIntervalInSeconds = 3;
-    private IMessageDisplay output;
+class AlbumSyncJob implements ActionListener, PropertyChangeListener {
+    private int checkCounter = 0;
+    private Timer checkTimer;
+    private int checkIntervalInSeconds = 3;
+    private final IMessageDisplay output;
     private BaseAlbumProvider albumProvider;
     private TargetDirectorySearchService targetDirectorySearchService;
     private SlaveDirectorySearchService slaveDirectorySearchService;
     private Vector<Album> lastSyncAlbums;
-    private ConfigurationService configurationService;
+    private final ConfigurationService configurationService;
     private int execCount = 1;
 
     public String getWebSearchServiceURL() {
-        return webSearchServiceURL;
+        return this.webSearchServiceURL;
     }
 
     public void setWebSearchServiceURL(String webSearchServiceURL) {
@@ -28,7 +28,7 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
     }
 
     public Boolean getUseWebsearch() {
-        return useWebsearch;
+        return this.useWebsearch;
     }
 
     public void setUseWebsearch(Boolean useWebsearch) {
@@ -44,17 +44,17 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
     }
 
     public void StartChecking() {
-        checkCounter = 0;
+        this.checkCounter = 0;
         this.lastSyncAlbums = null;
-        checkTimer = new Timer(checkIntervalInSeconds * 1000, this);
-        checkTimer.setInitialDelay(checkIntervalInSeconds * 1000);
-        checkTimer.start();
+        this.checkTimer = new Timer(this.checkIntervalInSeconds * 1000, this);
+        this.checkTimer.setInitialDelay(this.checkIntervalInSeconds * 1000);
+        this.checkTimer.start();
         this.output.showMessage("starte autosync\n");
     }
 
     public void StopChecking() {
-        if (checkTimer != null) {
-            checkTimer.stop();
+        if (this.checkTimer != null) {
+            this.checkTimer.stop();
             this.output.showMessage("stoppe autosync\n");
         }
     }
@@ -69,12 +69,12 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
     public void actionPerformed(ActionEvent actionEvent) {
         // this should be called when timer callback executes
         // check if albumfetching is in progress, then skip this timer, but tell someone
-        if (albumProvider != null && !albumProvider.isDone()) {
-            output.showMessage("letzter album check noch nicht fertig, überspringe dieses mal\n");
+        if (this.albumProvider != null && !this.albumProvider.isDone()) {
+            this.output.showMessage("letzter album check noch nicht fertig, überspringe dieses mal\n");
         } else {
             // ok albumprovider is null then create a new one and check
             this.albumProvider = new BaseAlbumProvider(this.output, this.configurationService);
-            this.albumProvider.setExecuteCount(execCount++);
+            this.albumProvider.setExecuteCount(this.execCount++);
             this.albumProvider.addPropertyChangeListener(this);
             this.albumProvider.execute();
         }
@@ -105,7 +105,7 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
 
     private void targetDirectorySearchServiceIsReady() {
         // check if there is anything left to do or if it is already in sync
-        if (this.targetDirectorySearchService != null && targetDirectorySearchService.isDone()) {
+        if (this.targetDirectorySearchService != null && this.targetDirectorySearchService.isDone()) {
             try {
                 File target = this.targetDirectorySearchService.get();
                 Album handleAlbum = this.targetDirectorySearchService.getHandleAlbum();
@@ -146,11 +146,11 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
 
 
     private void doCheck4NewAlbums() {
-        checkCounter++;
+        this.checkCounter++;
         Vector<Album> albums = new Vector<Album>();
         try {
             albums = this.albumProvider.get();
-            this.output.showMessage(albums.size() + " alben beim " + checkCounter + ". check gefunden\n");
+            this.output.showMessage(albums.size() + " alben beim " + this.checkCounter + ". check gefunden\n");
         } catch (InterruptedException e) {
             this.output.showMessage("doCheck4NewAlbums: something bad happened... " + e.getMessage() + "\n");
         } catch (ExecutionException e) {
@@ -190,7 +190,7 @@ public class AlbumSyncJob implements ActionListener, PropertyChangeListener {
         try {
             this.lastSyncAlbums = this.albumProvider.get();
             this.output.showMessage(this.lastSyncAlbums.size() + " alben beim 1. check gefunden\n");
-            checkCounter++;
+            this.checkCounter++;
         } catch (InterruptedException e) {
             this.output.showMessage("something bad happened... " + e.getMessage() + "\n");
         } catch (ExecutionException e) {

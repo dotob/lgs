@@ -82,11 +82,6 @@ public class FileInfoTests {
     }
 
     @Test
-    public void testFileFuncs() {
-        //assertTrue("better:" + new File(this.masterPath + File.separator + "a.a").getName(), new File(this.masterPath + File.pathSeparator + "a.a").getName().equals("a.a"));
-    }
-
-    @Test
     public void testIsMatchFileSameExtension() {
         File f1 = new File(this.masterPath + File.separator + "a.a");
         File f2 = new File(this.slavePath + File.separator + "a.a");

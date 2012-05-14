@@ -1,5 +1,5 @@
 // just the
-public class Image {
+class Image {
     
     public Image(){}
     
@@ -8,7 +8,7 @@ public class Image {
     }
 
     public String getFilenameOrig() {
-        return filename_orig;
+        return this.filename_orig;
     }
 
     public void setFilenameOrig(String filename_orig) {

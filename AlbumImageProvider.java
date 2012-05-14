@@ -11,9 +11,9 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.Vector;
 
-public class AlbumImageProvider extends SwingWorker<Vector<String>, Object> {
-    private IMessageDisplay outputArea;
-    private ConfigurationService configurationService;
+class AlbumImageProvider extends SwingWorker<Vector<String>, Object> {
+    private final IMessageDisplay outputArea;
+    private final ConfigurationService configurationService;
     private Album album;
 
     public AlbumImageProvider(IMessageDisplay output, ConfigurationService configurationService) {
@@ -29,10 +29,13 @@ public class AlbumImageProvider extends SwingWorker<Vector<String>, Object> {
     protected Vector<String> doInBackground() throws Exception {
         // if not already loaded load images
         if (this.album != null && !this.album.isInitiated()) {
-            retrieveFakeData();
-            //retrieveRealData();
+            //retrieveFakeData();
+            retrieveRealData();
         }
-        return this.album.getImages();
+        if (this.album != null) {
+            return this.album.getImages();
+        }
+        return new Vector<String>();
     }
 
     private void retrieveFakeData() {
@@ -41,10 +44,10 @@ public class AlbumImageProvider extends SwingWorker<Vector<String>, Object> {
         this.album.addImage("IMG_6764.jpg");
     }
 
-    private void retrieveRealData() throws IOException {
+    private void retrieveRealData() {
         try {
             // get last version info from internet
-            URL updateURL = new URL(configurationService.GetImageUrl() + this.album.getId());
+            URL updateURL = new URL(this.configurationService.GetImageUrl() + this.album.getId());
             Gson gson = new Gson();
             JsonReader reader = new JsonReader(new InputStreamReader(updateURL.openStream()));
             reader.beginArray();
@@ -55,15 +58,15 @@ public class AlbumImageProvider extends SwingWorker<Vector<String>, Object> {
             reader.endArray();
             reader.close();
         } catch (FileNotFoundException e) {
-            outputArea.showMessage("Kein Zugang zum Internet gefunden." + "\n");
+            this.outputArea.showMessage("Kein Zugang zum Internet gefunden." + "\n");
         } catch (UnknownHostException e) {
-            outputArea.showMessage("Kein Zugang zum Internet gefunden." + "\n");
+            this.outputArea.showMessage("Kein Zugang zum Internet gefunden." + "\n");
         } catch (ConnectException e) {
-            outputArea.showMessage("Kein Zugang zum Internet gefunden." + "\n");
+            this.outputArea.showMessage("Kein Zugang zum Internet gefunden." + "\n");
         } catch (MalformedURLException e) {
-            outputArea.showMessage("Kein Zugang zum Internet gefunden." + "\n");
+            this.outputArea.showMessage("Kein Zugang zum Internet gefunden." + "\n");
         } catch (IOException e) {
-            outputArea.showMessage("Kein Zugang zum Internet gefunden." + "\n");
+            this.outputArea.showMessage("Kein Zugang zum Internet gefunden." + "\n");
         }
     }
 

@@ -2,14 +2,14 @@ import javax.swing.*;
 import java.io.File;
 import java.util.Vector;
 
-public class FileDBSyncer extends SwingWorker<Boolean, Object> {
-    private IMessageDisplay outputArea;
+class FileDBSyncer extends SwingWorker<Boolean, Object> {
+    private final IMessageDisplay outputArea;
     private String slaveDir;
     private Vector<String> masterDBInfos;
     private String websearchURL;
     private Boolean useWebsearch;
     private String targetDir;
-    private WebSearchService webSearch;
+    private final WebSearchService webSearch;
 
     public FileDBSyncer(IMessageDisplay outputArea) {
         this.outputArea = outputArea;
@@ -24,7 +24,7 @@ public class FileDBSyncer extends SwingWorker<Boolean, Object> {
 
         File slaveDirFile = new File(slaveDir);
         File targetDirFile = new File(targetDir);
-        if (!FileSyncerUtils.doChecking(masterDBInfos, slaveDirFile, targetDirFile, this.outputArea)) {
+        if (!FileSyncerUtils.doChecking(this.masterDBInfos, slaveDirFile, targetDirFile, this.outputArea)) {
             return;
         }
         // output image names
@@ -60,9 +60,9 @@ public class FileDBSyncer extends SwingWorker<Boolean, Object> {
 
     @Override
     protected Boolean doInBackground() throws Exception {
-        File targetDirFile = new File(targetDir);
+        File targetDirFile = new File(this.targetDir);
         Vector<File> toCopy = new Vector<File>();
-        if (useWebsearch) {
+        if (this.useWebsearch) {
             getFilesFromWebSearch(toCopy);
         } else {
             getFilesFromSlaveDir(toCopy);
@@ -72,7 +72,7 @@ public class FileDBSyncer extends SwingWorker<Boolean, Object> {
     }
 
     private void getFilesFromWebSearch(Vector<File> toCopy) {
-        for (String masterRequired : masterDBInfos) {
+        for (String masterRequired : this.masterDBInfos) {
             String masterFileMatchName = FileInfo.GetMatchName(masterRequired);
             Vector<FileInformation> fileInformations = this.webSearch.Search4Files(this.websearchURL, masterFileMatchName);
             if (fileInformations.size() == 1) {
@@ -85,8 +85,8 @@ public class FileDBSyncer extends SwingWorker<Boolean, Object> {
 
     private void getFilesFromSlaveDir(Vector<File> toCopy) {
         // get all files, do not consider extensions
-        for (FileInfo fi : FileSyncerUtils.GetFileInfoItems(slaveDir)) {
-            for (String masterRequired : masterDBInfos) {
+        for (FileInfo fi : FileSyncerUtils.GetFileInfoItems(this.slaveDir)) {
+            for (String masterRequired : this.masterDBInfos) {
                 if (fi.getMatchName().equals(FileInfo.GetMatchName(masterRequired))) {
                     toCopy.add(fi.getFile());
                 }

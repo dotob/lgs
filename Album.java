@@ -1,12 +1,12 @@
 import java.util.Vector;
 
 public class Album {
-    String name;
-    String login;
-    String total;
-    String id;
-    Vector<String> images = new Vector<String>();
-    boolean initiated = false;
+    private String name;
+    private String login;
+    private String total;
+    private String id;
+    private final Vector<String> images = new Vector<String>();
+    private boolean initiated = false;
 
     public Album(){}
 
@@ -17,11 +17,11 @@ public class Album {
     }
 
     public boolean isInitiated() {
-        return initiated;
+        return this.initiated;
     }
 
     public Vector<String> getImages() {
-        return images;
+        return this.images;
     }
 
     public void addImage(String image) {
@@ -34,15 +34,15 @@ public class Album {
      */
 
     public String toString() {
-        if (id != null) {
-            return "<html><b>" + name + "</b> (" + id + ") von <b>"+login+"</b> mit <b>"+total+"</b> bildern</html>";
+        if (this.id != null) {
+            return "<html><b>" + this.name + "</b> (" + this.id + ") von <b>"+ this.login +"</b> mit <b>"+ this.total +"</b> bildern</html>";
         } else {
             return "";
         }
     }
 
     public String getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(String id) {
@@ -50,7 +50,7 @@ public class Album {
     }
 
     public String getLogin() {
-        return login;
+        return this.login;
     }
 
     public void setLogin(String login) {
@@ -59,7 +59,7 @@ public class Album {
 
 
     public String getTotal() {
-        return total;
+        return this.total;
     }
 
     public void setTotal(String total) {
@@ -71,7 +71,7 @@ public class Album {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -79,6 +79,6 @@ public class Album {
     }
 
     public String getInfoString() {
-        return id + ":" + name + ", " + initiated + ", #=" + this.getCount();
+        return this.id + ":" + this.name + ", " + this.initiated + ", #=" + this.getCount();
     }
 }
