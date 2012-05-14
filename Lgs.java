@@ -1,3 +1,6 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
@@ -13,6 +16,7 @@ import java.util.Vector;
 
 public class Lgs extends TransferHandler implements ActionListener {
     private static final String versionString = "buildnumber";
+    private static final Logger logger = LoggerFactory.getLogger(Lgs.class);
 
     //TODO: make this configurable
     private final String[] ext = {"jpg", "xmp"};
@@ -43,6 +47,7 @@ public class Lgs extends TransferHandler implements ActionListener {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 try {
+                    //logger.debug("create lgs");
                     Lgs lgsGui = new Lgs();
                     lgsGui.createAndShowGUI();
                 } catch (RuntimeException e) {
@@ -52,11 +57,12 @@ public class Lgs extends TransferHandler implements ActionListener {
         });
     }
 
-    public Lgs(){
+    public Lgs() {
         this.confService = new ConfigurationService();
     }
 
     private void createAndShowGUI() {
+        logger.debug("createAndShowGUI");
         String setLafResult = ""; //this.setLAF();
         this.outputAreaManualSync.append(setLafResult);
         this.dbRadioButton = new JRadioButton("db-album", true);
@@ -204,7 +210,7 @@ public class Lgs extends TransferHandler implements ActionListener {
 
 
         gc.gridy++;
-        gc.gridx=0;
+        gc.gridx = 0;
         String slaveMsg = "<html>im <b>slave</b>verzeichnis liegen die <b>originale</b>. diese werden dann ins zielverzeichnis kopiert.<br /> dabei dient der master als vorlage welche dateien kopiert werden müssen</html>";
         JLabel slaveLabel = new JLabel("slave");
         slaveLabel.setToolTipText(slaveMsg);
@@ -323,13 +329,12 @@ public class Lgs extends TransferHandler implements ActionListener {
 
     private void gatherAlbumsInBackground() {
         AlbumProvider albumProvider = new AlbumProvider(this.masterAlbum, this.manualSyncOutput, this.dbRadioButton, this.confService);
-
         // gather albums in background
         try {
             albumProvider.execute();
         } catch (Exception e) {
+            logger.debug("error while executing albumprovider", e);
             this.outputAreaManualSync.append(e.getMessage());
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
     }
 
@@ -352,7 +357,7 @@ public class Lgs extends TransferHandler implements ActionListener {
             e.printStackTrace();
             this.manualSyncOutput.showMessage("black theme nicht gefunden\n");
         } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
+            logger.debug("error while setting look and feel", e);
             this.manualSyncOutput.showMessage("black theme nicht gefunden\n");
         }
         return result;
@@ -360,6 +365,7 @@ public class Lgs extends TransferHandler implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        logger.debug("actionperformed:" + e.getActionCommand());
         if (e.getActionCommand().equals("start")) {
             this.startLGS();
         } else if (e.getActionCommand().equals("end")) {
@@ -397,23 +403,28 @@ public class Lgs extends TransferHandler implements ActionListener {
             this.masterAlbum.setEnabled(false);
             this.masterDirectory.setEnabled(true);
         } else if (e.getActionCommand().equals("dbalbums")) {
-            // album is selected
-            Album album = (Album) this.masterAlbum.getSelectedItem();
-            String orderTargetPath = this.confService.GetOrderTargetPath() + album.getId() + "_" + album.getLogin();
-            this.targetDirectory.setText(orderTargetPath);
-            this.albumImageProvider = new AlbumImageProvider(this.manualSyncOutput, this.confService);
-            this.albumImageProvider.setAlbum(album);
-            try {
-                this.albumImageProvider.execute();
-            } catch (Exception e1) {
-                e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            }
+            selectDbAlbum();
+        }
+    }
+
+    private void selectDbAlbum() {
+        // album is selected
+        Album album = (Album) this.masterAlbum.getSelectedItem();
+        String orderTargetPath = this.confService.GetOrderTargetPath() + album.getId() + "_" + album.getLogin();
+        this.targetDirectory.setText(orderTargetPath);
+        this.albumImageProvider = new AlbumImageProvider(this.manualSyncOutput, this.confService);
+        this.albumImageProvider.setAlbum(album);
+        try {
+            this.albumImageProvider.execute();
+        } catch (Exception e) {
+            logger.debug("error while executing albumprovider", e);
         }
     }
 
 
     private void startLGS() {
         if (this.dirRadioButton.isSelected()) {
+            logger.debug("start lgs with dir");
             this.manualSyncOutput.showMessage("start with directory" + "\n");
             // use supplied directory
             String masterDir = this.masterDirectory.getText();
@@ -422,6 +433,7 @@ public class Lgs extends TransferHandler implements ActionListener {
             FileDirectorySyncer fileDirectorySyncer = new FileDirectorySyncer(this.manualSyncOutput);
             fileDirectorySyncer.syncItems(masterDir, this.ext, slaveDir, targetDir);
         } else {
+            logger.debug("start lgs with db");
             this.manualSyncOutput.showMessage("start with db" + "\n");
             // use album from db
             String slaveDir = this.slaveDirectory.getText();
@@ -461,8 +473,9 @@ public class Lgs extends TransferHandler implements ActionListener {
             absPath = d.getDirectory();
             absPath += d.getFile();
         } catch (Exception e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            logger.debug("error while getting path from user", e);
         }
+        logger.debug("got path from user:", absPath);
         return absPath;
     }
 
@@ -532,7 +545,7 @@ class MyMessageDisplay implements IMessageDisplay {
         if (level < VERBOSE || this.verbose) {
             this.output.append(msg);
             // never growl verbose messages
-            if(level < VERBOSE){
+            if (level < VERBOSE) {
                 this.growl.notify("lgs info", msg);
             }
         }

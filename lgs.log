@@ -1,0 +1,8 @@
+2012-05-14 20:34:29,432 DEBUG [AWT-EventQueue-0] [ConfigurationService.java:16] read properties
+2012-05-14 20:34:29,479 DEBUG [AWT-EventQueue-0] [ConfigurationService.java:18] read properties ok
+2012-05-14 20:34:29,479 DEBUG [AWT-EventQueue-0] [Lgs.java:65] createAndShowGUI
+2012-05-14 20:34:32,383 DEBUG [AWT-EventQueue-0] [Lgs.java:368] actionperformed:end
+2012-05-14 20:35:44,853 DEBUG [AWT-EventQueue-0] [ConfigurationService.java:16] read properties
+2012-05-14 20:35:44,901 DEBUG [AWT-EventQueue-0] [ConfigurationService.java:18] read properties ok
+2012-05-14 20:35:44,901 DEBUG [AWT-EventQueue-0] [Lgs.java:65] createAndShowGUI
+2012-05-14 20:36:29,125 DEBUG [AWT-EventQueue-0] [Lgs.java:368] actionperformed:end

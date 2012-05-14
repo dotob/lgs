@@ -1,5 +1,7 @@
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.io.FileNotFoundException;
@@ -12,6 +14,8 @@ import java.net.UnknownHostException;
 import java.util.Vector;
 
 class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
+    private static final Logger logger = LoggerFactory.getLogger(AlbumProvider.class);
+
     private final IMessageDisplay outputArea;
     private final JRadioButton dbRadioButton;
     private final ConfigurationService confService;
@@ -55,7 +59,7 @@ class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
                 // get last version info from internet
                 //URL updateURL = new URL("http://dev.thalora.com/php/index.php?mode=desktop_get_orders");
                 URL updateURL = new URL(this.confService.GetAlbumUrl());
-
+                logger.debug("use url for albums: {}",updateURL);
                 Gson gson = new Gson();
                 JsonReader reader = new JsonReader(new InputStreamReader(updateURL.openStream()));
                 reader.beginArray();
@@ -67,24 +71,32 @@ class AlbumProvider extends SwingWorker<Vector<Album>, Object> {
                 reader.close();
 
             } catch (FileNotFoundException e) {
+                logger.error("konnte album information nicht laden (FileNotFoundException)\n");
                 this.outputArea.showMessage("konnte album information nicht laden (FileNotFoundException)\n");
             } catch (UnknownHostException e) {
+                logger.error("konnte album information nicht laden (UnknownHostException)\n");
                 this.outputArea.showMessage("konnte album information nicht laden (UnknownHostException)\n");
             } catch (ConnectException e) {
+                logger.error("konnte album information nicht laden (ConnectException)\n");
                 this.outputArea.showMessage("konnte album information nicht laden (ConnectException)\n");
             } catch (MalformedURLException e) {
+                logger.error("konnte album information nicht laden (MalformedURLException)\n");
                 this.outputArea.showMessage("konnte album information nicht laden (MalformedURLException)\n");
             } catch (IOException e) {
+                logger.error("konnte album information nicht laden (IOException)\n");
                 this.outputArea.showMessage("konnte album information nicht laden (IOException)\n");
             }
         } catch (Exception e) {
+            logger.error("error while retrieving data", e);
             this.dbRadioButton.setEnabled(false);
         }
     }
 
     @Override
     protected void done() {
-        this.outputArea.showMessage(this.albumList.size() + " alben gefunden\n");
+        String msg = this.albumList.size() + " alben gefunden\n";
+        logger.info(msg);
+        this.outputArea.showMessage(msg);
         this.dbRadioButton.setEnabled(true);
         this.masterAlbum.setModel(new DefaultComboBoxModel(this.albumList));
     }
