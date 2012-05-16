@@ -20,7 +20,11 @@ class FileSyncerUtils {
             return false;
         }
         if (!targetDirFile.isDirectory()) {
-	    targetDirFile.createNewFile();
+	    try {
+	        targetDirFile.createNewFile();
+	    } catch (IOException e){
+                // TODO
+            }
             if (!targetDirFile.isDirectory()) {
                 outputArea.showMessage("ziel-verzeichnis existiert nicht oder ist kein verzeichnis\n");
             }
