@@ -21,6 +21,7 @@ class FileSyncerUtils {
         }
         if (!targetDirFile.isDirectory()) {
             targetDirFile.mkdirs();
+            outputArea.showMessage("ziel-verzeichnis erstellt\n");
             if (!targetDirFile.isDirectory()) {
                 outputArea.showMessage("ziel-verzeichnis existiert nicht oder ist kein verzeichnis\n");
             }

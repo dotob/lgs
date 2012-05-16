@@ -2,19 +2,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.DefaultEditorKit;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
 
-public class Lgs extends TransferHandler implements ActionListener {
+public class Lgs extends TransferHandler implements ActionListener, DocumentListener {
     private static final String versionString = "buildnumber";
     private static final Logger logger = LoggerFactory.getLogger(Lgs.class);
 
@@ -63,7 +67,7 @@ public class Lgs extends TransferHandler implements ActionListener {
 
     private void createAndShowGUI() {
         logger.debug("createAndShowGUI");
-        String setLafResult = ""; //this.setLAF();
+        String setLafResult = this.setLAF();
         this.outputAreaManualSync.append(setLafResult);
         this.dbRadioButton = new JRadioButton("db-album", true);
         this.websearchRadioButton = new JRadioButton("suchservice");
@@ -227,8 +231,9 @@ public class Lgs extends TransferHandler implements ActionListener {
         this.slaveDirectory = new JTextField();
         this.slaveDirectory.setName("slave");
         this.slaveDirectory.setTransferHandler(this);
+        this.slaveDirectory.getDocument().addDocumentListener(this);
         this.slaveDirectory.setToolTipText(slaveMsg);
-        this.slaveDirectory.setEnabled(false);
+        this.slaveDirectory.setEnabled(true);
         manualSyncPanel.add(this.slaveDirectory, gc);
         gc.gridwidth = 1;
         gc.weightx = lWeight;
@@ -254,6 +259,7 @@ public class Lgs extends TransferHandler implements ActionListener {
         this.websearchURL.setName("websearch");
         this.websearchURL.setTransferHandler(this);
         this.websearchURL.setToolTipText(websearchMsg);
+        this.websearchURL.setEnabled(false);
         manualSyncPanel.add(this.websearchURL, gc);
 
         // radiobutton group
@@ -340,27 +346,33 @@ public class Lgs extends TransferHandler implements ActionListener {
 
     private String setLAF() {
         String result = "";
-        Toolkit.getDefaultToolkit().setDynamicLayout(true);
-        System.setProperty("sun.awt.noerasebackground", "true");
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        JDialog.setDefaultLookAndFeelDecorated(true);
-        try {
-            UIManager.setLookAndFeel("de.muntjak.tinylookandfeel.TinyLookAndFeel");
-            result = "black theme geladen\n";
-        } catch (ClassNotFoundException e) {
-            result = "black theme nicht gefunden\n";
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-            this.manualSyncOutput.showMessage("black theme nicht gefunden\n");
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            this.manualSyncOutput.showMessage("black theme nicht gefunden\n");
-        } catch (UnsupportedLookAndFeelException e) {
-            logger.debug("error while setting look and feel", e);
-            this.manualSyncOutput.showMessage("black theme nicht gefunden\n");
-        }
+
+        InputMap im = (InputMap) UIManager.get("TextField.focusInputMap");
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.META_DOWN_MASK), DefaultEditorKit.copyAction);
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.META_DOWN_MASK), DefaultEditorKit.pasteAction);
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, KeyEvent.META_DOWN_MASK), DefaultEditorKit.cutAction);
         return result;
+//        Toolkit.getDefaultToolkit().setDynamicLayout(true);
+//        System.setProperty("sun.awt.noerasebackground", "true");
+//        JFrame.setDefaultLookAndFeelDecorated(true);
+//        JDialog.setDefaultLookAndFeelDecorated(true);
+//        try {
+//            UIManager.setLookAndFeel("de.muntjak.tinylookandfeel.TinyLookAndFeel");
+//            result = "black theme geladen\n";
+//        } catch (ClassNotFoundException e) {
+//            result = "black theme nicht gefunden\n";
+//            e.printStackTrace();
+//        } catch (InstantiationException e) {
+//            e.printStackTrace();
+//            this.manualSyncOutput.showMessage("black theme nicht gefunden\n");
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//            this.manualSyncOutput.showMessage("black theme nicht gefunden\n");
+//        } catch (UnsupportedLookAndFeelException e) {
+//            logger.debug("error while setting look and feel", e);
+//            this.manualSyncOutput.showMessage("black theme nicht gefunden\n");
+//        }
+//        return result;
     }
 
     @Override
@@ -387,8 +399,7 @@ public class Lgs extends TransferHandler implements ActionListener {
             this.websearchURL.setEnabled(true);
             this.slaveDirectory.setEnabled(false);
         } else if (e.getActionCommand().equals("slavedir")) {
-            this.websearchURL.setEnabled(false);
-            this.slaveDirectory.setEnabled(true);
+            this.selectSlaveTextField();
         } else if (e.getActionCommand().equals("browseMaster")) {
             this.masterDirectory.setText(getPathFromUser());
         } else if (e.getActionCommand().equals("browseSlave")) {
@@ -523,10 +534,31 @@ public class Lgs extends TransferHandler implements ActionListener {
         }
         return false;
     }
+
+    @Override
+    public void insertUpdate(DocumentEvent documentEvent) {
+        this.selectSlaveTextField();
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent documentEvent) {
+        this.selectSlaveTextField();
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent documentEvent) {
+        this.selectSlaveTextField();
+    }
+
+    private void selectSlaveTextField() {
+        this.websearchURL.setEnabled(false);
+        this.slaveDirectory.setEnabled(true);
+    }
 }
 
 class MyMessageDisplay implements IMessageDisplay {
 
+    private static final Logger logger = LoggerFactory.getLogger(MyMessageDisplay.class);
     private final JTextArea output;
     private boolean verbose;
     private final GrowlNetwork growl;
@@ -542,6 +574,7 @@ class MyMessageDisplay implements IMessageDisplay {
 
     @Override
     public void showMessage(String msg, int level) {
+        logger.info(msg);
         if (level < VERBOSE || this.verbose) {
             this.output.append(msg);
             // never growl verbose messages

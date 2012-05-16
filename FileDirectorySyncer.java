@@ -21,7 +21,9 @@ class FileDirectorySyncer extends SwingWorker<Boolean, Object> {
         this.targetDir = targetDir;
         File slaveDirFile = new File(slaveDir);
         File targetDirFile = new File(targetDir);
+        this.outputArea.showMessage("hole dateiinfos von master verzeichnis", IMessageDisplay.VERBOSE);
         this.masterFileInfos = FileSyncerUtils.GetFileInfoItems(master, ext);
+        this.outputArea.showMessage("fertig mit holen von dateiinfos von master verzeichnis", IMessageDisplay.VERBOSE);
         if (!FileSyncerUtils.doChecking(this.masterFileInfos, slaveDirFile, targetDirFile, this.outputArea)) {
             return;
         }
@@ -42,11 +44,13 @@ class FileDirectorySyncer extends SwingWorker<Boolean, Object> {
         File slaveDirFile = new File(this.slaveDir);
         File targetDirFile = new File(this.targetDir);
         Vector<File> toCopy = new Vector<File>();
+        this.outputArea.showMessage("sammle zusammengehörige dateien", IMessageDisplay.VERBOSE);
         for (FileInfo fi : this.masterFileInfos) {
             for (File siblingInSlave : fi.GetSiblings(slaveDirFile)) {
                 toCopy.add(siblingInSlave);
             }
         }
+        this.outputArea.showMessage("starte kopieren", IMessageDisplay.VERBOSE);
         FileSyncerUtils.doCopying(toCopy, targetDirFile, this.outputArea);
         return true;
     }
