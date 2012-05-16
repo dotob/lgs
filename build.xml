@@ -35,7 +35,7 @@
         <!-- make manifest files -->
         <manifest file="build/MANIFEST.MF">
             <attribute name="Main-Class" value="Lgs"/>
-            <attribute name="Class-Path" value="logback-classic-1.0.3.jar logback-core-1.0.3.jar slf4j-api-2.0.99.jar commons-configuration-1.8.jar commons-lang-2.6.jar gson-1.7.1.jar libgrowl-0.2.jar commons-io-2.0.jar commons-logging-1.1.1.jar junit-4.7.jar tinylaf.jar"/>
+            <attribute name="Class-Path" value="logback-classic-1.0.3.jar logback-core-1.0.3.jar slf4j-api-1.6.4.jar commons-configuration-1.8.jar commons-lang-2.6.jar gson-1.7.1.jar libgrowl-0.2.jar commons-io-2.0.jar commons-logging-1.1.1.jar junit-4.7.jar tinylaf.jar"/>
         </manifest>
         <!-- pack files to jar -->
         <jar destfile="build/lgs.jar" manifest="build/MANIFEST.MF">
