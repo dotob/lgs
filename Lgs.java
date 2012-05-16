@@ -452,7 +452,9 @@ public class Lgs extends TransferHandler implements ActionListener, DocumentList
             Vector<String> foddos = null;
             try {
                 // this is SYNC, but usually we retrieved the images already
+                this.manualSyncOutput.showMessage("hole bilderinfos" + "\n");
                 foddos = this.albumImageProvider.get();
+                this.manualSyncOutput.showMessage("fertig mit bilderinfos holen" + "\n");
             } catch (Exception e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }

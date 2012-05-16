@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a84c7358-d7c7-428e-866a-8118c85b4d62" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jars/.tmp.swp" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FileDirectorySyncer.java" afterPath="$PROJECT_DIR$/FileDirectorySyncer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FileSyncerUtils.java" afterPath="$PROJECT_DIR$/FileSyncerUtils.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Lgs.java" afterPath="$PROJECT_DIR$/Lgs.java" />
     </list>
     <ignored path=".idea/workspace.xml" />
@@ -92,10 +88,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Lgs.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Lgs.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Lgs.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="444" column="39" selection-start="18952" selection-end="18952" vertical-scroll-proportion="0.0">
+            <state line="454" column="67" selection-start="19494" selection-end="19494" vertical-scroll-proportion="0.6693122">
               <folding />
             </state>
           </provider>
@@ -119,10 +115,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileSyncerUtils.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="FileSyncerUtils.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FileSyncerUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="23" selection-start="1171" selection-end="1171" vertical-scroll-proportion="0.33248082">
+            <state line="32" column="23" selection-start="1171" selection-end="1171" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -195,8 +191,8 @@
         <option value="$PROJECT_DIR$/AlbumProvider.java" />
         <option value="$PROJECT_DIR$/logback.xml" />
         <option value="$PROJECT_DIR$/FileSyncerUtils.java" />
-        <option value="$PROJECT_DIR$/Lgs.java" />
         <option value="$PROJECT_DIR$/FileDirectorySyncer.java" />
+        <option value="$PROJECT_DIR$/Lgs.java" />
       </list>
     </option>
   </component>
@@ -886,13 +882,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Lgs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="444" column="39" selection-start="18952" selection-end="18952" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FileDirectorySyncer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="53" column="29" selection-start="2243" selection-end="2243" vertical-scroll-proportion="0.0">
@@ -902,7 +891,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/FileSyncerUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="23" selection-start="1171" selection-end="1171" vertical-scroll-proportion="0.33248082">
+        <state line="32" column="23" selection-start="1171" selection-end="1171" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lgs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="454" column="67" selection-start="19494" selection-end="19494" vertical-scroll-proportion="0.6693122">
           <folding />
         </state>
       </provider>
