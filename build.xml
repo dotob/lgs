@@ -3,7 +3,7 @@
 
     <taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler"/>
 
-    <property name="version" value="${build.number}"/>
+    <property name="version" value="final"/>
 
     <target name="init">
         <mkdir dir="build/macapp"/>
